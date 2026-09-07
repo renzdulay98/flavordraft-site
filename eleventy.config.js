@@ -1,8 +1,20 @@
+import { existsSync } from "node:fs";
+
 import site from "./src/_data/site.json" with { type: "json" };
 
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/root": "." });
+  // Files whose names start with a dot are not copied by a directory
+  // passthrough, so .nojekyll is named explicitly.
+  eleventyConfig.addPassthroughCopy({ "src/root/.nojekyll": ".nojekyll" });
+
+  // GitHub writes CNAME into the default branch when a custom domain is set in
+  // the repo settings, and that file has to reach the published output for the
+  // domain to stick. Settings remain the source of truth; this only forwards it.
+  if (existsSync("CNAME")) {
+    eleventyConfig.addPassthroughCopy({ CNAME: "CNAME" });
+  }
 
   eleventyConfig.addWatchTarget("src/assets/css/");
   eleventyConfig.addWatchTarget("src/assets/js/");
