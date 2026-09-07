@@ -1,0 +1,15 @@
+{
+  "name": "flavordraft-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marketing and legal site for FlavorDraft — flavordraft.app",
+  "type": "module",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy",
+    "icons": "node scripts/build-icons.mjs"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

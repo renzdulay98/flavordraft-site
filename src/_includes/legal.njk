@@ -1,0 +1,31 @@
+---
+layout: base.njk
+---
+<div class="wrap legal-head">
+  <p class="overline">{{ legalKicker }}</p>
+  <h1 class="legal-head__title">{{ legalTitle }}</h1>
+
+  <dl class="legal-head__meta">
+    <div><dt>Effective</dt> <dd>{{ site.legal.effectiveDate }}</dd></div>
+    <div><dt>Applies to</dt> <dd>The FlavorDraft app and related services</dd></div>
+  </dl>
+
+  <p class="legal-head__summary lead">{{ legalSummary }}</p>
+</div>
+
+<div class="wrap legal-body">
+  <div class="legal-body__grid">
+    <nav class="toc" aria-labelledby="toc-title" data-toc>
+      <p class="overline toc__title" id="toc-title">Contents</p>
+      <div class="toc__list">
+        {%- for heading in content | headings %}
+        <a href="#{{ heading.id }}">{{ heading.label }}</a>
+        {%- endfor %}
+      </div>
+    </nav>
+
+    <div class="legal-prose">
+      {{ content | safe }}
+    </div>
+  </div>
+</div>

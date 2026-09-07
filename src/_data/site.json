@@ -1,0 +1,17 @@
+{
+  "name": "FlavorDraft",
+  "url": "https://flavordraft.app",
+  "tagline": "Automated recipe note-taking for your personal cookbook.",
+  "themeColor": "#FAF3E8",
+
+  "_todo_contactEmail": "TODO — no FlavorDraft support/privacy address exists yet. Set this to the real address (e.g. support@flavordraft.app) once the mailbox is live. While it is null the Privacy Policy, Terms and footer render a visible [CONTACT_EMAIL] placeholder and the build prints a warning.",
+  "contactEmail": null,
+
+  "_todo_appStoreUrl": "TODO — set to the real https://apps.apple.com/... URL at launch. While it is null the site shows the 'Coming to the App Store' status instead of a download link.",
+  "appStoreUrl": null,
+
+  "legal": {
+    "effectiveDate": "September 2026",
+    "copyrightYear": "2026"
+  }
+}

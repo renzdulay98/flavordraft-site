@@ -1,0 +1,234 @@
+---
+layout: base.njk
+canonical: /
+pageTitle: FlavorDraft — Save recipes without the note-taking
+pageDescription: FlavorDraft turns recipes from the web, cooking videos, and the places you already browse into clean, organized notes in your private personal cookbook.
+---
+{% from "icons.njk" import icon %}
+
+<section class="hero wrap">
+  <div class="grid hero__grid">
+
+    <div class="hero__copy">
+      <h1 class="display">Save the recipe.<br>Skip the note&#8209;taking.</h1>
+      <p class="lead hero__lead">Share a recipe to FlavorDraft or paste a link. It turns the one you chose into clean ingredients and steps, keeps the original source attached, and saves it to your private cookbook.</p>
+
+      <p class="hero__meta">
+        <span class="hero__meta-name">FlavorDraft for iPhone</span>
+        <span class="hero__meta-note">Coming to the App&nbsp;Store.</span>
+      </p>
+    </div>
+
+    <div class="hero__figure">
+      <figure class="compose">
+        <div class="compose__source">
+          <span class="compose__source-icon">{{ icon("globe", 18) }}</span>
+          <span class="compose__source-text">
+            <span class="compose__source-label">Shared to FlavorDraft</span>
+            <span class="compose__source-url">lolakitchen.com/chicken-adobo</span>
+          </span>
+        </div>
+
+        <div class="compose__link" aria-hidden="true"></div>
+
+        {# A reconstruction of the saved-recipe screen, built from the design
+           package's own components at the app's own point sizes. #}
+        <div class="device" role="img" aria-label="The FlavorDraft recipe screen showing Chicken Adobo saved from lolakitchen.com, with its ingredients listed and the original source kept alongside.">
+          <div class="device__cover"></div>
+          <div class="device__scrim"></div>
+
+          <div class="device__bar">
+            <span class="glass-dot">{{ icon("arrow-left", 18) }}</span>
+            <span class="device__bar-group">
+              <span class="glass-dot">{{ icon("heart", 18) }}</span>
+              <span class="glass-dot">{{ icon("dots", 18) }}</span>
+            </span>
+          </div>
+
+          <div class="device__sheet">
+            <p class="device__title">Chicken Adobo</p>
+
+            <p class="device__source">{{ icon("globe", 14) }} From lolakitchen.com</p>
+
+            <p class="device__meta">
+              <span>{{ icon("clock", 15) }}45 min</span>
+              <span>{{ icon("bowl", 15) }}4 servings</span>
+              <span>{{ icon("gauge", 15) }}Easy</span>
+            </p>
+
+            <div class="device__segments">
+              <span class="device__segment" data-on>Ingredients</span>
+              <span class="device__segment">Steps</span>
+            </div>
+
+            <div class="device__list">
+              <p class="device__row device__row--done"><span class="device__mark-done">{{ icon("check-circle", 20) }}</span><span><b>1 kg</b> chicken thighs</span></p>
+              <p class="device__row"><span class="device__mark-todo">{{ icon("circle", 20) }}</span><span><b>120 ml</b> soy sauce</span></p>
+              <p class="device__row"><span class="device__mark-todo">{{ icon("circle", 20) }}</span><span><b>120 ml</b> cane vinegar</span></p>
+              <p class="device__row"><span class="device__mark-todo">{{ icon("circle", 20) }}</span><span><b>6 cloves</b> garlic, crushed</span></p>
+              <p class="device__row"><span class="device__mark-todo">{{ icon("circle", 20) }}</span><span><b>3</b> bay leaves</span></p>
+              <p class="device__row"><span class="device__mark-todo">{{ icon("circle", 20) }}</span><span><b>1 tsp</b> black peppercorns</span></p>
+              <p class="device__row"><span class="device__mark-todo">{{ icon("circle", 20) }}</span><span><b>240 ml</b> water</span></p>
+              <p class="device__row"><span class="device__mark-todo">{{ icon("circle", 20) }}</span><span><b>2 tbsp</b> brown sugar</span></p>
+            </div>
+          </div>
+
+          <div class="device__fade"></div>
+        </div>
+      </figure>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section section--ruled" aria-labelledby="sources-title">
+  <div class="wrap grid">
+    <div class="sources__head">
+      <h2 class="h2" id="sources-title">From wherever you already cook.</h2>
+      <p class="prose prose--offset">Recipes rarely arrive as recipes. They're a link someone sent you, a video you saved at midnight, a page in a book on the counter. FlavorDraft takes the one you picked and writes it down properly.</p>
+    </div>
+
+    <ul class="sources__list ruled-list">
+      <li><span class="ruled-list__term">A recipe site or food blog</span><span class="ruled-list__note">Paste or share the link</span></li>
+      <li><span class="ruled-list__term">A cooking video</span><span class="ruled-list__note">Captions and narration both help</span></li>
+      <li><span class="ruled-list__term">A post from another app</span><span class="ruled-list__note">Straight from the share sheet</span></li>
+      <li><span class="ruled-list__term">A cookbook page or index card</span><span class="ruled-list__note">Scan it</span></li>
+      <li><span class="ruled-list__term">A dish you can describe</span><span class="ruled-list__note">Say what you want to make</span></li>
+    </ul>
+
+    <p class="sources__note">You pick the source, one at a time, and nothing is saved until you've looked at it.</p>
+  </div>
+</section>
+
+
+<section class="section section--ruled" aria-label="What FlavorDraft does">
+  <div class="wrap">
+
+    <div class="grid spread">
+      <div class="spread__copy">
+        <h2 class="h2">Save it without rewriting it.</h2>
+        <p class="prose">FlavorDraft sorts what you chose into ingredients and steps you can cook from — and it tells you plainly where the source came up short instead of inventing the gap.</p>
+      </div>
+
+      <div class="spread__figure">
+        <div class="panel">
+          <p class="panel__head">{{ icon("warning-circle", 18) }} 2 details need your review</p>
+          <ul class="review-list">
+            <li>
+              <span><span class="review-list__name">Soy sauce</span><span class="review-list__state">Amount not specified</span></span>
+              <span class="review-list__action">Add</span>
+            </li>
+            <li>
+              <span><span class="review-list__name">Cooking time</span><span class="review-list__state">Not specified</span></span>
+              <span class="review-list__action">Add</span>
+            </li>
+          </ul>
+          <p class="panel__note">We kept everything the page actually said. Missing details stay blank until you fill them in.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid spread spread--flip">
+      <div class="spread__copy">
+        <h2 class="h2">One cookbook for the recipes you actually use.</h2>
+        <p class="prose">Favorites, collections, grocery lists, and the handful you make on repeat — together in one place, and searchable, whatever they were saved from.</p>
+      </div>
+
+      <div class="spread__figure">
+        <div class="cookbook">
+          <div class="cookbook__chips">
+            <span class="chip" data-on>All (10)</span>
+            <span class="chip">Folders</span>
+            <span class="chip">Favorites</span>
+          </div>
+          <p class="recipe-row">
+            <span class="recipe-row__art recipe-row__art--soup"></span>
+            <span><span class="recipe-row__title">Chicken Adobo</span><span class="recipe-row__meta">Today · 45 min · from a link</span></span>
+          </p>
+          <p class="recipe-row">
+            <span class="recipe-row__art recipe-row__art--bread"></span>
+            <span><span class="recipe-row__title">Sunday Focaccia</span><span class="recipe-row__meta">Aug 11 · from a cookbook page</span></span>
+          </p>
+          <p class="recipe-row">
+            <span class="recipe-row__art recipe-row__art--pasta"></span>
+            <span><span class="recipe-row__title">Gochujang Butter Noodles</span><span class="recipe-row__meta">Aug 9 · 20 min · from a video</span></span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid pair">
+      <div class="pair__item">
+        <h2 class="h3">Make the recipe work for you.</h2>
+        <p class="prose">Ask for clearer instructions, different servings, or a substitution. FlavorDraft adapts your saved copy — and the original source stays attached to it.</p>
+        <div class="swap">
+          <p class="swap__row"><span class="swap__from">Heavy cream</span><span class="swap__arrow">{{ icon("arrow-right", 14) }}</span><span class="swap__to">Greek yogurt</span></p>
+          <p class="swap__row"><span class="swap__from">1 tbsp oil</span><span class="swap__arrow">{{ icon("arrow-right", 14) }}</span><span class="swap__to">1 tsp oil</span></p>
+        </div>
+      </div>
+
+      <div class="pair__item">
+        <h2 class="h3">Know where it came from.</h2>
+        <p class="prose">When the source tells us who made it, FlavorDraft keeps the creator or site and a link back on your recipe — so you can return to the original whenever you want to.</p>
+        <div class="attribution">
+          <p class="attribution__title">Chicken Adobo</p>
+          <p class="attribution__from">{{ icon("globe", 14) }} From lolakitchen.com</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="band-sunken">
+  <div class="wrap section grid notetaking">
+    <div class="notetaking__copy">
+      <h2 class="h2">Like writing the recipe down yourself — without all the writing.</h2>
+      <p class="prose prose--offset">FlavorDraft automates the tedious half of recipe note-taking: gathering the ingredients, putting the steps in order, holding on to the source, and filing the whole thing somewhere you'll find it again.</p>
+    </div>
+    <div class="notetaking__art">
+      <img src="/assets/img/home-illustration.svg" alt="" width="260" height="200">
+    </div>
+  </div>
+</section>
+
+
+<section class="band-deep" aria-labelledby="private-title">
+  <div class="wrap section grid private">
+    <p class="private__mark">
+      <img src="/assets/img/mark-parchment.svg" alt="" width="449" height="748">
+    </p>
+
+    <div class="private__head">
+      <h2 class="h2" id="private-title">Your cookbook stays yours.</h2>
+    </div>
+
+    <div class="private__body">
+      <p>FlavorDraft is built as a personal recipe notebook, not a public recipe network. Recipes you save are private by default, and they aren't added to a shared public recipe library.</p>
+      <p>You choose what FlavorDraft works with, one source at a time. We don't build a public catalog out of what you save. <a href="/privacy">Read the Privacy Policy</a>.</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="wrap section--tight section--ruled">
+  <div class="launch">
+    <img class="launch__icon" src="/assets/img/appicon.svg" alt="" width="56" height="56">
+    <div class="launch__text">
+      <p class="launch__name">FlavorDraft for iPhone</p>
+      <p class="launch__note">Sign in with Apple or Google, and your cookbook comes with you.</p>
+      {% if site.appStoreUrl %}
+        <p class="launch__status">On the App Store.</p>
+      {% else %}
+        <p class="launch__status"><span class="status-dot" aria-hidden="true"></span>Coming to the App Store.</p>
+      {% endif %}
+    </div>
+    {% if site.appStoreUrl %}
+      {# When the listing is live, replace this with Apple's official
+         "Download on the App Store" badge asset. #}
+      <a class="button" href="{{ site.appStoreUrl }}">Download on the App&nbsp;Store</a>
+    {% endif %}
+  </div>
+</section>
