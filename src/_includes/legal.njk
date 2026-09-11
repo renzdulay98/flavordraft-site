@@ -1,16 +1,16 @@
 ---
 layout: base.njk
 ---
+{%- set doc = legal[legalDoc] -%}
 <div class="wrap legal-head">
   <p class="overline">{{ legalKicker }}</p>
-  <h1 class="legal-head__title">{{ legalTitle }}</h1>
+  <h1 class="legal-head__title">{{ doc.title }}</h1>
 
+  {%- if doc.effectiveDate %}
   <dl class="legal-head__meta">
-    <div><dt>Effective</dt> <dd>{{ site.legal.effectiveDate }}</dd></div>
-    <div><dt>Applies to</dt> <dd>The FlavorDraft app and related services</dd></div>
+    <div><dt>Effective date</dt> <dd>{{ doc.effectiveDate }}</dd></div>
   </dl>
-
-  <p class="legal-head__summary lead">{{ legalSummary }}</p>
+  {%- endif %}
 </div>
 
 <div class="wrap legal-body">
@@ -19,7 +19,7 @@ layout: base.njk
       <p class="overline toc__title" id="toc-title">Contents</p>
       <div class="toc__list">
         {%- for heading in content | headings %}
-        <a href="#{{ heading.id }}">{{ heading.label }}</a>
+        <a href="#{{ heading.id }}"><span class="toc__num">{{ heading.number }}</span> {{ heading.label }}</a>
         {%- endfor %}
       </div>
     </nav>

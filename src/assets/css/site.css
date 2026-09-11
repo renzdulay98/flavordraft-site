@@ -1476,12 +1476,6 @@ a:hover {
   gap: 0.4375rem;
 }
 
-.legal-head__summary {
-  margin-top: var(--s6);
-  max-width: 44em;
-  color: var(--ink-2);
-}
-
 .legal-body {
   padding-bottom: clamp(4rem, 8vw, 7rem);
 }
@@ -1523,11 +1517,9 @@ a:hover {
   display: flex;
   flex-direction: column;
   border-top: 1px solid var(--rule);
-  counter-reset: legal-toc;
 }
 
 .toc__list a {
-  counter-increment: legal-toc;
   display: grid;
   grid-template-columns: 1.75rem 1fr;
   padding: 0.6875rem 0 0.6875rem 0.875rem;
@@ -1541,8 +1533,7 @@ a:hover {
   transition: color 0.14s ease, border-color 0.14s ease;
 }
 
-.toc__list a::before {
-  content: counter(legal-toc, decimal-leading-zero);
+.toc__num {
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -1554,8 +1545,8 @@ a:hover {
   color: var(--ink);
 }
 
-.toc__list a:hover::before,
-.toc__list a[data-current]::before {
+.toc__list a:hover .toc__num,
+.toc__list a[data-current] .toc__num {
   color: var(--red);
 }
 
@@ -1565,22 +1556,20 @@ a:hover {
   border-left-color: var(--red);
 }
 
-/* Long-form legal typography */
+/* Long-form legal typography. The markup is rendered from docs/*.md, so it
+   is flat: no wrapper per section, just headings, paragraphs and lists. */
 .legal-prose {
   max-width: 38rem;
   color: var(--ink-body);
-  counter-reset: legal-section;
+  overflow-wrap: break-word;
+}
+
+.legal-prose > :first-child {
+  margin-top: 0;
 }
 
 .legal-prose h2 {
-  counter-increment: legal-section;
-}
-
-.legal-prose > section + section {
   margin-top: clamp(2.75rem, 5vw, 4rem);
-}
-
-.legal-prose h2 {
   font-size: clamp(1.4375rem, 1.2rem + 0.9vw, 1.75rem);
   font-weight: 600;
   line-height: 1.2;
@@ -1588,11 +1577,10 @@ a:hover {
   scroll-margin-top: calc(var(--header-h) + var(--s6));
 }
 
-/* Section numbers come from a counter, so adding, removing or reordering a
-   section never leaves a stale number behind — in the prose or in the
-   contents list beside it. */
-.legal-prose h2::before {
-  content: counter(legal-section, decimal-leading-zero);
+/* The section number is the document's own ("1."), set apart from the
+   heading text at build time so it can sit above it as a label — the same
+   number the contents list beside it shows. */
+.legal-prose__num {
   display: block;
   font-family: var(--sans);
   font-size: 0.71875rem;
@@ -1609,6 +1597,7 @@ a:hover {
   letter-spacing: -0.008em;
   color: var(--ink);
   margin-top: var(--s7);
+  scroll-margin-top: calc(var(--header-h) + var(--s6));
 }
 
 .legal-prose p {
@@ -1648,31 +1637,6 @@ a:hover {
 .legal-prose strong {
   font-weight: 600;
   color: var(--ink);
-}
-
-/* One raised aside per page at most — used where a paragraph states the
-   product's central promise rather than a mechanic. */
-.legal-note {
-  margin-top: var(--s6);
-  padding: var(--s5);
-  background: var(--paper-raised);
-  border: 1px solid var(--rule);
-  border-left: 2px solid var(--red);
-  border-radius: 0 var(--r-md) var(--r-md) 0;
-}
-
-.legal-note p {
-  margin-top: 0;
-}
-
-.legal-note p + p {
-  margin-top: var(--s4);
-}
-
-.legal-contact {
-  font-family: var(--mono);
-  font-size: 0.9375rem;
-  word-break: break-word;
 }
 
 /* --------------------------------------------------------------------------
