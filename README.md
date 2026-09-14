@@ -87,8 +87,9 @@ The site uses the app's own faces through system stacks — Avenir Next for
 headlines and interface, Charter for editorial passages — with Helvetica
 Neue/Arial and Georgia as fallbacks. No font files are bundled or loaded.
 
-The wordmark is real text: the design system's "f" mark (inlined in
-`brand.njk`) followed by "lavordraft". The doodles are Lucide icons (ISC) plus
+The wordmark is the approved raster from `wordmark_handoff/` (see its README
+for specs): `src/assets/img/wordmark-flavordraft.png` on paper and the
+`-mono` file reversed on red, always placed by width. The doodles are Lucide icons (ISC) plus
 the whisk and spoon drawn for the screenshot set; the platform marks are from
 Simple Icons (CC0) and remain the trademarks of their owners. Sources and
 licences: `src/assets/img/doodles/SOURCES.txt`.

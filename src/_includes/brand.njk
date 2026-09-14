@@ -1,10 +1,10 @@
 {# ---------------------------------------------------------------------------
    Brand pieces shared by every page.
 
-   wordmark()      The lowercase FlavorDraft wordmark as the app draws it: the
-                   design system's own "f" mark (flavordraft-design-system/
-                   assets/mark-f.svg, inlined) followed by "lavordraft" set in
-                   the app's sans. Real text, so it scales and can be recoloured.
+   wordmark()      The approved FlavorDraft wordmark, the same raster the app
+                   ships (see wordmark_handoff/README.md): logoRed #9E1F1F on
+                   transparent, or the parchment "mono" file when onRed is set.
+                   Sized by width only; the 4.354:1 aspect follows.
    appStoreCta()   The download call to action. Renders a real link only when
                    site.appStoreUrl is set; until then an honest "coming soon"
                    status, never a dead button or an invented URL.
@@ -16,8 +16,8 @@
                    trademarks of their owners). Monochrome, small, labelled.
    --------------------------------------------------------------------------- #}
 
-{% macro wordmark(class) %}
-<span class="wordmark__lockup{% if class %} {{ class }}{% endif %}" role="img" aria-label="FlavorDraft"><svg class="wordmark__f" viewBox="220 120 440 780" aria-hidden="true" focusable="false"><path d="M624 268 C620 208 578 176 538 194 C526 146 466 134 438 174 C396 172 368 216 376 300 L306 800 C302 838 318 866 332 872 C350 858 366 830 370 800 L462 366 C452 292 470 254 508 250 C548 246 570 274 578 316 Z"/><path d="M286 512 L556 512 C570 512 580 524 578 538 L574 566 C572 578 562 586 550 586 L280 586 C266 586 256 574 258 560 L262 532 C264 520 274 512 286 512 Z"/></svg><span class="wordmark__text" aria-hidden="true">lavordraft</span></span>
+{% macro wordmark(size, onRed) %}
+<img class="wordmark__img{% if size %} wordmark__img--{{ size }}{% endif %}" src="/assets/img/wordmark-flavordraft{% if onRed %}-mono{% endif %}.png" alt="FlavorDraft" width="1193" height="274" decoding="async">
 {%- endmacro %}
 
 {% macro appStoreCta(site, variant) %}

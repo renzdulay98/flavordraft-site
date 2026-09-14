@@ -488,38 +488,21 @@ a:hover {
   color: inherit;
 }
 
-.wordmark__lockup {
-  display: inline-flex;
-  align-items: baseline;
-  color: var(--red);
-  font-family: var(--sans);
-  font-weight: 600;
-  font-size: var(--wm-size, 1.5rem);
-  letter-spacing: -0.02em;
-  line-height: 1;
-  white-space: nowrap;
+/* The approved wordmark is a raster (wordmark_handoff/README.md): place it by
+   width only and let the height follow. Header and footer sit at the
+   handoff's 140 pt home-header size; the closing section goes larger. */
+.wordmark__img {
+  display: block;
+  width: var(--wm-w, 8.75rem);
+  height: auto;
 }
 
-.wordmark__f {
-  height: 1.18em;
-  width: auto;
-  flex: none;
-  align-self: flex-end;
-  margin-right: -0.03em;
-  margin-bottom: -0.17em;
-  fill: currentColor;
+.wordmark__img--footer {
+  --wm-w: 9.5rem;
 }
 
-.wordmark__lockup--on-red {
-  color: var(--on-red);
-}
-
-.wordmark__lockup--footer {
-  --wm-size: 1.5rem;
-}
-
-.wordmark__lockup--closing {
-  --wm-size: clamp(2rem, 1.4rem + 2.5vw, 3.25rem);
+.wordmark__img--closing {
+  --wm-w: clamp(12rem, 26vw, 19rem);
 }
 
 /* --------------------------------------------------------------------------
@@ -766,8 +749,9 @@ a:hover {
   box-shadow: 0 0 0 3px var(--paper-sunken);
 }
 
-/* A phone cut off by the section it sits in: the top is what matters. */
-.phone--cut {
+/* A phone cut off by the section it sits in: the top is what matters. The
+   crop lives on the body so the step numeral on the outer element stays whole. */
+.phone--cut > .phone__body {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
   mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
@@ -1020,6 +1004,9 @@ a:hover {
 
   .stack > .phone {
     width: min(100%, 24rem);
+  }
+
+  .stack > .phone > .phone__body {
     max-height: 27rem;
     overflow: hidden;
     -webkit-mask-image: linear-gradient(to bottom, #000 76%, transparent 100%);
@@ -1030,7 +1017,7 @@ a:hover {
     width: min(100%, 22rem);
   }
 
-  .stack--cookbook > .phone {
+  .stack--cookbook > .phone > .phone__body {
     max-height: 31rem;
   }
 }
@@ -1311,7 +1298,7 @@ a:hover {
 }
 
 @media (max-width: 61.99em) {
-  .trio__item > .phone {
+  .trio__item > .phone > .phone__body {
     max-height: 26rem;
   }
 
