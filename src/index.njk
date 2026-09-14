@@ -1,234 +1,205 @@
 ---
 layout: base.njk
 canonical: /
-pageTitle: FlavorDraft — Save recipes without the note-taking
-pageDescription: FlavorDraft turns recipes from the web, cooking videos, and the places you already browse into clean, organized notes in your private personal cookbook.
+pageTitle: FlavorDraft — Your recipes, all in one place
+pageDescription: Import recipes from websites, social media, photos and food packaging. Organize your cookbook, adapt recipes and build grocery lists with FlavorDraft for iPhone.
+heroImage: home
 ---
-{% from "icons.njk" import icon %}
+{% from "brand.njk" import wordmark, appStoreCta, screen, phone, doodle, mark %}
 
-<section class="hero wrap">
-  <div class="grid hero__grid">
-
+{# ---------------------------------------------------------------- 1 · Hero #}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero__grid">
     <div class="hero__copy">
-      <h1 class="display">Save the recipe.<br>Skip the note&#8209;taking.</h1>
-      <p class="lead hero__lead">Share a recipe to FlavorDraft or paste a link. It turns the one you chose into clean ingredients and steps, keeps the original source attached, and saves it to your private cookbook.</p>
-
-      <p class="hero__meta">
-        <span class="hero__meta-name">FlavorDraft for iPhone</span>
-        <span class="hero__meta-note">Coming to the App&nbsp;Store.</span>
-      </p>
+      {{ doodle("bookmark", "doodle--hero-bookmark") }}
+      <p class="eyebrow">FlavorDraft for iPhone</p>
+      <h1 class="display hero__title" id="hero-title">Every recipe you&nbsp;love. One&nbsp;cookbook.</h1>
+      <p class="lead hero__lead">Bring recipes from websites, social posts, photos and food packaging into one cookbook you can actually cook from.</p>
+      <div class="hero__actions">
+        {{ appStoreCta(site) }}
+        <a class="button button--ghost" href="#how">See how it works</a>
+      </div>
     </div>
 
     <div class="hero__figure">
-      <figure class="compose">
-        <div class="compose__source">
-          <span class="compose__source-icon">{{ icon("globe", 18) }}</span>
-          <span class="compose__source-text">
-            <span class="compose__source-label">Shared to FlavorDraft</span>
-            <span class="compose__source-url">lolakitchen.com/chicken-adobo</span>
-          </span>
-        </div>
+      {{ doodle("whisk", "doodle--hero-whisk") }}
+      <div class="hero__phone" data-reveal>
+        {{ phone("home", "FlavorDraft's Home screen. Good morning, Stan. What are you cooking today? A French Toast recipe sits under Just Added, above Quick Access shelves for Weeknight Dinners and Desserts.", "(min-width: 62em) 26rem, 74vw", null, true) }}
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="compose__link" aria-hidden="true"></div>
+{# -------------------------------------------------------------- 2 · Thesis #}
+<section class="thesis" aria-labelledby="thesis-title">
+  <div class="wrap thesis__grid">
+    <div class="thesis__head" data-reveal>
+      {{ doodle("squiggle", "doodle--thesis") }}
+      <h2 class="thesis__title" id="thesis-title">Saved isn't the same as organized.</h2>
+    </div>
+    <p class="thesis__text" data-reveal style="--i: 1">That recipe you saved last month shouldn't disappear into a browser bookmark, a screenshot folder or a social feed. FlavorDraft gives everything a permanent place.</p>
+  </div>
+</section>
 
-        {# A reconstruction of the saved-recipe screen, built from the design
-           package's own components at the app's own point sizes. #}
-        <div class="device" role="img" aria-label="The FlavorDraft recipe screen showing Chicken Adobo saved from lolakitchen.com, with its ingredients listed and the original source kept alongside.">
-          <div class="device__cover"></div>
-          <div class="device__scrim"></div>
+{# -------------------------------------------------------------- 3 · Import #}
+<section class="feature feature--import" id="features" aria-labelledby="import-title">
+  <div class="wrap feature__grid">
+    <div class="feature__copy" id="how" data-reveal>
+      <p class="eyebrow">Import</p>
+      <h2 class="h2" id="import-title">Found a recipe?<br>Bring it with you.</h2>
+      <p class="prose">Paste a link or share a recipe to FlavorDraft. We'll turn what the source provides into a clean recipe you can review before it joins your cookbook.</p>
+      <ol class="steps">
+        <li><span class="steps__num" aria-hidden="true">1</span><span><b>Paste or share.</b> Send a link from Safari or a social app, or paste it in.</span></li>
+        <li><span class="steps__num" aria-hidden="true">2</span><span><b>It imports in the background.</b> Keep using FlavorDraft. Progress shows on Home, and you'll see when the recipe is ready.</span></li>
+        <li><span class="steps__num" aria-hidden="true">3</span><span><b>Review, then save.</b> See what came through, credited to its source. Nothing is saved until you've looked at it.</span></li>
+      </ol>
+      <p class="sources">Works with links from
+        <span class="sources__marks" aria-hidden="true">{{ mark("tiktok") }}{{ mark("instagram") }}{{ mark("youtube") }}{{ mark("facebook") }}{{ mark("web") }}</span>
+        TikTok, Instagram, YouTube and Facebook posts, and from recipe websites and blogs. You can also scan a cookbook page, describe a dish, or add a recipe by hand.</p>
+    </div>
 
-          <div class="device__bar">
-            <span class="glass-dot">{{ icon("arrow-left", 18) }}</span>
-            <span class="device__bar-group">
-              <span class="glass-dot">{{ icon("heart", 18) }}</span>
-              <span class="glass-dot">{{ icon("dots", 18) }}</span>
-            </span>
-          </div>
-
-          <div class="device__sheet">
-            <p class="device__title">Chicken Adobo</p>
-
-            <p class="device__source">{{ icon("globe", 14) }} From lolakitchen.com</p>
-
-            <p class="device__meta">
-              <span>{{ icon("clock", 15) }}45 min</span>
-              <span>{{ icon("bowl", 15) }}4 servings</span>
-              <span>{{ icon("gauge", 15) }}Easy</span>
-            </p>
-
-            <div class="device__segments">
-              <span class="device__segment" data-on>Ingredients</span>
-              <span class="device__segment">Steps</span>
-            </div>
-
-            <div class="device__list">
-              <p class="device__row device__row--done"><span class="device__mark-done">{{ icon("check-circle", 20) }}</span><span><b>1 kg</b> chicken thighs</span></p>
-              <p class="device__row"><span class="device__mark-todo">{{ icon("circle", 20) }}</span><span><b>120 ml</b> soy sauce</span></p>
-              <p class="device__row"><span class="device__mark-todo">{{ icon("circle", 20) }}</span><span><b>120 ml</b> cane vinegar</span></p>
-              <p class="device__row"><span class="device__mark-todo">{{ icon("circle", 20) }}</span><span><b>6 cloves</b> garlic, crushed</span></p>
-              <p class="device__row"><span class="device__mark-todo">{{ icon("circle", 20) }}</span><span><b>3</b> bay leaves</span></p>
-              <p class="device__row"><span class="device__mark-todo">{{ icon("circle", 20) }}</span><span><b>1 tsp</b> black peppercorns</span></p>
-              <p class="device__row"><span class="device__mark-todo">{{ icon("circle", 20) }}</span><span><b>240 ml</b> water</span></p>
-              <p class="device__row"><span class="device__mark-todo">{{ icon("circle", 20) }}</span><span><b>2 tbsp</b> brown sugar</span></p>
-            </div>
-          </div>
-
-          <div class="device__fade"></div>
-        </div>
+    <div class="feature__figure stack stack--import">
+      <div class="phone stack__a" data-reveal style="--i: 0">
+        {{ phone("import-link", "The Import from link screen with a recipe URL pasted in. Under Found on the page, FlavorDraft lists French Toast with ingredients, method and photo detected, above an Import Recipe button.", "(min-width: 62em) 18rem, 90vw", null, false, 1) }}
+      </div>
+      <div class="phone stack__b" data-reveal style="--i: 1">
+        {{ phone("import-progress", "Home with an Imports card: Strawberry Shortcake from natashaskitchen.com, reading the recipe.", "(min-width: 62em) 18rem, 90vw", null, false, 2) }}
+      </div>
+      <div class="phone stack__c" data-reveal style="--i: 2">
+        {{ phone("import-ready", "Recipe imported: French Toast, with the recipe photo, 9 ingredients, 7 steps, 2 servings, the credit From Nagi, RecipeTin Eats, and Review Recipe and Save as is buttons.", "(min-width: 62em) 18rem, 90vw", null, false, 3) }}
+      </div>
+      <figure class="card stack__inset" data-reveal style="--i: 3">
+        {{ screen("import-menu", "The + menu in FlavorDraft: Scan a recipe, Scan food packaging, Import from link, Import from social media, Describe a dish or idea, Add manually.", "(min-width: 62em) 16rem, 60vw", [300, 600, 900], 790, 826) }}
       </figure>
     </div>
-
   </div>
 </section>
 
-
-<section class="section section--ruled" aria-labelledby="sources-title">
-  <div class="wrap grid">
-    <div class="sources__head">
-      <h2 class="h2" id="sources-title">From wherever you already cook.</h2>
-      <p class="prose prose--offset">Recipes rarely arrive as recipes. They're a link someone sent you, a video you saved at midnight, a page in a book on the counter. FlavorDraft takes the one you picked and writes it down properly.</p>
+{# ----------------------------------------------------------- 4 · Packaging #}
+<section class="band band--red packaging" aria-labelledby="packaging-title">
+  {{ doodle("scan", "doodle--packaging") }}
+  <div class="wrap packaging__grid">
+    <div class="packaging__head" data-reveal>
+      <p class="eyebrow eyebrow--on-red">Scan packaging</p>
+      <h2 class="h2" id="packaging-title">Turn packaging into recipes.</h2>
+      <p class="lead">Turn the recipe on the box into a recipe you'll keep. Scan the packaging and FlavorDraft reads the useful details and drafts a recipe you can save, edit and cook from.</p>
+      <ol class="steps">
+        <li><span class="steps__num" aria-hidden="true">1</span><span><b>Front</b> The name and what's on the box.</span></li>
+        <li><span class="steps__num" aria-hidden="true">2</span><span><b>Ingredients</b> The panel that says what's actually in it.</span></li>
+        <li><span class="steps__num" aria-hidden="true">3</span><span><b>Nutrition</b> Serving size and the numbers that matter.</span></li>
+        <li><span class="steps__num" aria-hidden="true">4</span><span><b>Your recipe</b> A homemade version, drafted from the scan, ready to edit.</span></li>
+      </ol>
+      <p class="packaging__note">Drafted from what the packaging says, and yours to check and edit before you cook.</p>
     </div>
 
-    <ul class="sources__list ruled-list">
-      <li><span class="ruled-list__term">A recipe site or food blog</span><span class="ruled-list__note">Paste or share the link</span></li>
-      <li><span class="ruled-list__term">A cooking video</span><span class="ruled-list__note">Captions and narration both help</span></li>
-      <li><span class="ruled-list__term">A post from another app</span><span class="ruled-list__note">Straight from the share sheet</span></li>
-      <li><span class="ruled-list__term">A cookbook page or index card</span><span class="ruled-list__note">Scan it</span></li>
-      <li><span class="ruled-list__term">A dish you can describe</span><span class="ruled-list__note">Say what you want to make</span></li>
-    </ul>
-
-    <p class="sources__note">You pick the source, one at a time, and nothing is saved until you've looked at it.</p>
+    {# One asset, on purpose: the packaging demo shows a real brand's box (see
+       screenshots/RIGHTS_REVIEW.md). Swap the source in scripts/screens.json
+       and run `npm run screens` to replace it before launch. #}
+    <figure class="packaging__figure" data-reveal>
+      {{ screen("packaging", "Three phones scanning a pancake mix box: the front, the ingredients panel and the nutrition panel. Below them, the resulting recipe, Homemade Buttermilk Pancake and Waffle Mix, marked Recreated from your scan.", "(min-width: 62em) 44rem, 92vw", [480, 960, 1320], 1320, 2208) }}
+    </figure>
   </div>
 </section>
 
+{# --------------------------------------------------------------- 5 · Adapt #}
+<section class="band band--sunken feature feature--adapt" aria-labelledby="adapt-title">
+  <div class="wrap feature__grid feature__grid--flip">
+    <div class="feature__copy" data-reveal>
+      <p class="eyebrow">Adapt</p>
+      <h2 class="h2" id="adapt-title" style="position: relative">Make a recipe work for you.{{ doodle("message", "doodle--adapt") }}</h2>
+      <p class="prose">Ask for a change in plain language. FlavorDraft suggests specific edits to the recipe, and you decide whether to apply them.</p>
+      <ul class="asks">
+        <li>Make this healthier and keep it high-protein.</li>
+        <li>What can I use instead of the dairy?</li>
+        <li>Make this serve 4.</li>
+      </ul>
+      <ol class="steps">
+        <li><span class="steps__num" aria-hidden="true">1</span><span><b>Ask.</b> Healthier, higher-protein, a substitution, different servings.</span></li>
+        <li><span class="steps__num" aria-hidden="true">2</span><span><b>Review the suggested changes.</b> Every edit is shown against the original, ingredient by ingredient.</span></li>
+        <li><span class="steps__num" aria-hidden="true">3</span><span><b>Apply them, or keep the original.</b> Nothing changes until you say so.</span></li>
+      </ol>
+    </div>
 
-<section class="section section--ruled" aria-label="What FlavorDraft does">
+    <div class="feature__figure stack stack--adapt">
+      <div class="phone stack__a" data-reveal style="--i: 0">
+        {{ phone("adapt-ask", "A Draft with AI conversation on Best Homemade Pancakes. The request Make this healthier and keep it high-protein gets a reply suggesting whole-wheat flour, Greek yogurt, less sugar and less butter, with an Apply these changes button.", "(min-width: 62em) 21rem, 90vw", null, false, 1) }}
+      </div>
+      <div class="phone stack__b" data-reveal style="--i: 1">
+        {{ phone("adapt-changes", "The Suggested Changes card: original amounts struck through beside the new ones, added whole-wheat flour, Greek yogurt and chia, and Apply Changes or Keep Original buttons.", "(min-width: 62em) 21rem, 90vw", null, false, 2) }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ------------------------------------------------------------- 6 · Grocery #}
+<section class="grocery" aria-labelledby="grocery-title">
+  {{ doodle("basket", "doodle--grocery") }}
   <div class="wrap">
-
-    <div class="grid spread">
-      <div class="spread__copy">
-        <h2 class="h2">Save it without rewriting it.</h2>
-        <p class="prose">FlavorDraft sorts what you chose into ingredients and steps you can cook from — and it tells you plainly where the source came up short instead of inventing the gap.</p>
-      </div>
-
-      <div class="spread__figure">
-        <div class="panel">
-          <p class="panel__head">{{ icon("warning-circle", 18) }} 2 details need your review</p>
-          <ul class="review-list">
-            <li>
-              <span><span class="review-list__name">Soy sauce</span><span class="review-list__state">Amount not specified</span></span>
-              <span class="review-list__action">Add</span>
-            </li>
-            <li>
-              <span><span class="review-list__name">Cooking time</span><span class="review-list__state">Not specified</span></span>
-              <span class="review-list__action">Add</span>
-            </li>
-          </ul>
-          <p class="panel__note">We kept everything the page actually said. Missing details stay blank until you fill them in.</p>
-        </div>
-      </div>
+    <div class="grocery__head" data-reveal>
+      <p class="eyebrow">Grocery</p>
+      <h2 class="h2" id="grocery-title">From recipe to grocery list in a few taps.</h2>
+      <p class="prose">Pick the ingredients you need from a recipe and they land on your list, grouped by aisle and still tied to the recipe they came from.</p>
     </div>
 
-    <div class="grid spread spread--flip">
-      <div class="spread__copy">
-        <h2 class="h2">One cookbook for the recipes you actually use.</h2>
-        <p class="prose">Favorites, collections, grocery lists, and the handful you make on repeat — together in one place, and searchable, whatever they were saved from.</p>
-      </div>
-
-      <div class="spread__figure">
-        <div class="cookbook">
-          <div class="cookbook__chips">
-            <span class="chip" data-on>All (10)</span>
-            <span class="chip">Folders</span>
-            <span class="chip">Favorites</span>
-          </div>
-          <p class="recipe-row">
-            <span class="recipe-row__art recipe-row__art--soup"></span>
-            <span><span class="recipe-row__title">Chicken Adobo</span><span class="recipe-row__meta">Today · 45 min · from a link</span></span>
-          </p>
-          <p class="recipe-row">
-            <span class="recipe-row__art recipe-row__art--bread"></span>
-            <span><span class="recipe-row__title">Sunday Focaccia</span><span class="recipe-row__meta">Aug 11 · from a cookbook page</span></span>
-          </p>
-          <p class="recipe-row">
-            <span class="recipe-row__art recipe-row__art--pasta"></span>
-            <span><span class="recipe-row__title">Gochujang Butter Noodles</span><span class="recipe-row__meta">Aug 9 · 20 min · from a video</span></span>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid pair">
-      <div class="pair__item">
-        <h2 class="h3">Make the recipe work for you.</h2>
-        <p class="prose">Ask for clearer instructions, different servings, or a substitution. FlavorDraft adapts your saved copy — and the original source stays attached to it.</p>
-        <div class="swap">
-          <p class="swap__row"><span class="swap__from">Heavy cream</span><span class="swap__arrow">{{ icon("arrow-right", 14) }}</span><span class="swap__to">Greek yogurt</span></p>
-          <p class="swap__row"><span class="swap__from">1 tbsp oil</span><span class="swap__arrow">{{ icon("arrow-right", 14) }}</span><span class="swap__to">1 tsp oil</span></p>
-        </div>
-      </div>
-
-      <div class="pair__item">
-        <h2 class="h3">Know where it came from.</h2>
-        <p class="prose">When the source tells us who made it, FlavorDraft keeps the creator or site and a link back on your recipe — so you can return to the original whenever you want to.</p>
-        <div class="attribution">
-          <p class="attribution__title">Chicken Adobo</p>
-          <p class="attribution__from">{{ icon("globe", 14) }} From lolakitchen.com</p>
-        </div>
-      </div>
-    </div>
-
+    <ol class="trio">
+      <li class="trio__item" data-reveal style="--i: 0">
+        {{ phone("grocery-choose", "The Add to Grocery sheet for Greek Chicken Salad, with eight ingredients ticked and a button reading Add 8 items.", "(min-width: 62em) 22rem, 90vw", "phone--cut", false, 1) }}
+        <figure class="card trio__inset" data-reveal style="--i: 2">
+          {{ screen("grocery-already", "Two ingredients in the Add to Grocery sheet, Bread of choice and Large eggs, each marked Already on your list.", "(min-width: 62em) 19rem, 70vw", [360, 720, 1080], 1240, 470) }}
+        </figure>
+        <p class="trio__caption"><b>Choose what you need.</b> Tick the ingredients you're missing. Anything already on your list is marked, so nothing gets added twice.</p>
+      </li>
+      <li class="trio__item" data-reveal style="--i: 1">
+        {{ phone("grocery-list", "The Grocery list, 16 to buy, grouped under Produce. Each item shows its quantity and the recipe it came from.", "(min-width: 62em) 22rem, 90vw", "phone--cut", false, 2) }}
+        <p class="trio__caption"><b>One list, by aisle.</b> Produce, dairy, pantry. Each item keeps its quantity and the recipe it's for.</p>
+      </li>
+      <li class="trio__item" data-reveal style="--i: 2">
+        {{ phone("grocery-bought", "The bottom of the Grocery list: Dairy and Eggs and Pantry items, then a Bought 3 group with lemon juice, bread and milk crossed off.", "(min-width: 62em) 22rem, 90vw", "phone--cut", false, 3) }}
+        <p class="trio__caption"><b>Check things off.</b> Tap items as you shop. Bought items move to the bottom, and an ingredient two recipes share becomes one line.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
-
-<section class="band-sunken">
-  <div class="wrap section grid notetaking">
-    <div class="notetaking__copy">
-      <h2 class="h2">Like writing the recipe down yourself — without all the writing.</h2>
-      <p class="prose prose--offset">FlavorDraft automates the tedious half of recipe note-taking: gathering the ingredients, putting the steps in order, holding on to the source, and filing the whole thing somewhere you'll find it again.</p>
+{# ------------------------------------------------------------ 7 · Cookbook #}
+<section class="feature cookbook" aria-labelledby="cookbook-title">
+  {{ doodle("book-open", "doodle--cookbook") }}
+  <div class="wrap feature__grid">
+    <div class="feature__copy" data-reveal>
+      <p class="eyebrow">Your cookbook</p>
+      <h2 class="h2" id="cookbook-title">Everything has a place.</h2>
+      <p class="prose">Create collections, keep favorites close, and search the recipes you've saved when you actually need them.</p>
+      <ul class="ruled-list">
+        <li><span class="ruled-list__term">Collections</span><span class="ruled-list__note">Shelves like Weeknight Dinners and Desserts. A recipe can sit on as many as you like.</span></li>
+        <li><span class="ruled-list__term">Favorites</span><span class="ruled-list__note">The ones you make on repeat, one filter away.</span></li>
+        <li><span class="ruled-list__term">Search</span><span class="ruled-list__note">By recipe name, or by the ingredients you have.</span></li>
+        <li><span class="ruled-list__term">Cooking profile</span><span class="ruled-list__note">Default servings, measurement units, dietary preference and cooking goals, kept in mind whenever FlavorDraft drafts for you.</span></li>
+      </ul>
     </div>
-    <div class="notetaking__art">
-      <img src="/assets/img/home-illustration.svg" alt="" width="260" height="200">
+
+    <div class="feature__figure stack stack--cookbook">
+      <div class="phone stack__a" data-reveal style="--i: 0">
+        {{ phone("cookbook-collections", "My Recipes, Collections tab: Weeknight Dinners, Desserts, Breakfast and Brunch, Comfort Food, Fresh and Light and Quick and Easy, each with its own cover photo.", "(min-width: 62em) 23rem, 90vw") }}
+      </div>
+      <div class="phone stack__b" data-reveal style="--i: 1">
+        {{ phone("cookbook-desserts", "The Desserts collection, six recipes: Pavlova, Strawberry Shortcake, Tiramisu, Classic New York Cheesecake, Apple Crumble and Chocolate Chip Cookies.", "(min-width: 62em) 20rem, 90vw") }}
+      </div>
     </div>
   </div>
 </section>
 
-
-<section class="band-deep" aria-labelledby="private-title">
-  <div class="wrap section grid private">
-    <p class="private__mark">
-      <img src="/assets/img/mark-parchment.svg" alt="" width="449" height="748">
-    </p>
-
-    <div class="private__head">
-      <h2 class="h2" id="private-title">Your cookbook stays yours.</h2>
+{# ------------------------------------------------------------- 8 · Closing #}
+<section class="band band--red closing" aria-labelledby="closing-title">
+  {{ doodle("utensils", "doodle--closing") }}
+  {{ doodle("spoon", "doodle--closing-2") }}
+  <div class="wrap closing__inner">
+    <h2 class="display closing__title" id="closing-title" data-reveal>Your next favorite recipe already has a place.</h2>
+    <div data-reveal style="--i: 1">{{ wordmark("wordmark__lockup--on-red wordmark__lockup--closing") }}</div>
+    <div data-reveal style="--i: 2">{{ appStoreCta(site, "on-red") }}</div>
+    <div class="closing__window">
+      <div class="closing__phone" data-reveal style="--i: 3">
+        {{ phone("closing-recipe", "A recipe screen for Greek Chicken Salad, credited to Lisa Bryan on downshiftology.com, with cooking time, servings and the ingredient list.", "(min-width: 62em) 21rem, 70vw") }}
+      </div>
     </div>
-
-    <div class="private__body">
-      <p>FlavorDraft is built as a personal recipe notebook, not a public recipe network. Recipes you save are private by default, and they aren't added to a shared public recipe library.</p>
-      <p>You choose what FlavorDraft works with, one source at a time. We don't build a public catalog out of what you save. <a href="/privacy">Read the Privacy Policy</a>.</p>
-    </div>
-  </div>
-</section>
-
-
-<section class="wrap section--tight section--ruled">
-  <div class="launch">
-    <img class="launch__icon" src="/assets/img/appicon.svg" alt="" width="56" height="56">
-    <div class="launch__text">
-      <p class="launch__name">FlavorDraft for iPhone</p>
-      <p class="launch__note">Sign in with Apple or Google, and your cookbook comes with you.</p>
-      {% if site.appStoreUrl %}
-        <p class="launch__status">On the App Store.</p>
-      {% else %}
-        <p class="launch__status"><span class="status-dot" aria-hidden="true"></span>Coming to the App Store.</p>
-      {% endif %}
-    </div>
-    {% if site.appStoreUrl %}
-      {# When the listing is live, replace this with Apple's official
-         "Download on the App Store" badge asset. #}
-      <a class="button" href="{{ site.appStoreUrl }}">Download on the App&nbsp;Store</a>
-    {% endif %}
   </div>
 </section>

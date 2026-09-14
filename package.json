@@ -7,7 +7,8 @@
   "scripts": {
     "start": "eleventy --serve",
     "build": "eleventy",
-    "icons": "node scripts/build-icons.mjs"
+    "icons": "node scripts/build-icons.mjs",
+    "screens": "node scripts/build-screens.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0"

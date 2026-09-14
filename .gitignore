@@ -2,3 +2,7 @@
 node_modules/
 _site/
 .DS_Store
+
+# The screenshot archive and its extracted copy are inputs to `npm run screens`, not part of the site.
+/Archive.zip
+/screenshot-assets/

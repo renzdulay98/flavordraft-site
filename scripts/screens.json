@@ -1,0 +1,34 @@
+{
+  "_readme": [
+    "Every screenshot the site shows, in one place. `from` is a path inside the FlavorDraft",
+    "screenshot set (the extracted Archive.zip: screenshot-source/… and screenshots/…).",
+    "To swap an image — for example to replace third-party recipe photography or the",
+    "packaging demo before launch — point `from` at the new 1320×2868 capture and run",
+    "`npm run screens`. `crop` is [x, y, width, height] in source pixels; `widths` are the",
+    "output widths written as WebP into src/assets/img/screens/."
+  ],
+  "images": [
+    { "name": "home", "from": "screenshot-source/home/home_primary.png", "widths": [400, 800, 1200] },
+
+    { "name": "import-link", "from": "screenshot-source/import/import_alt_00_link_found_french_toast.png", "widths": [400, 800, 1200] },
+    { "name": "import-progress", "from": "screenshot-source/import/import_alt_05_home_import_in_progress.png", "widths": [400, 800, 1200] },
+    { "name": "import-ready", "from": "screenshot-source/import/import_primary_recipe_imported_french_toast.png", "widths": [400, 800, 1200] },
+    { "name": "import-menu", "from": "screenshot-source/import/import_alt_02_add_menu_ways_in.png", "crop": [520, 1436, 790, 826], "widths": [300, 600, 900] },
+
+    { "name": "packaging", "from": "screenshots/final-png/03-turn-packaging-into-recipes.png", "crop": [0, 660, 1320, 2208], "widths": [480, 960, 1320], "quality": 84,
+      "_note": "Composite from the App Store set (the raw scan captures are not in the archive). Red #B62B25 background baked in; shows Hungry Jack packaging — see screenshots/RIGHTS_REVIEW.md before launch." },
+
+    { "name": "adapt-ask", "from": "screenshot-source/ai/ai_healthier_recipe.png", "widths": [400, 800, 1200] },
+    { "name": "adapt-changes", "from": "screenshot-source/ai/ai_suggested_changes_card.png", "widths": [400, 800, 1200] },
+
+    { "name": "grocery-choose", "from": "screenshot-source/grocery/grocery_add_to_grocery_selection_greek_salad.png", "widths": [400, 800, 1200] },
+    { "name": "grocery-list", "from": "screenshot-source/grocery/grocery_primary.png", "widths": [400, 800, 1200] },
+    { "name": "grocery-bought", "from": "screenshot-source/grocery/grocery_alt_bought_items.png", "widths": [400, 800, 1200] },
+    { "name": "grocery-already", "from": "screenshot-source/grocery/grocery_add_to_grocery_already_on_list.png", "crop": [40, 628, 1240, 470], "widths": [360, 720, 1080] },
+
+    { "name": "cookbook-collections", "from": "screenshot-source/collections/collections_primary.png", "widths": [400, 800, 1200] },
+    { "name": "cookbook-desserts", "from": "screenshot-source/collections/collection_detail_desserts.png", "widths": [400, 800, 1200] },
+
+    { "name": "closing-recipe", "from": "screenshot-source/recipe-detail/recipe_detail_primary_greek_chicken_salad.png", "widths": [400, 800, 1200] }
+  ]
+}

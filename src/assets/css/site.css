@@ -1,15 +1,15 @@
 /* ==========================================================================
    FlavorDraft — flavordraft.app
 
-   Tokens are taken from the FlavorDraft iOS design package ("Foundations")
-   so the site and the app share one palette, one type ramp and one radius
-   language. The package's material rule carries over unchanged:
+   Colour, spacing and radii come from the FlavorDraft iOS design package, so
+   the site and the app share one palette. Type follows the app's own faces:
+   Avenir Next for headlines and interface, Charter for editorial moments.
+   Both ship with iOS and macOS; elsewhere the stacks fall back to the closest
+   system faces. No webfont is loaded.
 
-     glass floats, paper holds content — content surfaces are never glass,
-     paper never casts a shadow, and there is exactly one accent.
-
-   On the web that means the sticky header is the only translucent surface
-   on the site, and the only drop shadow belongs to the phone in the hero.
+   The package's material rule carries over: paper holds content and never
+   casts a shadow; the only shadows on the site belong to the phones, which
+   float above the paper.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -22,53 +22,29 @@
   --paper-raised: #fffbf3;
   --paper-sunken: #f1e6d4;
 
-  /* Ink.
-     The app carries four descending text tones on paper (secondaryText,
-     tertiaryText, mutedText and below). On a phone, at Dynamic Type sizes and
-     under a colour-managed display, they all read. On the web the two lightest
-     land at 3.8:1 and 2.7:1 against this background — under AA for anything
-     that isn't large text — so the ramp is collapsed to a single muted tone at
-     the app's own `secondaryText`, which clears 4.6:1. Separation that the
-     lighter tones used to carry is done with size, weight and tracking
-     instead; see `.overline`.
-     Anything below that value survives only as non-text: marks, rules,
-     disclosure affordances. */
-  --ink: #2c2622; /* 11.3:1 — headings */
-  --ink-body: #3b322c; /* 11.3:1 — long-form prose */
-  --ink-2: #7a6c60; /* 4.6:1  — every secondary and muted text tone */
-  /* A sunken ground costs about half a point of contrast, which is enough to
-     put --ink-2 under AA on it. Muted text sitting on paperSunken or on the
-     segmented control's groove steps down to this instead. */
-  --ink-2-on-sunken: #6b5d52; /* 5.1:1 on paperSunken */
-  --mark-empty: #d8c8b2; /* non-text: an unchecked ingredient mark */
-  --segment-track: #efe4d2; /* non-text: the segmented control's groove */
+  /* Ink — see the package's contrast notes: two tones on paper, both AA. */
+  --ink: #2c2622;
+  --ink-body: #3b322c;
+  --ink-2: #7a6c60;
+  --ink-2-on-sunken: #6b5d52;
 
   /* Lines */
   --rule: #e9ddc9;
   --rule-strong: #decfb8;
-  --hairline: #f0e5d4;
-  --field: #e4d7c3;
 
-  /* Accent — one, and used sparingly */
+  /* The one accent, and its family */
   --red: #b62b25;
   --red-deep: #7e1d1a;
   --red-tint: #f7e6e0;
   --on-red: #fff8ee;
-  --parchment: #f6efe3;
-
-  /* Reserved by the package for confirmation and for estimated values only */
-  --green: #4e7a45;
-  --amber: #b0761e;
+  --on-red-2: rgba(255, 248, 238, 0.78);
+  --doodle-on-red: #f48e84;
 
   /* Type */
-  --serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino,
-    Georgia, "Times New Roman", serif;
-  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: "Avenir Next", Avenir, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --serif: Charter, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
 
-  /* Spacing — the package's 4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 scale,
-     extended upward for the room a page has that a phone screen does not. */
+  /* Spacing — the package's 4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 scale, extended */
   --s1: 0.25rem;
   --s2: 0.5rem;
   --s3: 0.75rem;
@@ -81,20 +57,21 @@
   --s10: 5rem;
   --s11: 7rem;
 
-  /* Radii — sm 10 · md 14 · lg 20 · xl 28 · capsule */
+  /* Radii — sm 10 · md 14 · lg 20 */
   --r-sm: 10px;
   --r-md: 14px;
   --r-lg: 20px;
-  --r-xl: 28px;
-  --r-pill: 999px;
 
   /* Layout */
-  --page-max: 74rem;
-  --gutter: clamp(1.25rem, 5vw, 4rem);
-  --section-y: clamp(4.5rem, 9vw, 8rem);
+  --page-max: 80rem;
+  --gutter: clamp(1.25rem, 5vw, 4.5rem);
+  --section-y: clamp(4.5rem, 9vw, 8.5rem);
   --header-h: 4.25rem;
 
-  /* The package's paper grain, at the same 3.5% it uses on device. */
+  /* Phone shadow — the package lets only floating things cast one */
+  --phone-shadow: 0 2.4cqw 5cqw -1.6cqw rgba(44, 38, 34, 0.42);
+
+  /* The package's paper grain, at the 3.5% it uses on device */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='80' height='80' filter='url(%23g)' opacity='.035'/%3E%3C/svg%3E");
 
   color-scheme: light;
@@ -132,6 +109,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-wrap: pretty;
+  overflow-x: clip;
 }
 
 h1,
@@ -139,9 +117,9 @@ h2,
 h3,
 h4 {
   margin: 0;
-  font-family: var(--serif);
+  font-family: var(--sans);
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
   text-wrap: balance;
 }
 
@@ -185,68 +163,80 @@ a:hover {
   border-radius: 2px;
 }
 
+.band--red :focus-visible {
+  outline-color: var(--on-red);
+}
+
 ::selection {
   background: var(--red-tint);
   color: var(--ink);
 }
 
 /* --------------------------------------------------------------------------
-   3 · Type primitives
+   3 · Type
    -------------------------------------------------------------------------- */
 
 .display {
-  /* Sized so the longest line ("Skip the note-taking.", 9.58em wide in
-     Newsreader 700 at this tracking) always clears the seven columns it sits
-     in, from the 62em two-column breakpoint up. */
-  font-size: clamp(2.75rem, 1.9rem + 2.2vw, 3.85rem);
-  font-weight: 700;
-  line-height: 1.04;
-  letter-spacing: -0.028em;
+  font-size: clamp(2.25rem, 0.9rem + 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.032em;
 }
 
 .h2 {
-  font-size: clamp(2rem, 1.35rem + 2.6vw, 3rem);
-  font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.022em;
+  font-size: clamp(2.125rem, 1.4rem + 2.4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.028em;
 }
 
 .h3 {
   font-size: clamp(1.375rem, 1.15rem + 0.9vw, 1.75rem);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.18;
-  letter-spacing: -0.014em;
+  letter-spacing: -0.016em;
 }
 
-/* The package's `overline` token: 11.5 semibold, 1.3 tracking, uppercase. */
-.overline {
+.eyebrow {
   font-family: var(--sans);
-  font-size: 0.71875rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.125em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink-2);
+  color: var(--red);
   line-height: 1.4;
 }
 
+.eyebrow--on-red {
+  color: var(--on-red-2);
+}
+
 .lead {
-  font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
-  line-height: 1.55;
-  color: var(--ink-2);
-  max-width: 34em;
+  font-family: var(--serif);
+  font-size: clamp(1.125rem, 1rem + 0.55vw, 1.4375rem);
+  line-height: 1.5;
+  color: var(--ink-body);
+  max-width: 30em;
 }
 
 .prose {
-  color: var(--ink-2);
-  max-width: 36em;
+  font-family: var(--serif);
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  line-height: 1.55;
+  color: var(--ink-body);
+  max-width: 32em;
 }
 
 .prose + .prose {
   margin-top: var(--s4);
 }
 
-.accent {
-  color: var(--red);
+.on-red,
+.band--red .h2,
+.band--red .display,
+.band--red .lead,
+.band--red .prose {
+  color: var(--on-red);
 }
 
 /* --------------------------------------------------------------------------
@@ -264,25 +254,18 @@ a:hover {
   padding-block: var(--section-y);
 }
 
-.section--tight {
-  padding-block: clamp(3.25rem, 6vw, 5.5rem);
+.band--red {
+  background: var(--red);
+  color: var(--on-red);
 }
 
-.section--ruled {
-  border-top: 1px solid var(--rule);
+.band--sunken {
+  background: var(--paper-sunken);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--s8);
-}
-
-@media (min-width: 56em) {
-  .grid {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: var(--s8) var(--s7);
-  }
+.band--sunken .prose,
+.band--sunken .lead {
+  color: var(--ink-body);
 }
 
 .visually-hidden {
@@ -318,15 +301,236 @@ a:hover {
   outline-offset: 2px;
 }
 
+/* Buttons — the app's own rounded rectangle, not a capsule. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3.25rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--r-md);
+  background: var(--red);
+  color: var(--on-red);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  transition: background-color 0.16s ease, transform 0.16s ease, color 0.16s ease;
+}
+
+.button:hover {
+  background: var(--red-deep);
+  color: var(--on-red);
+  transform: translateY(-1px);
+}
+
+.button--ghost {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1.5px var(--rule-strong);
+}
+
+.button--ghost:hover {
+  background: var(--paper-raised);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1.5px var(--ink-2);
+}
+
+.button--on-red {
+  background: var(--on-red);
+  color: var(--red);
+}
+
+.button--on-red:hover {
+  background: #fff;
+  color: var(--red-deep);
+}
+
+/* The honest state while the App Store listing is not live yet. */
+.coming {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-height: 3.25rem;
+  padding: 0.875rem 1.25rem;
+  border: 1.5px solid var(--rule-strong);
+  border-radius: var(--r-md);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.coming__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--red);
+  flex: none;
+}
+
+.coming--on-red {
+  border-color: rgba(255, 248, 238, 0.45);
+  color: var(--on-red);
+}
+
+.coming--on-red .coming__dot {
+  background: var(--on-red);
+}
+
+/* Numbered editorial steps. */
+.steps {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--rule);
+}
+
+.steps > li {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding: 0.9375rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink-body);
+}
+
+.steps__num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--on-red);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  margin-top: 0.05rem;
+}
+
+.steps b {
+  display: block;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.band--red .steps,
+.band--red .steps > li {
+  border-color: rgba(255, 248, 238, 0.28);
+  color: var(--on-red-2);
+}
+
+.band--red .steps b {
+  color: var(--on-red);
+}
+
+.band--red .steps__num {
+  background: var(--on-red);
+  color: var(--red);
+}
+
+/* Term / note pairs separated by hairlines. */
+.ruled-list {
+  border-top: 1px solid var(--rule);
+}
+
+.ruled-list > li {
+  display: grid;
+  gap: 0.25rem 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+@media (min-width: 40em) {
+  .ruled-list > li {
+    grid-template-columns: 10rem minmax(0, 1fr);
+  }
+}
+
+.ruled-list__term {
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.ruled-list__note {
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  color: var(--ink-body);
+  max-width: 34em;
+}
+
+/* Doodles — hand-placed, never patterned. Each has its own home below. */
+.doodle {
+  position: absolute;
+  color: var(--red);
+  opacity: 0.16;
+  pointer-events: none;
+  user-select: none;
+}
+
+.band--red .doodle {
+  color: var(--doodle-on-red);
+  opacity: 0.5;
+}
+
 /* --------------------------------------------------------------------------
-   5 · Header
+   5 · Wordmark
+   -------------------------------------------------------------------------- */
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  padding-block: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.wordmark__lockup {
+  display: inline-flex;
+  align-items: baseline;
+  color: var(--red);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: var(--wm-size, 1.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.wordmark__f {
+  height: 1.18em;
+  width: auto;
+  flex: none;
+  align-self: flex-end;
+  margin-right: -0.03em;
+  margin-bottom: -0.17em;
+  fill: currentColor;
+}
+
+.wordmark__lockup--on-red {
+  color: var(--on-red);
+}
+
+.wordmark__lockup--footer {
+  --wm-size: 1.5rem;
+}
+
+.wordmark__lockup--closing {
+  --wm-size: clamp(2rem, 1.4rem + 2.5vw, 3.25rem);
+}
+
+/* --------------------------------------------------------------------------
+   6 · Header
    -------------------------------------------------------------------------- */
 
 .masthead {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  background: color-mix(in srgb, var(--paper) 84%, transparent);
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
@@ -338,11 +542,14 @@ a:hover {
   }
 }
 
-.masthead[data-stuck] {
+.masthead[data-stuck],
+.masthead[data-open] {
   border-bottom-color: var(--rule);
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
 }
 
 .masthead__inner {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -350,1036 +557,1175 @@ a:hover {
   min-height: var(--header-h);
 }
 
-.wordmark {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5625rem;
-  padding-block: 0.5rem;
-  text-decoration: none;
-  color: inherit;
-}
-
-.wordmark__icon {
-  width: clamp(1.5rem, 1.2rem + 1.4vw, 1.75rem);
-  height: clamp(1.5rem, 1.2rem + 1.4vw, 1.75rem);
-  border-radius: 24%;
-  flex: none;
-}
-
-.wordmark__text {
-  font-family: var(--serif);
-  font-size: clamp(1.1875rem, 1rem + 0.9vw, 1.375rem);
-  font-weight: 600;
-  letter-spacing: -0.018em;
-  color: var(--red);
-  line-height: 1;
-}
-
-.wordmark__stop {
-  color: var(--red-deep);
-}
-
 .masthead__nav {
   display: flex;
   align-items: center;
-  gap: clamp(1rem, 3vw, 1.75rem);
+  gap: clamp(1rem, 3vw, 2rem);
 }
 
 .masthead__link {
   font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--ink-2);
+  font-weight: 600;
+  color: var(--ink);
   text-decoration: none;
   padding-block: 0.75rem;
+  letter-spacing: -0.005em;
 }
 
-.masthead__link:hover,
-.masthead__link[aria-current="page"] {
-  color: var(--ink);
+.masthead__link:hover {
+  color: var(--red);
 }
 
 .masthead__link[aria-current="page"] {
+  color: var(--red);
+}
+
+.masthead__cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--r-sm);
+  background: var(--red);
+  color: var(--on-red);
+  font-size: 0.9375rem;
   font-weight: 600;
+  text-decoration: none;
+}
+
+.masthead__cta:hover {
+  background: var(--red-deep);
+  color: var(--on-red);
 }
 
 .masthead__status {
   display: none;
   align-items: center;
-  gap: 0.4375rem;
-  padding-left: clamp(1rem, 3vw, 1.75rem);
+  gap: 0.5rem;
+  padding-left: clamp(1rem, 3vw, 2rem);
   border-left: 1px solid var(--rule);
   font-size: 0.8125rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--ink-2);
   white-space: nowrap;
 }
 
-@media (min-width: 44em) {
+@media (min-width: 48em) {
   .masthead__status {
     display: inline-flex;
   }
 }
 
-.status-dot {
-  width: 0.4375rem;
-  height: 0.4375rem;
-  border-radius: 50%;
-  background: var(--red);
-  flex: none;
+/* Menu button: shown on small screens only when the script is running,
+   because it is the script that opens the panel. Without it the links stay
+   inline, which fits at 320px. */
+.masthead__toggle {
+  display: none;
+  align-items: center;
+  gap: 0.625rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.25rem 0.5rem 0.625rem;
+  margin-right: -0.25rem;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.masthead__toggle-bars {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 1.125rem;
+}
+
+.masthead__toggle-bars i {
+  display: block;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.2s ease;
+}
+
+.masthead[data-open] .masthead__toggle-bars i:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+
+.masthead[data-open] .masthead__toggle-bars i:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+@media (max-width: 47.99em) {
+  .js .masthead__toggle {
+    display: inline-flex;
+  }
+
+  .js .masthead__nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: calc(-1 * var(--gutter));
+    right: calc(-1 * var(--gutter));
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.25rem var(--gutter) 1.25rem;
+    background: var(--paper);
+    background-image: var(--grain);
+    border-bottom: 1px solid var(--rule);
+    box-shadow: 0 1.5rem 2rem -1.5rem rgba(44, 38, 34, 0.25);
+  }
+
+  .js .masthead[data-open] .masthead__nav {
+    display: flex;
+  }
+
+  .js .masthead__link {
+    padding: 1rem 0;
+    font-size: 1.125rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .js .masthead__cta {
+    margin-top: 1rem;
+    justify-content: center;
+    min-height: 3rem;
+  }
+
+  .js .masthead__status {
+    display: inline-flex;
+    margin-top: 1rem;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .masthead__nav:not(.js *) .masthead__link {
+    font-size: 0.875rem;
+  }
 }
 
 /* --------------------------------------------------------------------------
-   6 · Hero
+   7 · Phones
+
+   A raw simulator capture with a thin, realistic rim: black glass border, a
+   dark metal band, and the display's own corner radius. All of it is sized
+   from the phone's width with container units so one number scales the
+   whole device. The Dynamic Island is already in the capture.
+   -------------------------------------------------------------------------- */
+
+.phone {
+  position: relative;
+  width: 100%;
+  container-type: inline-size;
+}
+
+.phone__body {
+  padding: 4.15cqw;
+  border-radius: 18.3cqw;
+  background: #0b0b0c;
+  box-shadow: inset 0 0 0 1.5cqw #3d3d42, inset 0 0 0 1.9cqw #1a1a1c,
+    var(--phone-shadow);
+}
+
+.phone__screen {
+  border-radius: 14.1cqw;
+  overflow: hidden;
+  aspect-ratio: 1320 / 2868;
+  background: var(--paper);
+}
+
+.phone__screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Step numeral pinned to a phone's corner, matching the numbered list. */
+.phone[data-step]::before {
+  content: attr(data-step);
+  position: absolute;
+  z-index: 3;
+  top: -0.75rem;
+  left: -0.5rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--on-red);
+  font-size: 0.875rem;
+  font-weight: 700;
+  box-shadow: 0 0 0 3px var(--paper);
+}
+
+.band--sunken .phone[data-step]::before {
+  box-shadow: 0 0 0 3px var(--paper-sunken);
+}
+
+/* A phone cut off by the section it sits in: the top is what matters. */
+.phone--cut {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
+}
+
+/* A cropped fragment of a screen, shown as a floating card. */
+.card {
+  position: relative;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--paper-raised);
+  box-shadow: 0 1.25rem 2.5rem -1rem rgba(44, 38, 34, 0.35), 0 0 0 1px rgba(44, 38, 34, 0.06);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+/* --------------------------------------------------------------------------
+   8 · Hero
    -------------------------------------------------------------------------- */
 
 .hero {
-  padding-top: clamp(2rem, 4vw, 3.5rem);
-  padding-bottom: clamp(3.5rem, 7vw, 6.5rem);
+  position: relative;
+  overflow: hidden;
+  padding-top: clamp(1.5rem, 4vw, 3.5rem);
 }
 
 .hero__grid {
-  align-items: center;
-  gap: clamp(3rem, 6vw, 4rem) var(--s7);
+  display: grid;
+  gap: clamp(2rem, 5vw, 3rem);
 }
 
 .hero__copy {
-  grid-column: 1 / -1;
+  position: relative;
+  padding-top: clamp(1rem, 4vw, 3rem);
 }
 
-.hero__figure {
-  grid-column: 1 / -1;
-  /* Stacked, the composition keeps the same left edge as the headline above
-     it rather than floating centred against left-aligned type. */
-  justify-self: start;
-}
-
-@media (min-width: 62em) {
-  .hero__copy {
-    grid-column: 1 / span 7;
-  }
-
-  .hero__figure {
-    grid-column: 8 / -1;
-    justify-self: end;
-  }
+.hero__title {
+  margin-top: var(--s5);
+  max-width: 11ch;
 }
 
 .hero__lead {
   margin-top: var(--s6);
 }
 
-.hero__meta {
-  margin-top: var(--s8);
-  padding-top: var(--s5);
-  border-top: 1px solid var(--rule);
+.hero__actions {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.4375rem var(--s4);
+  gap: 0.75rem 1rem;
+  margin-top: var(--s8);
 }
 
-.hero__meta-name {
-  font-weight: 600;
-  color: var(--ink);
-  font-size: 0.9375rem;
+.hero__figure {
+  position: relative;
+  height: min(112vw, 34rem);
 }
 
-.hero__meta-note {
-  font-size: 0.9375rem;
-  color: var(--ink-2);
+.hero__phone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  width: min(74vw, 22rem);
+}
+
+.doodle--hero-whisk {
+  top: -3%;
+  left: -6%;
+  width: clamp(8rem, 20vw, 15rem);
+  height: auto;
+  transform: rotate(-18deg);
+}
+
+@media (min-width: 62em) {
+  .doodle--hero-whisk {
+    top: 34%;
+    left: -24%;
+    width: 13rem;
+    transform: rotate(-22deg);
+  }
+}
+
+.doodle--hero-bookmark {
+  top: -0.5rem;
+  left: -3.25rem;
+  width: 2.5rem;
+  height: auto;
+  transform: rotate(-12deg);
+  opacity: 0.3;
+}
+
+@media (max-width: 61.99em) {
+  .doodle--hero-bookmark {
+    display: none;
+  }
+}
+
+@media (min-width: 62em) {
+  .hero {
+    padding-top: clamp(2rem, 4vw, 4rem);
+  }
+
+  .hero__grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+    gap: var(--s7);
+  }
+
+  .hero__copy {
+    padding-top: clamp(2rem, 5vw, 5rem);
+    padding-bottom: clamp(4rem, 9vw, 8rem);
+  }
+
+  .hero__figure {
+    height: clamp(30rem, 44vw, 40rem);
+  }
+
+  .hero__phone {
+    top: 1.5rem;
+    left: auto;
+    right: clamp(0rem, 4vw, 3rem);
+    margin: 0;
+    transform: rotate(-3deg);
+    transform-origin: 50% 0;
+    width: clamp(19rem, 27vw, 25rem);
+  }
 }
 
 /* --------------------------------------------------------------------------
-   7 · Hero composition — source above, saved recipe below
-
-   The phone is a reconstruction, not a screenshot: every value below is the
-   app's own point value from the design package, multiplied by --u so the
-   whole thing scales from one number. 1 unit = 1pt at --device-w: 393px.
+   9 · Thesis — typography only
    -------------------------------------------------------------------------- */
 
-.compose {
-  /* Unitless on purpose: --u has to stay a plain ratio so that every
-     `calc(<pt>px * var(--u))` below resolves to a length. Stepping the width
-     rather than making it fluid keeps the phone at whole-pixel sizes, which
-     is what keeps its hairline borders crisp. */
-  --device-w: 264;
-  --u: calc(var(--device-w) / 393);
-  width: calc(var(--device-w) * 1px);
-  max-width: 100%;
+.thesis {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding-block: clamp(4rem, 8vw, 7rem);
 }
 
-@media (min-width: 23em) {
-  .compose {
-    --device-w: 300;
-  }
-}
-
-@media (min-width: 30em) {
-  .compose {
-    --device-w: 318;
-  }
-}
-
-@media (min-width: 75em) {
-  .compose {
-    --device-w: 322;
-  }
-}
-
-.compose__source {
+.thesis__grid {
   position: relative;
-  z-index: 2;
-  background: var(--paper-raised);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
-  padding: 0.6875rem 0.875rem;
-  display: flex;
+  display: grid;
+  gap: var(--s6);
+}
+
+.thesis__title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(2.125rem, 1.4rem + 3.4vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 14ch;
+}
+
+.thesis__text {
+  font-family: var(--serif);
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  line-height: 1.5;
+  color: var(--ink-body);
+  max-width: 30em;
+}
+
+.doodle--thesis {
+  position: static;
+  width: 3rem;
+  height: auto;
+  opacity: 0.55;
+  transform: rotate(-8deg);
+}
+
+@media (min-width: 56em) {
+  .thesis__grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--s6) var(--s7);
+  }
+
+  .thesis__head {
+    grid-column: 1 / span 7;
+  }
+
+  .thesis__text {
+    grid-column: 6 / span 7;
+    padding-top: var(--s5);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10 · Feature layouts — copy beside a composition of real screens
+   -------------------------------------------------------------------------- */
+
+.feature {
+  position: relative;
+  padding-block: var(--section-y);
+}
+
+.feature__grid {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);
   align-items: center;
-  gap: 0.625rem;
 }
 
-.compose__source-icon {
-  flex: none;
-  color: var(--red);
+.feature__copy > .h2 {
+  margin-top: var(--s4);
 }
 
-.compose__source-text {
-  min-width: 0;
-  flex: 1;
+.feature__copy > .prose,
+.feature__copy > .lead {
+  margin-top: var(--s5);
 }
 
-.compose__source-label {
+.feature__copy > .steps {
+  margin-top: var(--s7);
+}
+
+@media (min-width: 62em) {
+  .feature__grid {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    gap: clamp(3rem, 6vw, 5rem);
+  }
+
+  .feature__grid--flip > .feature__copy {
+    order: 2;
+  }
+
+  .feature__grid--flip > .feature__figure {
+    order: 1;
+  }
+}
+
+/* Stacks. On wide screens the phones overlap in a cascade; on narrow ones
+   they become a column of large, legible tops. */
+.stack {
+  position: relative;
+}
+
+.stack > .phone,
+.stack > .card {
+  position: relative;
+}
+
+@media (max-width: 61.99em) {
+  .stack {
+    display: grid;
+    gap: 2.25rem;
+    justify-items: center;
+  }
+
+  .stack > .phone {
+    width: min(100%, 24rem);
+    max-height: 27rem;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, #000 76%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 76%, transparent 100%);
+  }
+
+  .stack > .card {
+    width: min(100%, 22rem);
+  }
+
+  .stack--cookbook > .phone {
+    max-height: 31rem;
+  }
+}
+
+@media (min-width: 62em) {
+  .stack > .phone,
+  .stack > .card {
+    position: absolute;
+  }
+
+  /* Import: paste → importing → ready, plus the "+" menu peeking in. */
+  .stack--import {
+    aspect-ratio: 1 / 1.12;
+  }
+
+  .stack--import > .stack__a {
+    left: 0;
+    top: 16%;
+    width: 46%;
+    z-index: 1;
+  }
+
+  .stack--import > .stack__b {
+    left: 27%;
+    top: 0;
+    width: 46%;
+    z-index: 2;
+  }
+
+  .stack--import > .stack__c {
+    right: 0;
+    top: 12%;
+    width: 46%;
+    z-index: 3;
+  }
+
+  .stack--import > .stack__inset {
+    left: -5%;
+    bottom: -5%;
+    width: 36%;
+    z-index: 4;
+    transform: rotate(-2deg);
+  }
+
+  /* Adapt: the conversation, then the Suggested Changes sheet in front. */
+  .stack--adapt {
+    aspect-ratio: 1 / 1.24;
+  }
+
+  .stack--adapt > .stack__a {
+    left: 0;
+    top: 0;
+    width: 52%;
+    z-index: 1;
+  }
+
+  .stack--adapt > .stack__b {
+    right: 0;
+    top: 15%;
+    width: 52%;
+    z-index: 2;
+  }
+
+  /* Cookbook: Collections large, a shelf emerging beside it. */
+  .stack--cookbook {
+    aspect-ratio: 1 / 1.34;
+  }
+
+  .stack--cookbook > .stack__a {
+    left: 0;
+    top: 0;
+    width: 58%;
+    z-index: 1;
+  }
+
+  .stack--cookbook > .stack__b {
+    right: 0;
+    top: 26%;
+    width: 50%;
+    z-index: 2;
+  }
+}
+
+/* Platform marks under the import copy: small, monochrome, decorative. */
+.sources {
+  margin-top: var(--s7);
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+  max-width: 34em;
+}
+
+.sources__marks {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  vertical-align: middle;
+  margin-inline: 0.5rem 0.25rem;
+}
+
+.mark {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   11 · Packaging — full-bleed red
+   -------------------------------------------------------------------------- */
+
+.packaging {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--section-y) 0;
+}
+
+.packaging__grid {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+.packaging__head > .h2 {
+  margin-top: var(--s4);
+  max-width: 12ch;
+}
+
+.packaging__head > .lead {
+  margin-top: var(--s5);
+}
+
+.packaging__head > .steps {
+  margin-top: var(--s7);
+  max-width: 26rem;
+}
+
+.packaging__note {
+  margin-top: var(--s6);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--on-red-2);
+  max-width: 30em;
+}
+
+.packaging__figure {
+  position: relative;
+  margin-inline: auto;
+  width: min(100%, 44rem);
+}
+
+.packaging__figure img {
+  width: 100%;
+  height: auto;
   display: block;
-  font-size: 0.6875rem;
+  -webkit-mask-image: linear-gradient(to bottom, #000 92%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 92%, transparent 100%);
+}
+
+.doodle--packaging {
+  top: 6%;
+  left: -3rem;
+  width: clamp(8rem, 18vw, 15rem);
+  height: auto;
+  transform: rotate(-6deg);
+}
+
+@media (min-width: 62em) {
+  .packaging__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+
+  .packaging__head {
+    position: sticky;
+    top: calc(var(--header-h) + 2rem);
+    padding-bottom: var(--section-y);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12 · Adapt — the example asks
+   -------------------------------------------------------------------------- */
+
+.asks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: var(--s6);
+}
+
+.asks > li {
+  padding: 0.5rem 0.875rem;
+  border-radius: var(--r-md) var(--r-md) var(--r-md) 4px;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule-strong);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.9375rem;
+  color: var(--ink-body);
+}
+
+.doodle--adapt {
+  top: -1.25rem;
+  right: -0.25rem;
+  width: 3.25rem;
+  height: auto;
+  opacity: 0.3;
+  transform: rotate(8deg);
+}
+
+/* --------------------------------------------------------------------------
+   13 · Grocery — three steps in a row
+   -------------------------------------------------------------------------- */
+
+.grocery {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--section-y);
+}
+
+.grocery__head > .h2 {
+  margin-top: var(--s4);
+  max-width: 14ch;
+}
+
+.grocery__head > .prose {
+  margin-top: var(--s5);
+}
+
+.trio {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 3.5rem);
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+}
+
+.trio__item {
+  position: relative;
+  display: grid;
+  gap: 1.25rem;
+  justify-items: center;
+}
+
+.trio__item > .phone {
+  width: min(100%, 24rem);
+}
+
+.trio__caption {
+  width: min(100%, 24rem);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink-body);
+}
+
+.trio__caption b {
+  display: block;
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.25rem;
+}
+
+.trio__inset {
+  position: absolute;
+  z-index: 3;
+  right: -4%;
+  top: 46%;
+  width: 82%;
+  max-width: 20rem;
+  transform: rotate(2deg);
+}
+
+.doodle--grocery {
+  right: -2.5rem;
+  top: 2rem;
+  width: clamp(7rem, 15vw, 12rem);
+  height: auto;
+  transform: rotate(-10deg);
+}
+
+@media (max-width: 61.99em) {
+  .trio__item > .phone {
+    max-height: 26rem;
+  }
+
+  .trio__inset {
+    top: 38%;
+    right: 0;
+    width: 70%;
+  }
+}
+
+@media (min-width: 62em) {
+  .trio {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .trio__item {
+    justify-items: start;
+  }
+
+  .trio__item:nth-child(2) {
+    padding-top: 3rem;
+  }
+
+  .trio__item:nth-child(3) {
+    padding-top: 6rem;
+  }
+
+  .trio__item > .phone {
+    width: min(100%, 22rem);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14 · Cookbook
+   -------------------------------------------------------------------------- */
+
+.cookbook {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--rule);
+}
+
+.cookbook .feature__copy > .ruled-list {
+  margin-top: var(--s7);
+}
+
+.doodle--cookbook {
+  left: -2rem;
+  bottom: 3rem;
+  width: clamp(7rem, 14vw, 11rem);
+  height: auto;
+  transform: rotate(6deg);
+}
+
+/* --------------------------------------------------------------------------
+   15 · Closing
+   -------------------------------------------------------------------------- */
+
+.closing {
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--section-y);
+  text-align: center;
+}
+
+.closing__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s7);
+}
+
+.closing__title {
+  max-width: 14ch;
+  margin-inline: auto;
+}
+
+.closing__window {
+  position: relative;
+  width: 100%;
+  height: clamp(13rem, 30vw, 22rem);
+  margin-top: var(--s6);
+  overflow: hidden;
+}
+
+.closing__phone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  width: min(70vw, 21rem);
+}
+
+.doodle--closing {
+  left: 4%;
+  top: 12%;
+  width: clamp(5rem, 10vw, 8rem);
+  height: auto;
+  transform: rotate(-14deg);
+}
+
+.doodle--closing-2 {
+  right: 5%;
+  top: 40%;
+  width: clamp(4rem, 8vw, 6rem);
+  height: auto;
+  transform: rotate(20deg);
+}
+
+@media (max-width: 47.99em) {
+  .doodle--closing,
+  .doodle--closing-2 {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   16 · Support page
+   -------------------------------------------------------------------------- */
+
+.support-hero {
+  position: relative;
+  padding-top: clamp(2.5rem, 6vw, 5rem);
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.support-hero__title {
+  margin-top: var(--s4);
+  font-size: clamp(2.5rem, 1.6rem + 4vw, 4.75rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.support-hero > .lead {
+  margin-top: var(--s5);
+}
+
+.doodle--support {
+  top: 1rem;
+  right: var(--gutter);
+  width: clamp(4rem, 10vw, 7rem);
+  height: auto;
+  transform: rotate(10deg);
+  opacity: 0.14;
+}
+
+/* The contact block: the address is text first, a button second. */
+.contact {
+  margin-top: var(--s8);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-lg);
+  background: var(--paper-raised);
+  display: grid;
+  gap: 0.75rem;
+  max-width: 44rem;
+}
+
+.contact__label {
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-2);
 }
 
-.compose__source-url {
-  display: block;
-  font-family: var(--mono);
-  font-size: 0.8125rem;
-  color: var(--ink-body);
-  margin-top: 0.125rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* The one line on the page that draws a relationship. No arrowheads. */
-.compose__link {
-  width: 1px;
-  height: 1.75rem;
-  margin-inline-start: 1.75rem;
-  background: linear-gradient(
-    to bottom,
-    var(--rule-strong),
-    color-mix(in srgb, var(--red) 55%, transparent)
-  );
-}
-
-.device {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 393 / 852;
-  border-radius: calc(46px * var(--u));
-  overflow: hidden;
-  background: var(--paper);
-  background-image: var(--grain);
-  color: var(--ink);
+.contact__email {
   font-family: var(--sans);
-  border: 1px solid var(--rule-strong);
-  /* The package lets only floating things cast a shadow. This floats. */
-  box-shadow: 0 1.5rem 3.5rem -2rem rgba(44, 38, 34, 0.42);
-}
-
-.device__cover {
-  position: absolute;
-  inset: 0 0 auto;
-  height: calc(348px * var(--u));
-  background: url("../img/fallback-soup.svg") center / cover;
-}
-
-.device__scrim {
-  position: absolute;
-  inset: 0 0 auto;
-  height: calc(150px * var(--u));
-  background: linear-gradient(
-    180deg,
-    rgba(20, 15, 12, 0.42),
-    rgba(20, 15, 12, 0)
-  );
-}
-
-.device__bar {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: calc(16px * var(--u)) calc(20px * var(--u)) 0;
-}
-
-/* Floating glass control — the package's 38pt circle. */
-.glass-dot {
-  width: calc(38px * var(--u));
-  height: calc(38px * var(--u));
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  flex: none;
-  background: rgba(255, 251, 243, 0.26);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  backdrop-filter: blur(18px) saturate(160%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4),
-    0 0 0 0.5px rgba(255, 255, 255, 0.2);
-  color: var(--on-red);
-}
-
-.glass-dot svg {
-  width: calc(18px * var(--u));
-  height: calc(18px * var(--u));
-}
-
-.device__bar-group {
-  display: flex;
-  gap: calc(9px * var(--u));
-}
-
-.device__sheet {
-  position: absolute;
-  inset: calc(302px * var(--u)) 0 0;
-  background: var(--paper);
-  background-image: var(--grain);
-  border-radius: calc(30px * var(--u)) calc(30px * var(--u)) 0 0;
-  padding: calc(22px * var(--u)) calc(20px * var(--u)) 0;
-  box-shadow: 0 -8px 24px -12px rgba(44, 38, 34, 0.3);
-}
-
-.device__title {
-  font-family: var(--serif);
-  font-size: calc(29px * var(--u));
-  font-weight: 600;
-  line-height: 1.14;
-  letter-spacing: -0.014em;
-  margin: 0;
-}
-
-.device__source {
-  display: flex;
-  align-items: center;
-  gap: calc(6px * var(--u));
-  margin-top: calc(9px * var(--u));
-  font-size: calc(13px * var(--u));
-  color: var(--ink-2);
-}
-
-.device__source svg {
-  width: calc(14px * var(--u));
-  height: calc(14px * var(--u));
-  flex: none;
-}
-
-.device__meta {
-  display: flex;
-  align-items: center;
-  gap: calc(18px * var(--u));
-  margin-top: calc(14px * var(--u));
-  font-size: calc(13.5px * var(--u));
-  font-weight: 500;
-  color: var(--ink-2);
-}
-
-.device__meta span {
-  display: inline-flex;
-  align-items: center;
-  gap: calc(6px * var(--u));
-}
-
-.device__meta svg {
-  width: calc(15px * var(--u));
-  height: calc(15px * var(--u));
+  font-size: clamp(1.125rem, 0.6rem + 2.6vw, 2.125rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
   color: var(--red);
-  flex: none;
+  text-decoration-color: color-mix(in srgb, var(--red) 25%, transparent);
+  overflow-wrap: anywhere;
 }
 
-.device__segments {
-  display: flex;
-  gap: calc(4px * var(--u));
-  margin-top: calc(18px * var(--u));
-  padding: calc(3px * var(--u));
-  border-radius: calc(12px * var(--u));
-  background: var(--segment-track);
+.contact__note {
+  color: var(--ink-body);
+  max-width: 40em;
 }
 
-.device__segment {
-  flex: 1;
-  height: calc(36px * var(--u));
-  border-radius: calc(9px * var(--u));
-  display: grid;
-  place-items: center;
-  font-size: calc(14.5px * var(--u));
-  font-weight: 600;
-  color: var(--ink-2-on-sunken);
+.contact__actions {
+  margin-top: 0.5rem;
 }
 
-.device__segment[data-on] {
-  background: var(--paper-raised);
-  color: var(--red);
-  box-shadow: 0 1px 3px rgba(44, 38, 34, 0.14);
-}
-
-.device__list {
-  display: flex;
-  flex-direction: column;
-  gap: calc(7px * var(--u));
-  margin-top: calc(14px * var(--u));
-}
-
-.device__row {
-  background: var(--paper-raised);
-  border: 1px solid var(--rule);
-  border-radius: calc(13px * var(--u));
-  padding: calc(12px * var(--u)) calc(14px * var(--u));
-  display: flex;
-  align-items: center;
-  gap: calc(12px * var(--u));
-  font-size: calc(15.5px * var(--u));
-  line-height: 1.3;
-}
-
-.device__row b {
-  font-weight: 600;
-}
-
-.device__row > span:last-child {
-  flex: 1;
-  min-width: 0;
-}
-
-.device__row svg {
-  width: calc(20px * var(--u));
-  height: calc(20px * var(--u));
-  flex: none;
-}
-
-.device__row--done {
-  color: var(--ink-2);
-}
-
-.device__mark-todo,
-.device__mark-done {
-  display: flex;
-  flex: none;
-}
-
-.device__mark-todo {
-  color: var(--mark-empty);
-}
-
-.device__mark-done {
-  color: var(--green);
-  --knockout: var(--paper-raised);
-}
-
-/* Content fades out rather than being cut off mid-row. */
-.device__fade {
-  position: absolute;
-  inset: auto 0 0;
-  height: calc(96px * var(--u));
-  background: linear-gradient(
-    180deg,
-    rgba(250, 243, 232, 0),
-    rgba(250, 243, 232, 0.96) 55%,
-    var(--paper) 82%
-  );
-}
-
-/* --------------------------------------------------------------------------
-   8 · Sources — "From wherever you already cook."
-   -------------------------------------------------------------------------- */
-
-.sources__head {
-  grid-column: 1 / -1;
-}
-
-.sources__list {
-  grid-column: 1 / -1;
-}
-
-@media (min-width: 62em) {
-  .sources__head {
-    grid-column: 1 / span 5;
-  }
-
-  .sources__list {
-    grid-column: 7 / -1;
-  }
-}
-
-.ruled-list > li {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.1875rem;
-  padding-block: var(--s4);
+/* Topic jump list */
+.support-jump {
+  margin-top: var(--s8);
+  padding-top: var(--s5);
   border-top: 1px solid var(--rule);
 }
 
-@media (min-width: 34em) {
-  .ruled-list > li {
-    flex-direction: row;
-    align-items: baseline;
-    gap: var(--s4);
+.support-jump__title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 0.75rem;
+}
+
+.support-jump ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+}
+
+.support-jump a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.375rem 0.875rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-sm);
+  color: var(--ink);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.support-jump a:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* Topics and questions */
+.topics {
+  padding-block: clamp(2rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
+}
+
+.topics__title {
+  font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.topic {
+  display: grid;
+  gap: 0.75rem 3rem;
+  padding-top: clamp(1.75rem, 4vw, 2.75rem);
+  margin-top: clamp(1.75rem, 4vw, 2.75rem);
+  border-top: 1px solid var(--rule-strong);
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+.topic:first-of-type {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.topic__title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.topic__intro {
+  margin-top: 0.5rem;
+  font-family: var(--serif);
+  color: var(--ink-2);
+  font-size: 1rem;
+}
+
+@media (min-width: 56em) {
+  .topic {
+    grid-template-columns: 16rem minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .topic__head {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
   }
 }
 
-.ruled-list > li:last-child {
+.faq {
   border-bottom: 1px solid var(--rule);
 }
 
-.ruled-list__term {
+.faq > summary {
+  list-style: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1.25rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.0625rem;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.faq > summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq > summary::after {
+  content: "";
+  width: 0.625rem;
+  height: 0.625rem;
+  justify-self: center;
+  border-right: 2px solid var(--red);
+  border-bottom: 2px solid var(--red);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform 0.18s ease;
+}
+
+.faq[open] > summary::after {
+  transform: rotate(-135deg) translate(-2px, -2px);
+}
+
+.faq > summary:hover {
+  color: var(--red);
+}
+
+.faq__body {
+  padding: 0 0 1.25rem;
+  max-width: 62ch;
+  color: var(--ink-body);
+}
+
+.faq__body p + p,
+.faq__body p + ul,
+.faq__body p + ol,
+.faq__body ul + p,
+.faq__body ol + p {
+  margin-top: 0.75rem;
+}
+
+.faq__body ul,
+.faq__body ol {
+  display: grid;
+  gap: 0.375rem;
+  padding-left: 1.25rem;
+}
+
+.faq__body ul {
+  list-style: disc;
+}
+
+.faq__body ol {
+  list-style: decimal;
+}
+
+.faq__body strong {
   font-weight: 600;
   color: var(--ink);
-  flex: none;
-  min-width: 0;
 }
 
-.ruled-list__note {
-  color: var(--ink-2);
-  font-size: 0.9375rem;
+/* Contact, again, at the end */
+.support-contact {
+  padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3.5rem, 7vw, 6rem);
+  border-top: 1px solid var(--rule-strong);
 }
 
-@media (min-width: 34em) {
-  .ruled-list__note {
-    margin-left: auto;
-    text-align: right;
-  }
+.support-contact__grid {
+  display: grid;
+  gap: 2rem 4rem;
 }
 
-.sources__note {
-  grid-column: 1 / -1;
-  margin-top: var(--s2);
-  font-size: 0.9375rem;
-  color: var(--ink-2);
-  max-width: 42em;
+.support-contact__title {
+  font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
 }
 
-@media (min-width: 62em) {
-  .sources__note {
-    grid-column: 7 / -1;
-  }
-}
-
-/* --------------------------------------------------------------------------
-   9 · Capability spreads
-   -------------------------------------------------------------------------- */
-
-.spread {
-  align-items: center;
-  gap: clamp(2.5rem, 5vw, 4rem) var(--s7);
-}
-
-.spread + .spread {
-  margin-top: clamp(4rem, 8vw, 7rem);
-}
-
-.spread__copy,
-.spread__figure {
-  grid-column: 1 / -1;
-}
-
-@media (min-width: 62em) {
-  .spread__copy {
-    grid-column: 1 / span 5;
-  }
-
-  .spread__figure {
-    grid-column: 7 / -1;
-  }
-
-  .spread--flip .spread__copy {
-    grid-column: 8 / -1;
-    grid-row: 1;
-  }
-
-  .spread--flip .spread__figure {
-    grid-column: 1 / span 6;
-    grid-row: 1;
-  }
-}
-
-.spread__copy .prose {
-  margin-top: var(--s5);
-}
-
-/* A lighter third beat: two columns of type carrying a small piece of real UI
-   each, rather than a third full-width panel. */
-.pair {
-  margin-top: clamp(4rem, 8vw, 7rem);
-  padding-top: clamp(3rem, 6vw, 4.5rem);
-  border-top: 1px solid var(--rule);
-  gap: clamp(2.5rem, 5vw, 3.5rem) var(--s7);
-  align-items: start;
-}
-
-.pair__item {
-  grid-column: 1 / -1;
-}
-
-@media (min-width: 56em) {
-  .pair__item {
-    grid-column: span 6;
-  }
-
-  .pair__item + .pair__item {
-    padding-left: clamp(2rem, 4vw, 3.5rem);
-    border-left: 1px solid var(--rule);
-  }
-}
-
-.pair__item .prose {
-  margin-top: var(--s4);
-}
-
-.prose--offset {
+.support-contact .contact {
   margin-top: var(--s6);
 }
 
-.recipe-row__art--soup {
-  background-image: url("../img/fallback-soup.svg");
-}
-
-.recipe-row__art--bread {
-  background-image: url("../img/fallback-bread.svg");
-}
-
-.recipe-row__art--pasta {
-  background-image: url("../img/fallback-pasta.svg");
-}
-
-/* --------------------------------------------------------------------------
-   10 · Product fragments used inside the spreads
-
-   Same components as the phone, at reading size rather than device size.
-   -------------------------------------------------------------------------- */
-
-.panel {
-  background: var(--paper-raised);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-lg);
-  padding: var(--s5);
-}
-
-.panel__head {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  font-size: 0.9375rem;
+.checklist__title {
+  font-size: 0.75rem;
   font-weight: 600;
-  color: var(--ink);
-}
-
-.panel__head svg {
-  width: 1.125rem;
-  height: 1.125rem;
-  flex: none;
-  color: var(--amber);
-  --knockout: var(--paper-raised);
-}
-
-.panel__note {
-  margin-top: var(--s4);
-  font-size: 0.875rem;
-  line-height: 1.5;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--ink-2);
 }
 
-.review-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s2);
-  margin-top: var(--s4);
-}
-
-.review-list li {
-  display: flex;
-  align-items: center;
-  gap: var(--s3);
-  background: var(--paper);
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-sm);
-  padding: 0.6875rem 0.8125rem;
-}
-
-.review-list li > span:first-child {
-  min-width: 0;
-}
-
-.review-list__name {
-  display: block;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--ink);
-}
-
-.review-list__state {
-  display: block;
-  font-size: 0.8125rem;
-  color: var(--ink-2);
-  margin-top: 0.0625rem;
-}
-
-.review-list__action {
-  margin-left: auto;
-  flex: none;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--red);
-  background: var(--red-tint);
-  border-radius: var(--r-pill);
-  padding: 0.3125rem 0.75rem;
-}
-
-/* Cookbook fragment */
-.cookbook {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s3);
-}
-
-.cookbook__chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s2);
-}
-
-.chip {
-  font-size: 0.84375rem;
-  font-weight: 500;
-  color: var(--ink-2);
-  background: var(--paper-raised);
-  border: 1px solid var(--field);
-  border-radius: var(--r-pill);
-  padding: 0.3125rem 0.75rem;
-}
-
-.chip[data-on] {
-  background: var(--red);
-  border-color: var(--red);
-  color: var(--on-red);
-  font-weight: 600;
-}
-
-.recipe-row {
-  display: flex;
-  align-items: center;
-  gap: var(--s3);
-  background: var(--paper-raised);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
-  padding: 0.625rem;
-}
-
-.recipe-row__art {
-  width: 3.25rem;
-  height: 3.25rem;
-  border-radius: var(--r-sm);
-  flex: none;
-  background-size: cover;
-  background-position: center;
-}
-
-.recipe-row > span:last-child {
-  flex: 1;
-  min-width: 0;
-}
-
-.recipe-row__title {
-  display: block;
-  font-family: var(--serif);
-  font-size: 1.0625rem;
-  font-weight: 600;
-  line-height: 1.2;
-  color: var(--ink);
-}
-
-.recipe-row__meta {
-  display: block;
-  font-size: 0.8125rem;
-  color: var(--ink-2);
-  margin-top: 0.25rem;
-}
-
-/* Substitution fragment — the package's ProposedRecipeChangeCard, reduced to
-   the one line that carries the idea. */
-.swap {
-  margin-top: var(--s5);
-  padding-top: var(--s5);
+.checklist ul {
+  margin-top: 0.75rem;
   border-top: 1px solid var(--rule);
-  display: flex;
-  flex-direction: column;
-  gap: var(--s3);
 }
 
-.swap__row {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  font-size: 0.9375rem;
+.checklist li {
+  padding: 0.625rem 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-body);
 }
 
-.swap__from {
-  color: var(--ink-2);
-  text-decoration: line-through;
-  text-decoration-color: var(--ink-2);
-}
-
-.swap__arrow {
-  display: flex;
-  width: 0.875rem;
-  height: 0.875rem;
-  color: var(--green);
-  flex: none;
-}
-
-.swap__to {
+.notice {
+  margin-top: 1.5rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--red);
+  color: var(--ink-body);
   font-weight: 600;
-  color: var(--ink);
-}
-
-/* Source-attribution fragment */
-.attribution {
-  margin-top: var(--s5);
-  padding: var(--s4) var(--s5);
-  background: var(--paper-raised);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
-}
-
-.attribution__title {
-  font-family: var(--serif);
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--ink);
-  line-height: 1.2;
-}
-
-.attribution__from {
-  display: flex;
-  align-items: center;
-  gap: 0.4375rem;
-  margin-top: 0.625rem;
-  padding-top: 0.625rem;
-  border-top: 1px solid var(--hairline);
-  font-size: 0.84375rem;
-  color: var(--ink-2);
-}
-
-.attribution__from svg {
-  width: 0.875rem;
-  height: 0.875rem;
-  flex: none;
-}
-
-/* --------------------------------------------------------------------------
-   11 · Note-taking band
-   -------------------------------------------------------------------------- */
-
-.band-sunken {
-  background: var(--paper-sunken);
-  border-block: 1px solid var(--rule-strong);
-}
-
-.band-sunken .prose,
-.band-sunken .lead {
-  color: var(--ink-2-on-sunken);
-}
-
-.notetaking {
-  align-items: center;
-  gap: var(--s8) var(--s7);
-}
-
-.notetaking__copy {
-  grid-column: 1 / -1;
-}
-
-.notetaking__art {
-  grid-column: 1 / -1;
-  justify-self: start;
-}
-
-.notetaking__art img {
-  width: clamp(10rem, 22vw, 17rem);
 }
 
 @media (min-width: 56em) {
-  .notetaking__copy {
-    grid-column: 1 / span 7;
+  .support-contact__grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: start;
   }
-
-  .notetaking__art {
-    grid-column: 9 / -1;
-    justify-self: end;
-  }
-}
-
-.notetaking__copy .h2 {
-  max-width: 21ch;
 }
 
 /* --------------------------------------------------------------------------
-   12 · Private band — the brand's own two-colour identity, full width
-   -------------------------------------------------------------------------- */
-
-.band-deep {
-  background: var(--red-deep);
-  color: color-mix(in srgb, var(--parchment) 82%, transparent);
-}
-
-.band-deep .h2 {
-  color: var(--parchment);
-}
-
-.band-deep a {
-  color: var(--parchment);
-  text-decoration-color: color-mix(in srgb, var(--parchment) 45%, transparent);
-}
-
-.band-deep a:hover {
-  color: #fff;
-  text-decoration-color: currentColor;
-}
-
-.band-deep :focus-visible {
-  outline-color: var(--parchment);
-}
-
-/* The mark takes a row of its own, so the headline and the body text align on
-   the row below it without either being nudged into place. */
-.private__mark,
-.private__head,
-.private__body {
-  grid-column: 1 / -1;
-}
-
-.private__mark img {
-  height: 3.5rem;
-  width: auto;
-  opacity: 0.95;
-}
-
-@media (min-width: 62em) {
-  .private__head {
-    grid-column: 1 / span 6;
-  }
-
-  .private__body {
-    grid-column: 8 / -1;
-  }
-}
-
-.private {
-  align-items: start;
-  gap: var(--s6) var(--s7);
-}
-
-.private__mark {
-  margin-bottom: calc(var(--s2) * -1);
-}
-
-.private__body p {
-  max-width: 34em;
-  font-size: 1.0625rem;
-  line-height: 1.6;
-}
-
-.private__body p + p {
-  margin-top: var(--s5);
-  padding-top: var(--s5);
-  border-top: 1px solid color-mix(in srgb, var(--parchment) 20%, transparent);
-}
-
-/* --------------------------------------------------------------------------
-   13 · Launch colophon
-   -------------------------------------------------------------------------- */
-
-.launch {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: var(--s5) var(--s6);
-}
-
-.launch__icon {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 24%;
-  flex: none;
-}
-
-.launch__text {
-  flex: 1 1 18rem;
-}
-
-.launch__name {
-  font-family: var(--serif);
-  font-size: clamp(1.5rem, 1.3rem + 0.8vw, 1.875rem);
-  font-weight: 600;
-  letter-spacing: -0.016em;
-  color: var(--ink);
-  line-height: 1.2;
-}
-
-.launch__note {
-  margin-top: 0.4375rem;
-  color: var(--ink-2);
-  max-width: 32em;
-}
-
-.launch__status {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: var(--s4);
-  font-size: 0.9375rem;
-  color: var(--ink-2);
-}
-
-/* Primary button — the package's 52pt / radius 14 oxblood control. Used once
-   on the site, and only when there is somewhere real to send people. */
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  min-height: 3.25rem;
-  padding-inline: var(--s6);
-  border-radius: var(--r-md);
-  background: var(--red);
-  color: var(--on-red);
-  font-size: 1.0625rem;
-  font-weight: 600;
-  letter-spacing: -0.012em;
-  text-decoration: none;
-  box-shadow: 0 1px 2px rgba(126, 29, 26, 0.35);
-  transition: background-color 0.14s ease, transform 0.14s ease;
-}
-
-.button:hover {
-  background: var(--red-deep);
-  color: var(--on-red);
-}
-
-.button:active {
-  transform: scale(0.985);
-}
-
-/* --------------------------------------------------------------------------
-   14 · Footer
+   17 · Footer
    -------------------------------------------------------------------------- */
 
 .colophon {
@@ -1391,12 +1737,14 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: flex-start;
   gap: var(--s7);
 }
 
 .colophon__tagline {
   margin-top: var(--s3);
-  font-size: 0.9375rem;
+  font-family: var(--serif);
+  font-size: 1rem;
   color: var(--ink-2);
   max-width: 26em;
 }
@@ -1404,8 +1752,9 @@ a:hover {
 .colophon__nav {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--s3) var(--s6);
-  align-items: flex-start;
+  gap: 0 var(--s6);
+  align-items: center;
+  max-width: 100%;
 }
 
 .colophon__nav a {
@@ -1413,12 +1762,14 @@ a:hover {
   align-items: center;
   min-height: 2.75rem;
   font-size: 0.9375rem;
+  font-weight: 500;
   color: var(--ink-2);
   text-decoration: none;
+  overflow-wrap: anywhere;
 }
 
 .colophon__nav a:hover {
-  color: var(--ink);
+  color: var(--red);
   text-decoration: underline;
 }
 
@@ -1431,7 +1782,7 @@ a:hover {
 }
 
 /* --------------------------------------------------------------------------
-   15 · Legal pages
+   18 · Legal pages
    -------------------------------------------------------------------------- */
 
 .legal-head {
@@ -1441,10 +1792,10 @@ a:hover {
 
 .legal-head__title {
   margin-top: var(--s4);
-  font-size: clamp(2.25rem, 1.5rem + 3vw, 3.5rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.024em;
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.028em;
   max-width: 16ch;
 }
 
@@ -1493,7 +1844,16 @@ a:hover {
   }
 }
 
-/* Table of contents */
+.overline {
+  font-family: var(--sans);
+  font-size: 0.71875rem;
+  font-weight: 600;
+  letter-spacing: 0.125em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+
 .toc {
   font-size: 0.9375rem;
 }
@@ -1556,8 +1916,6 @@ a:hover {
   border-left-color: var(--red);
 }
 
-/* Long-form legal typography. The markup is rendered from docs/*.md, so it
-   is flat: no wrapper per section, just headings, paragraphs and lists. */
 .legal-prose {
   max-width: 38rem;
   color: var(--ink-body);
@@ -1570,16 +1928,14 @@ a:hover {
 
 .legal-prose h2 {
   margin-top: clamp(2.75rem, 5vw, 4rem);
+  font-family: var(--serif);
   font-size: clamp(1.4375rem, 1.2rem + 0.9vw, 1.75rem);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.014em;
   scroll-margin-top: calc(var(--header-h) + var(--s6));
 }
 
-/* The section number is the document's own ("1."), set apart from the
-   heading text at build time so it can sit above it as a label — the same
-   number the contents list beside it shows. */
 .legal-prose__num {
   display: block;
   font-family: var(--sans);
@@ -1603,11 +1959,6 @@ a:hover {
 .legal-prose p {
   margin-top: var(--s4);
   line-height: 1.65;
-}
-
-.legal-prose h2 + p,
-.legal-prose h3 + p {
-  margin-top: var(--s4);
 }
 
 .legal-prose ul {
@@ -1640,8 +1991,47 @@ a:hover {
 }
 
 /* --------------------------------------------------------------------------
-   16 · Motion
+   19 · Motion — gentle reveals, nothing that moves while you read
    -------------------------------------------------------------------------- */
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 110ms);
+}
+
+.js [data-reveal="in"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* The hero phone keeps its tilt through the reveal. */
+@media (min-width: 62em) {
+  .js .hero__phone[data-reveal] {
+    transform: rotate(-3deg) translateY(18px);
+  }
+
+  .js .hero__phone[data-reveal="in"] {
+    transform: rotate(-3deg) translateY(0);
+  }
+
+  .js .stack__inset[data-reveal] {
+    transform: rotate(-2deg) translateY(18px);
+  }
+
+  .js .stack__inset[data-reveal="in"] {
+    transform: rotate(-2deg);
+  }
+}
+
+.js .trio__inset[data-reveal] {
+  transform: rotate(2deg) translateY(18px);
+}
+
+.js .trio__inset[data-reveal="in"] {
+  transform: rotate(2deg);
+}
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -1655,5 +2045,9 @@ a:hover {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
   }
 }

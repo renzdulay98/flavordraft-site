@@ -1,12 +1,12 @@
 {
   "name": "FlavorDraft",
   "url": "https://flavordraft.app",
-  "tagline": "Automated recipe note-taking for your personal cookbook.",
+  "tagline": "A personal recipe cookbook for iPhone.",
   "themeColor": "#FAF3E8",
 
   "contactEmail": "support@flavordraft.app",
 
-  "_todo_appStoreUrl": "TODO — set to the real https://apps.apple.com/... URL at launch. While it is null the site shows the 'Coming to the App Store' status instead of a download link.",
+  "_todo_appStoreUrl": "TODO — set to the real https://apps.apple.com/... URL at launch. While it is null the site shows the 'Coming soon to the App Store' status instead of a download link (header, hero, closing section, support page and footer all read this one value).",
   "appStoreUrl": null,
 
   "legal": {

@@ -1,0 +1,332 @@
+---
+layout: base.njk
+canonical: /support
+pageTitle: FlavorDraft Support
+pageDescription: Get help with FlavorDraft, recipe imports, subscriptions, account access and more. Contact FlavorDraft Support at support@flavordraft.app.
+pageClass: support
+---
+{% from "brand.njk" import doodle, appStoreCta %}
+{%- set email = site.contactEmail -%}
+
+<section class="wrap support-hero" aria-labelledby="support-title">
+  {{ doodle("message", "doodle--support") }}
+  <p class="eyebrow">Support</p>
+  <h1 class="support-hero__title" id="support-title">How can we help?</h1>
+  <p class="lead">Need help with FlavorDraft, have feedback, or found something that isn't working? We're here to help.</p>
+
+  <div class="contact">
+    <p class="contact__label">Email FlavorDraft Support</p>
+    <a class="contact__email" href="mailto:{{ email }}">{{ email }}</a>
+    <p class="contact__note">For app issues, general feedback and feature requests. Tell us what happened in a sentence or two; screenshots help.</p>
+    <p class="contact__actions"><a class="button" href="mailto:{{ email }}?subject=FlavorDraft%20support">Email FlavorDraft Support</a></p>
+  </div>
+
+  <nav class="support-jump" aria-labelledby="support-jump-title">
+    <p class="support-jump__title" id="support-jump-title">Quick help</p>
+    <ul>
+      <li><a href="#getting-started">Getting started</a></li>
+      <li><a href="#imports">Imports</a></li>
+      <li><a href="#recipes-grocery">Recipes &amp; Grocery</a></li>
+      <li><a href="#account">Account &amp; sign-in</a></li>
+      <li><a href="#subscriptions">Subscriptions &amp; purchases</a></li>
+      <li><a href="#privacy">Privacy &amp; account deletion</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+  </nav>
+</section>
+
+<section class="wrap topics" aria-labelledby="topics-title">
+  <h2 class="topics__title" id="topics-title">Quick help</h2>
+
+  <section class="topic" id="getting-started" aria-labelledby="t-getting-started">
+    <div class="topic__head">
+      <h3 class="topic__title" id="t-getting-started">Getting started</h3>
+      <p class="topic__intro">What FlavorDraft is, and the first thing to do.</p>
+    </div>
+    <div class="topic__body">
+      <details class="faq">
+        <summary>What is FlavorDraft?</summary>
+        <div class="faq__body">
+          <p>FlavorDraft is a personal recipe cookbook for iPhone. It brings the recipes you find on websites, in social posts, in photos and on food packaging into one place, where you can organize them into collections, adapt them, and build a grocery list from them.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>Do I need an account to use FlavorDraft?</summary>
+        <div class="faq__body">
+          <p>No. You can use FlavorDraft on your iPhone without signing in. Signing in with Apple or Google connects your cookbook to an account so it can be backed up and restored. See <a href="#account">Account &amp; sign-in</a>.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>How do I add my first recipe?</summary>
+        <div class="faq__body">
+          <p>Tap the <strong>+</strong> button on Home. From there you can scan a recipe, scan food packaging, import from a link, import from social media, describe a dish or idea, or add a recipe manually.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="topic" id="imports" aria-labelledby="t-imports">
+    <div class="topic__head">
+      <h3 class="topic__title" id="t-imports">Imports</h3>
+      <p class="topic__intro">Bringing recipes in from links, posts and pages.</p>
+    </div>
+    <div class="topic__body">
+      <details class="faq">
+        <summary>How do I import a recipe?</summary>
+        <div class="faq__body">
+          <p>Copy the link, open FlavorDraft, tap <strong>+</strong> and choose <strong>Import from link</strong>, then paste it. You can also share a page or post straight to FlavorDraft from Safari or the app you found it in, using the iOS share sheet.</p>
+          <p>Imports run in the background, so you can keep using FlavorDraft while the recipe is being read.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>What sources can I import from?</summary>
+        <div class="faq__body">
+          <p>Recipe websites and blogs, and supported social and video sources such as TikTok, Instagram, YouTube and Facebook posts. You can also scan a printed recipe or a cookbook page, scan food packaging, or describe a dish and let FlavorDraft draft it.</p>
+          <p>Not every page or video contains enough recipe information to import, and some sources can't be read. When an import can't be completed, FlavorDraft lets you know, and you can add the recipe manually instead.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>Why is my recipe still importing?</summary>
+        <div class="faq__body">
+          <p>Imports finish in the background. Follow progress on Home under <strong>Imports</strong>; when the recipe is ready you'll see <strong>Recipe ready</strong> and can open it to review. Busy pages and longer videos can take a little longer.</p>
+          <p>If an import seems stuck, check that your iPhone has an internet connection and try the import again. If it keeps happening with a particular link, email it to us and we'll take a look.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>Can I review a recipe before it's saved?</summary>
+        <div class="faq__body">
+          <p>Yes. Nothing is saved until you've reviewed it. When an import finishes, FlavorDraft shows what came through, including the ingredients, steps, servings and the source credit. Tap <strong>Review Recipe</strong> to check and edit it, or <strong>Save as is</strong>.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>Why is an imported recipe missing something?</summary>
+        <div class="faq__body">
+          <p>FlavorDraft only keeps what the source actually provided. If a page or post leaves out an amount, a time or a step, the recipe won't invent it. You can fill in anything that's missing while you review the recipe, or later from the recipe itself.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>Does FlavorDraft keep the original source?</summary>
+        <div class="faq__body">
+          <p>Yes. Imported recipes keep the creator or site attribution and a link back to the source when it's available, so you can always return to the original.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="topic" id="recipes-grocery" aria-labelledby="t-recipes-grocery">
+    <div class="topic__head">
+      <h3 class="topic__title" id="t-recipes-grocery">Recipes &amp; Grocery</h3>
+      <p class="topic__intro">Organizing, adapting and shopping.</p>
+    </div>
+    <div class="topic__body">
+      <details class="faq">
+        <summary>How do I add ingredients to Grocery?</summary>
+        <div class="faq__body">
+          <p>Open a recipe, go to <strong>Ingredients</strong> and tap <strong>Add to Grocery</strong>. Choose the ingredients you need, or <strong>Select All</strong>, then tap <strong>Add</strong>. Ingredients that are already on your list are marked, so you won't add them twice.</p>
+          <p>Your Grocery list is grouped by aisle, and each item shows the recipe it came from. Tap an item to mark it bought.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>Can I organize recipes into collections?</summary>
+        <div class="faq__body">
+          <p>Yes. In <strong>My Recipes</strong>, open the <strong>Collections</strong> tab to create and browse collections. From a recipe, use <strong>Add to Collection</strong> to file it. A recipe can sit in more than one collection, and it always stays in <strong>All</strong>.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>Can I favorite recipes?</summary>
+        <div class="faq__body">
+          <p>Yes. Tap the heart on a recipe. Favorites appear under the <strong>Favorites</strong> filter in My Recipes.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>Can I edit an imported recipe?</summary>
+        <div class="faq__body">
+          <p>Yes. You can edit a recipe when you review it after import, and any time after saving it.</p>
+          <p>You can also ask for changes in plain language with <strong>Draft with AI</strong> on the recipe, for example to make it healthier or swap an ingredient. FlavorDraft shows the suggested changes against the original, and nothing is applied until you tap <strong>Apply Changes</strong>. Please check ingredients, amounts and cooking steps before you rely on them.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>How do I find a recipe I saved?</summary>
+        <div class="faq__body">
+          <p>Use the <strong>Search</strong> tab to search your cookbook by recipe name or ingredient, or browse My Recipes, Favorites and your collections.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="topic" id="account" aria-labelledby="t-account">
+    <div class="topic__head">
+      <h3 class="topic__title" id="t-account">Account &amp; sign-in</h3>
+      <p class="topic__intro">Guest use, signing in and signing out.</p>
+    </div>
+    <div class="topic__body">
+      <details class="faq">
+        <summary>Can I use FlavorDraft without signing in?</summary>
+        <div class="faq__body">
+          <p>Yes. FlavorDraft lets you continue on your iPhone without signing in, and you can sign in later.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>How do I sign in?</summary>
+        <div class="faq__body">
+          <p>FlavorDraft uses <strong>Sign in with Apple</strong> and <strong>Google Sign-In</strong>. Open the <strong>Profile</strong> tab to sign in. FlavorDraft doesn't have its own passwords, so there's nothing to reset: your Apple ID or Google account handles that.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>What happens to my recipes when I sign in?</summary>
+        <div class="faq__body">
+          <p>Signing in connects your cookbook to your account so it can be backed up and restored. Sign in with Apple or Google, and your cookbook comes with you.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>How do I sign out?</summary>
+        <div class="faq__body">
+          <p>Sign out from the <strong>Profile</strong> tab. Recipes connected to your account are restored when you sign in again with the same Apple or Google account.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>I signed in and my recipes are missing.</summary>
+        <div class="faq__body">
+          <p>Recipes are tied to the account you signed in with. If you have both an Apple and a Google sign-in, sign out and sign back in with the one you used originally. If they're still missing, email us and tell us which sign-in you used.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="topic" id="subscriptions" aria-labelledby="t-subscriptions">
+    <div class="topic__head">
+      <h3 class="topic__title" id="t-subscriptions">Subscriptions &amp; purchases</h3>
+      <p class="topic__intro">Billed and managed by Apple through the App Store.</p>
+    </div>
+    <div class="topic__body">
+      <details class="faq">
+        <summary>What plans does FlavorDraft offer?</summary>
+        <div class="faq__body">
+          <p>FlavorDraft Premium is offered as a <strong>Monthly</strong> or an <strong>Annual</strong> subscription through the App Store. The Monthly plan may include a 7-day free trial for eligible users. The Annual plan does not include that free trial.</p>
+          <p>Prices are shown in FlavorDraft and on the App Store in your local currency before you subscribe, and can vary by country or region.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>What happens after a free trial?</summary>
+        <div class="faq__body">
+          <p>If you start a Monthly free trial and don't cancel before it ends, it converts to the paid Monthly subscription and Apple charges your Apple ID payment method, following Apple's subscription rules. You can cancel at any time during the trial through your Apple ID subscription settings.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>How do I manage or cancel my subscription?</summary>
+        <div class="faq__body">
+          <p>Subscriptions are billed and managed by Apple, not by FlavorDraft. To change or cancel yours:</p>
+          <ol>
+            <li>On your iPhone, open the <strong>Settings</strong> app and tap your name.</li>
+            <li>Tap <strong>Subscriptions</strong>.</li>
+            <li>Choose <strong>FlavorDraft</strong> and pick a different plan, or tap <strong>Cancel Subscription</strong>.</li>
+          </ol>
+          <p>You can also get there from the App Store app: tap your profile picture, then <strong>Subscriptions</strong>.</p>
+          <p>Emailing us can't cancel a subscription; only Apple can. Deleting the app, or deleting your FlavorDraft account, doesn't cancel it either.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>How do I restore purchases?</summary>
+        <div class="faq__body">
+          <p>If you've subscribed before, or subscribed on another device, and FlavorDraft doesn't show Premium, open the subscription screen in FlavorDraft and tap <strong>Restore Purchases</strong>. Make sure you're signed in to the same Apple ID you used for the purchase.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>Can I get a refund?</summary>
+        <div class="faq__body">
+          <p>Refunds for App Store purchases are handled by Apple under Apple's policies. You can request one through Apple's <strong>Report a Problem</strong> service, using the Apple ID you purchased with.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="topic" id="privacy" aria-labelledby="t-privacy">
+    <div class="topic__head">
+      <h3 class="topic__title" id="t-privacy">Privacy &amp; account deletion</h3>
+      <p class="topic__intro">Your data, and how to remove it.</p>
+    </div>
+    <div class="topic__body">
+      <details class="faq">
+        <summary>How do I delete my FlavorDraft account?</summary>
+        <div class="faq__body">
+          <p>FlavorDraft includes an in-app option to delete your account. Open the <strong>Profile</strong> tab, then <strong>Settings</strong>, and use the account deletion option.</p>
+          <p>Deleting your account removes your account and account-linked data from FlavorDraft's active systems, subject to the retention described in the <a href="/privacy">Privacy Policy</a>. It does <strong>not</strong> cancel an App Store subscription: manage that through Apple, as described under <a href="#subscriptions">Subscriptions</a>.</p>
+          <p>If you can't get into the app to delete your account, email us from the address connected to it and we'll help.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>Are my recipes private?</summary>
+        <div class="faq__body">
+          <p>Yes. Recipes you save are private to your FlavorDraft account or device unless you choose to share them.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>Where can I read the Privacy Policy?</summary>
+        <div class="faq__body">
+          <p>The <a href="/privacy">FlavorDraft Privacy Policy</a> explains what information FlavorDraft processes and why. The <a href="/terms">Terms of Service</a> cover using the app. For privacy questions or data requests, email <a href="mailto:{{ email }}">{{ email }}</a>.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="topic" id="troubleshooting" aria-labelledby="t-troubleshooting">
+    <div class="topic__head">
+      <h3 class="topic__title" id="t-troubleshooting">Troubleshooting</h3>
+      <p class="topic__intro">When something isn't working.</p>
+    </div>
+    <div class="topic__body">
+      <details class="faq">
+        <summary>Something isn't working. What should I try first?</summary>
+        <div class="faq__body">
+          <ol>
+            <li>Make sure your iPhone has an internet connection. Imports and account features need one.</li>
+            <li>Try the action again.</li>
+            <li>Check that FlavorDraft is updated to the latest version on the App Store.</li>
+            <li>If something looks stuck, close FlavorDraft from the App Switcher and open it again.</li>
+            <li>If the problem continues, email us and describe what happened.</li>
+          </ol>
+          <p><strong>Please don't delete and reinstall the app to fix a problem</strong> if you use FlavorDraft without signing in. Recipes stored only on your iPhone may be lost. Email us first.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>An import failed or came back empty.</summary>
+        <div class="faq__body">
+          <p>Some pages and videos don't contain enough recipe information to import, and some sources can't be read. Try importing from the recipe's own page if the link was a share or a shortened link. If it still fails, email us the link and we'll take a look. You can always add the recipe manually in the meantime.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary>I'm subscribed but FlavorDraft doesn't show Premium.</summary>
+        <div class="faq__body">
+          <p>Open the subscription screen in FlavorDraft and tap <strong>Restore Purchases</strong> while signed in to the Apple ID you purchased with. If Premium still doesn't appear, email us with the approximate purchase date.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+</section>
+
+<section class="wrap support-contact" aria-labelledby="contact-title">
+  <div class="support-contact__grid">
+    <div>
+      <h2 class="support-contact__title" id="contact-title">Still need help?</h2>
+      <p class="lead">Email us and include a short description of what happened. Screenshots can help us understand the issue.</p>
+      <div class="contact">
+        <p class="contact__label">FlavorDraft Support</p>
+        <a class="contact__email" href="mailto:{{ email }}">{{ email }}</a>
+        <p class="contact__actions"><a class="button" href="mailto:{{ email }}?subject=FlavorDraft%20support">Email FlavorDraft Support</a></p>
+      </div>
+      <p class="notice">Please don't include passwords or payment information in your email.</p>
+    </div>
+
+    <div class="checklist">
+      <p class="checklist__title">Helpful to include</p>
+      <ul>
+        <li>What you were trying to do</li>
+        <li>What happened instead</li>
+        <li>A screenshot of the issue</li>
+        <li>Your iPhone model</li>
+        <li>Your iOS version</li>
+        <li>Your FlavorDraft app version</li>
+      </ul>
+    </div>
+  </div>
+</section>

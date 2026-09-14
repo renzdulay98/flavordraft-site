@@ -1,0 +1,10 @@
+# Background doodle motifs
+
+Line-art motifs drawn very faintly behind every screenshot (lighter pink-red #F48E84 at 46% opacity,
+7 px stroke). All are Lucide 1.45.0 icons (ISC licence, npm `lucide-static`) except `whisk.svg`
+and `spoon.svg`, which were drawn for this set on the same 24 px / 2 px-stroke grid.
+
+Per-shot vocabulary: KEEP — notebook, bookmark, grid, sticky note, folders, open book ·
+IMPORT — import, share, curved arrows · TURN — scan frames, clipboard, checklists · ADAPT — chat
+bubbles, sparkles, pencil · BUILD — basket, checklists, check marks · ORGANIZE — folders, layers,
+grid, bookmark. No ingredient illustrations.

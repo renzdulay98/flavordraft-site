@@ -1,11 +1,13 @@
-/* FlavorDraft — the only two behaviours on the site that CSS cannot express.
-   Everything else, including every visual state, is styles. */
+/* FlavorDraft — the few behaviours CSS cannot express. Every page renders
+   completely without this file; it only adds the header state, the small-screen
+   menu, gentle reveals, and the reading marker on the legal pages. */
 
 (() => {
   "use strict";
 
-  /* The header keeps its hairline hidden until the page has actually moved,
-     so the top of the page reads as one uninterrupted sheet of paper. */
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  /* Header: a hairline appears once the page has moved. */
   const masthead = document.getElementById("masthead");
   if (masthead && "IntersectionObserver" in window) {
     const sentinel = document.createElement("div");
@@ -19,21 +21,70 @@
     ).observe(sentinel);
   }
 
-  /* Legal pages: mark the section currently being read in the contents list.
-     The current section is the last one whose heading has crossed the reading
-     line — picking the topmost *visible* heading instead makes the marker jump
-     back and forth between neighbours across a short section. */
+  /* Small-screen menu. */
+  const toggle = document.querySelector("[data-nav-toggle]");
+  if (masthead && toggle) {
+    const nav = document.getElementById(toggle.getAttribute("aria-controls"));
+    const setOpen = (open) => {
+      masthead.toggleAttribute("data-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+    };
+    toggle.addEventListener("click", () => setOpen(!masthead.hasAttribute("data-open")));
+    nav?.addEventListener("click", (event) => {
+      if (event.target.closest("a")) setOpen(false);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && masthead.hasAttribute("data-open")) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    document.addEventListener("click", (event) => {
+      if (masthead.hasAttribute("data-open") && !masthead.contains(event.target)) setOpen(false);
+    });
+    window.matchMedia("(min-width: 48em)").addEventListener("change", (mq) => {
+      if (mq.matches) setOpen(false);
+    });
+  }
+
+  /* Reveals: elements marked data-reveal fade in as they arrive. Without an
+     observer, or when motion is reduced, everything is simply shown. */
+  const reveals = document.querySelectorAll("[data-reveal]");
+  if (reveals.length) {
+    const show = (el) => el.setAttribute("data-reveal", "in");
+    if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+      reveals.forEach(show);
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            show(entry.target);
+            observer.unobserve(entry.target);
+          }
+        },
+        { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+      );
+      reveals.forEach((el) => observer.observe(el));
+      /* Anything already on screen at load shows at once. */
+      setTimeout(() => {
+        reveals.forEach((el) => {
+          const r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom > 0) show(el);
+        });
+      }, 60);
+    }
+  }
+
+  /* Legal pages: mark the section currently being read in the contents list. */
   const toc = document.querySelector("[data-toc]");
   if (!toc) return;
 
   const links = new Map(
-    [...toc.querySelectorAll("a[href^='#']")].map((a) => [
-      decodeURIComponent(a.hash.slice(1)),
-      a
-    ])
+    [...toc.querySelectorAll("a[href^='#']")].map((a) => [decodeURIComponent(a.hash.slice(1)), a])
   );
-  const headings = [...document.querySelectorAll(".legal-prose h2[id]")].filter(
-    (heading) => links.has(heading.id)
+  const headings = [...document.querySelectorAll(".legal-prose h2[id]")].filter((heading) =>
+    links.has(heading.id)
   );
   if (!headings.length) return;
 

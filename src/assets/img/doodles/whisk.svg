@@ -1,0 +1,7 @@
+<!-- FlavorDraft screenshot doodle, drawn to match Lucide's 24px / 2px stroke grid -->
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 22v-6" />
+  <path d="M10.5 16h3" />
+  <path d="M12 16C6.5 12.5 6.5 3.5 12 2c5.5 1.5 5.5 10.5 0 14" />
+  <path d="M12 16c-2.6-3-2.6-10.5 0-14c2.6 3.5 2.6 11 0 14" />
+</svg>

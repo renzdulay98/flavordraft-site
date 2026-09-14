@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400"><defs><pattern id="tx" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.1" fill="#8A6F60" opacity=".075"></circle><circle cx="11" cy="10" r="1" fill="#8A6F60" opacity=".055"></circle></pattern></defs><rect width="400" height="400" fill="#F1E6D4"></rect><rect width="400" height="400" fill="url(#tx)"></rect><circle cx="200" cy="200" r="132" fill="#E7D6BC"></circle>
-<path d="M176 168 c-16 -20 16 -30 0 -50" fill="none" stroke="#B62B25" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity=".7"></path>
-<path d="M224 168 c-16 -20 16 -30 0 -50" fill="none" stroke="#B62B25" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity=".7"></path>
-<path d="M108 216 A92 92 0 0 0 292 216 Z" fill="#FFFBF3" stroke="#B62B25" stroke-width="7" stroke-linejoin="round"></path>
-<ellipse cx="200" cy="216" rx="92" ry="15" fill="#FFFBF3" stroke="#B62B25" stroke-width="7" stroke-linejoin="round"></ellipse>
-<path d="M136 288 H264" fill="none" stroke="#B62B25" stroke-width="6" stroke-linecap="round" opacity=".5"></path></svg>
