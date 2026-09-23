@@ -12,13 +12,13 @@ src/
   _data/build.js       values from the build itself (the footer's year)
   _data/legal.js       reads the two documents in docs/ for the legal pages
   _includes/base.njk   header, footer, <head> — shared by every page
-  _includes/brand.njk  wordmark, App Store CTA, screenshot, doodle and mark macros
+  _includes/brand.njk  wordmark, App Store badge, screenshot, doodle and mark macros
   _includes/legal.njk  the legal-page layout
   assets/css/site.css  every style on the site; tokens at the top
   assets/img/screens/  the responsive screenshot set (generated, see below)
   assets/img/doodles/  the line drawings' source SVGs and licences
   assets/js/site.js    header state, small-screen menu, reveals, legal contents marker
-  index.njk  support.njk  privacy.njk  terms.njk
+  index.njk  support.njk  privacy.njk  terms.njk  download.njk
 scripts/screens.json     which app screenshots the site shows, and where each comes from
 scripts/build-screens.mjs  regenerates src/assets/img/screens/ from those sources
 scripts/build-icons.mjs  regenerates the raster icons and the share image
@@ -33,6 +33,7 @@ scripts/og/              their source pages (not part of the site)
 | `/support` | `src/support.njk` | The App Store Connect **Support URL**. Contact address, quick help, contact again. |
 | `/privacy` | `docs/privacy.md` | Linked from the Terms and from the app; do not move |
 | `/terms` | `docs/terms.md` | |
+| `/download` | `src/download.njk` | The short link to share. Redirects to `appStoreUrl`; `noindex`, and out of the sitemap |
 | `/sitemap.xml` `/robots.txt` | `src/sitemap.njk`, `src/root/` | Every page with a `canonical` is in the sitemap |
 
 Deployed by `.github/workflows/deploy.yml` to GitHub Pages on every push to
@@ -59,7 +60,7 @@ that are empty.
 | Key | Effect |
 | --- | --- |
 | `contactEmail` | The public support address (`support@flavordraft.app`). Shown on `/support` and in the footer; the legal documents state it in their own text. |
-| `appStoreUrl` | While `null`, every download call to action renders as an honest "Coming soon to the App Store" status. Set it to the real `https://apps.apple.com/…` URL and the header, hero, closing section and footer all turn into links. |
+| `appStoreUrl` | The App Store listing (`https://apps.apple.com/app/id6809896491`). One value behind every download route: the header, hero and closing badges, the footer link, and where `/download` sends people. |
 
 ## Screenshots
 
@@ -86,6 +87,12 @@ supported sources and imply no partnership.
 The site uses the app's own faces through system stacks — Avenir Next for
 headlines and interface, Charter for editorial passages — with Helvetica
 Neue/Arial and Georgia as fallbacks. No font files are bundled or loaded.
+
+The App Store badge is Apple's own artwork, downloaded unaltered from Apple's
+marketing toolbox (`app-store-badge.svg`, and `-white` for the red closing
+section). Apple's guidelines govern it: place it by height, never recolour,
+crop, outline or redraw it, and keep clear space around it. Replace the files
+rather than editing them.
 
 The wordmark is the approved raster from `wordmark_handoff/` (see its README
 for specs): `src/assets/img/wordmark-flavordraft.png` on paper and the

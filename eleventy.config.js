@@ -84,7 +84,7 @@ export default function (eleventyConfig) {
   eleventyConfig.on("eleventy.after", () => {
     const unresolved = [];
     if (!site.contactEmail) unresolved.push("site.contactEmail  → the footer's Contact link is hidden");
-    if (!site.appStoreUrl) unresolved.push("site.appStoreUrl   → renders the 'Coming to the App Store' status instead of a link");
+    if (!site.appStoreUrl) unresolved.push("site.appStoreUrl   → the App Store badges and /download lead nowhere");
     if (!unresolved.length) return;
     const rule = "─".repeat(74);
     console.warn(

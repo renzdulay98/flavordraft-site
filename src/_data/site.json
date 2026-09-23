@@ -6,8 +6,8 @@
 
   "contactEmail": "support@flavordraft.app",
 
-  "_todo_appStoreUrl": "TODO — set to the real https://apps.apple.com/... URL at launch. While it is null the site shows the 'Coming soon to the App Store' status instead of a download link (header, hero, closing section, support page and footer all read this one value).",
-  "appStoreUrl": null,
+  "_note_appStoreUrl": "The listing every download route leads to: the badges on the site, and /download (src/download.njk), the short link to share.",
+  "appStoreUrl": "https://apps.apple.com/app/id6809896491",
 
   "legal": {
     "copyrightYear": "2026"

@@ -1,4 +1,4 @@
-{%- from "brand.njk" import wordmark -%}
+{%- from "brand.njk" import wordmark, appStoreCta -%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,11 +50,7 @@
     <nav class="masthead__nav" id="site-nav" aria-label="Site">
       <a class="masthead__link" href="/#features">Features</a>
       <a class="masthead__link" href="/support"{% if canonical == "/support" %} aria-current="page"{% endif %}>Support</a>
-      {% if site.appStoreUrl -%}
-        <a class="masthead__cta" href="{{ site.appStoreUrl }}">Download</a>
-      {%- else -%}
-        <span class="masthead__status"><span class="coming__dot" aria-hidden="true"></span>iPhone · coming&nbsp;soon</span>
-      {%- endif %}
+      {{ appStoreCta(site, "compact") }}
     </nav>
   </div>
 </header>
@@ -76,7 +72,7 @@
         <a href="/support">Support</a>
         <a href="/privacy">Privacy Policy</a>
         <a href="/terms">Terms of Service</a>
-        {% if site.appStoreUrl %}<a href="{{ site.appStoreUrl }}">App Store</a>{% endif %}
+        <a href="{{ site.appStoreUrl }}">App Store</a>
         <a href="mailto:{{ site.contactEmail }}">{{ site.contactEmail }}</a>
       </nav>
     </div>

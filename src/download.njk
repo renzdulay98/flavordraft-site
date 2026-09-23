@@ -1,0 +1,41 @@
+---
+permalink: /download/index.html
+eleventyExcludeFromCollections: true
+---
+{%- from "brand.njk" import wordmark, appStoreCta -%}
+<!DOCTYPE html>
+{#- flavordraft.app/download — the short link to share. It hands off to the
+    App Store listing in site.appStoreUrl: the script redirects the moment the
+    page is parsed, the meta refresh covers a browser without scripting, and
+    the badge below covers both failing. location.replace leaves no history
+    entry, so Back returns to wherever the link was opened from. -#}
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Download FlavorDraft on the App Store</title>
+<script>location.replace("{{ site.appStoreUrl }}");</script>
+<meta http-equiv="refresh" content="0; url={{ site.appStoreUrl }}">
+<meta name="robots" content="noindex, follow">
+
+<meta name="theme-color" content="{{ site.themeColor }}">
+<meta name="color-scheme" content="light">
+
+<link rel="icon" href="/assets/img/appicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body class="page">
+
+<main class="wrap handoff" id="main">
+  <a class="wordmark" href="/">{{ wordmark() }}</a>
+  <p class="handoff__note">Taking you to the App&nbsp;Store…</p>
+  {{ appStoreCta(site) }}
+  <p class="handoff__fallback">Not moving? <a href="{{ site.appStoreUrl }}">Open FlavorDraft on the App&nbsp;Store</a> — or go back to <a href="/">flavordraft.app</a>.</p>
+</main>
+
+</body>
+</html>

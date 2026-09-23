@@ -338,45 +338,31 @@ a:hover {
   box-shadow: inset 0 0 0 1.5px var(--ink-2);
 }
 
-.button--on-red {
-  background: var(--on-red);
-  color: var(--red);
-}
-
-.button--on-red:hover {
-  background: #fff;
-  color: var(--red-deep);
-}
-
-/* The honest state while the App Store listing is not live yet. */
-.coming {
+/* The App Store badge. Apple's artwork, placed unaltered: only its height is
+   set, the 119.66:40 aspect carries the width, and nothing is drawn over it.
+   Full height matches a .button so the hero's two actions line up; the header
+   takes the compact size, and the white badge goes on red. */
+.appstore {
   display: inline-flex;
   align-items: center;
-  gap: 0.625rem;
-  min-height: 3.25rem;
-  padding: 0.875rem 1.25rem;
-  border: 1.5px solid var(--rule-strong);
-  border-radius: var(--r-md);
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--ink);
+  border-radius: var(--r-sm);
+  transition: transform 0.16s ease, opacity 0.16s ease;
 }
 
-.coming__dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: var(--red);
-  flex: none;
+.appstore:hover {
+  transform: translateY(-1px);
+  opacity: 0.88;
 }
 
-.coming--on-red {
-  border-color: rgba(255, 248, 238, 0.45);
-  color: var(--on-red);
+.appstore__badge {
+  display: block;
+  height: 3.25rem;
+  width: auto;
+  aspect-ratio: 119.66407 / 40;
 }
 
-.coming--on-red .coming__dot {
-  background: var(--on-red);
+.appstore--compact .appstore__badge {
+  height: 2.5rem;
 }
 
 /* Numbered editorial steps. */
@@ -563,42 +549,6 @@ a:hover {
   color: var(--red);
 }
 
-.masthead__cta {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: var(--r-sm);
-  background: var(--red);
-  color: var(--on-red);
-  font-size: 0.9375rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.masthead__cta:hover {
-  background: var(--red-deep);
-  color: var(--on-red);
-}
-
-.masthead__status {
-  display: none;
-  align-items: center;
-  gap: 0.5rem;
-  padding-left: clamp(1rem, 3vw, 2rem);
-  border-left: 1px solid var(--rule);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--ink-2);
-  white-space: nowrap;
-}
-
-@media (min-width: 48em) {
-  .masthead__status {
-    display: inline-flex;
-  }
-}
-
 /* Menu button: shown on small screens only when the script is running,
    because it is the script that opens the panel. Without it the links stay
    inline, which fits at 320px. */
@@ -672,21 +622,24 @@ a:hover {
     border-bottom: 1px solid var(--rule);
   }
 
-  .js .masthead__cta {
-    margin-top: 1rem;
+  /* In the open menu the badge sits on its own line, centred under the links. */
+  .js .masthead .appstore {
     justify-content: center;
-    min-height: 3rem;
+    margin-top: 1.25rem;
   }
 
-  .js .masthead__status {
-    display: inline-flex;
-    margin-top: 1rem;
-    padding-left: 0;
-    border-left: 0;
+  .js .masthead .appstore__badge {
+    height: 3rem;
   }
 
   .masthead__nav:not(.js *) .masthead__link {
     font-size: 0.875rem;
+  }
+
+  /* Without the script there is no panel to open, so the links stay inline and
+     the badge stands down — the hero's own badge is one screen away. */
+  .masthead__nav:not(.js *) .appstore {
+    display: none;
   }
 }
 
@@ -1978,7 +1931,34 @@ a:hover {
 }
 
 /* --------------------------------------------------------------------------
-   19 · Motion — gentle reveals, nothing that moves while you read
+   19 · Download handoff — /download, shown only while the redirect happens
+   -------------------------------------------------------------------------- */
+
+.handoff {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s6);
+  min-height: 100svh;
+  justify-content: center;
+  text-align: center;
+  padding-block: var(--s9);
+}
+
+.handoff__note {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.handoff__fallback {
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+  max-width: 34ch;
+}
+
+/* --------------------------------------------------------------------------
+   20 · Motion — gentle reveals, nothing that moves while you read
    -------------------------------------------------------------------------- */
 
 .js [data-reveal] {

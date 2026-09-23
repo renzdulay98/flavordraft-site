@@ -5,9 +5,10 @@
                    ships (see wordmark_handoff/README.md): logoRed #9E1F1F on
                    transparent, or the parchment "mono" file when onRed is set.
                    Sized by width only; the 4.354:1 aspect follows.
-   appStoreCta()   The download call to action. Renders a real link only when
-                   site.appStoreUrl is set; until then an honest "coming soon"
-                   status, never a dead button or an invented URL.
+   appStoreCta()   The download call to action: Apple's own "Download on the
+                   App Store" badge, linking to site.appStoreUrl. The artwork
+                   is Apple's, used unaltered (see README) — the black badge on
+                   paper, the white one on red, "compact" in the header.
    screen()        A responsive screenshot from src/assets/img/screens/ (built by
                    `npm run screens` from scripts/screens.json).
    doodle()        One of the hand-placed line drawings. Lucide (ISC) plus the
@@ -21,12 +22,8 @@
 {%- endmacro %}
 
 {% macro appStoreCta(site, variant) %}
-{%- if site.appStoreUrl -%}
-<a class="button{% if variant == 'on-red' %} button--on-red{% endif %}" href="{{ site.appStoreUrl }}">Download on the App&nbsp;Store</a>
-{%- else -%}
-<p class="coming{% if variant == 'on-red' %} coming--on-red{% endif %}"><span class="coming__dot" aria-hidden="true"></span>Coming soon to the App&nbsp;Store for&nbsp;iPhone</p>
-{%- endif -%}
-{% endmacro %}
+<a class="appstore{% if variant %} appstore--{{ variant }}{% endif %}" href="{{ site.appStoreUrl }}"><img class="appstore__badge" src="/assets/img/app-store-badge{% if variant == 'on-red' %}-white{% endif %}.svg" alt="Download on the App Store" width="120" height="40" decoding="async"></a>
+{%- endmacro %}
 
 {% macro screen(name, alt, sizes, widths, w, h, eager) %}
 {%- set ws = widths or [400, 800, 1200] -%}
