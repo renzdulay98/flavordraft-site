@@ -1,6 +1,6 @@
 # FlavorDraft Privacy Policy
 
-**Effective date: September 11, 2026**
+**Effective date: October 4, 2026**
 
 FlavorDraft (“FlavorDraft,” “we,” “us,” or “our”) is a recipe capture, organization, and cooking-assistance app. This Privacy Policy explains what information FlavorDraft processes, why we process it, how it is shared, how long it is kept, and the choices available to you.
 
@@ -99,6 +99,12 @@ If you enable notifications, FlavorDraft processes your notification preferences
 
 When FlavorDraft communicates with its backend or service providers, standard technical information may be processed for security, reliability, and troubleshooting, such as request metadata, IP address, app version, device/operating-system information, and error information.
 
+### Advertising measurement
+
+FlavorDraft advertises on Meta's services, such as Facebook and Instagram. To measure whether those ads lead people to install and open FlavorDraft, the app includes Meta's app events software. When you open FlavorDraft, the app lets Meta know that it was installed and opened. Meta's software sends this with technical information, such as an identifier it creates for this installation, when the app was opened and how long it stayed open, device and app details (including device model, operating-system version, app version, language, and time zone), and your IP address as part of the request.
+
+FlavorDraft does not give Meta's app events software your recipes, ingredients, instructions, recipe or imported links, search queries, grocery lists, collections, AI prompts, preferred name, or email address. FlavorDraft does not show Apple's prompt asking for permission to track you across other companies' apps and websites, and it does not collect your device's advertising identifier (IDFA). How Meta may use this information is described under “Meta” in Section 3.
+
 ## 2. How We Use Information
 
 We use information described above to:
@@ -111,6 +117,7 @@ We use information described above to:
 - manage account sign-in, restoration, and deletion;
 - determine subscription access and restore purchases;
 - send notifications you enable;
+- measure whether FlavorDraft's ads on Meta's services lead to app installs and app opens;
 - protect the service from abuse, fraud, and security threats;
 - diagnose errors and improve service reliability;
 - comply with legal obligations.
@@ -121,7 +128,7 @@ We do not sell your personal information.
 
 ## 3. Service Providers and Third Parties
 
-FlavorDraft relies on third-party services to operate certain features. These providers process information only as needed for the services they provide, subject to their own terms and privacy obligations.
+FlavorDraft relies on third-party services to operate certain features. Except as described for Meta below, these providers process information only as needed for the services they provide, subject to their own terms and privacy obligations.
 
 ### Supabase
 
@@ -142,6 +149,12 @@ FlavorDraft may use OpenAI services for AI-assisted extraction, structured recip
 ### RevenueCat
 
 FlavorDraft uses RevenueCat to manage and interpret App Store subscription entitlements and purchase state.
+
+### Meta
+
+FlavorDraft uses Meta Platforms' app events software to measure its own advertising on Meta's services: the app installs and app opens that may follow from FlavorDraft's ads. Through this software, Meta receives the installation and app-open information described under “Advertising measurement” above, and not the content you create or import in FlavorDraft or your account details. FlavorDraft does not ask Meta to limit this information to measuring FlavorDraft's ads; Meta may also use it for its own purposes, under its own terms and privacy policy.
+
+Separately, when you import a recipe from Instagram or Facebook, FlavorDraft retrieves the post you selected from Meta's services, and may later refresh its cover image from there, as described under “Recipe source services and websites” and “Third-party recipe images and thumbnails.”
 
 ### Recipe source services and websites
 
