@@ -8,6 +8,7 @@
     "start": "eleventy --serve",
     "build": "eleventy",
     "icons": "node scripts/build-icons.mjs",
+    "media": "node scripts/build-media.mjs",
     "screens": "node scripts/build-screens.mjs"
   },
   "devDependencies": {

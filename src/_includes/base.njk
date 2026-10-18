@@ -1,4 +1,4 @@
-{%- from "brand.njk" import wordmark, appStoreCta -%}
+{%- from "brand.njk" import wordmark -%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,19 +20,51 @@
 <meta property="og:image" content="{{ site.url }}/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FlavorDraft — Every recipe you love. One cookbook.">
+<meta property="og:image:alt" content="{{ site.ogImageAlt }}">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="/assets/img/appicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-{% if heroImage -%}
-<link rel="preload" as="image" href="/assets/img/screens/{{ heroImage }}-800.webp" imagesrcset="/assets/img/screens/{{ heroImage }}-400.webp 400w, /assets/img/screens/{{ heroImage }}-800.webp 800w, /assets/img/screens/{{ heroImage }}-1200.webp 1200w" imagesizes="(min-width: 62em) 26rem, 72vw">
+{% if preloadImage -%}
+{%- set p = screens[preloadImage] -%}
+<link rel="preload" as="image" type="image/avif" imagesrcset="{% for w in p.widths %}/assets/img/screens/{{ preloadImage }}-{{ w }}.avif {{ w }}w{% if not loop.last %}, {% endif %}{% endfor %}" imagesizes="{{ preloadSizes }}" fetchpriority="high">
 {% endif -%}
 <link rel="stylesheet" href="/assets/css/site.css">
+{% if pageStyles %}<link rel="stylesheet" href="/assets/css/{{ pageStyles }}.css">
+{% endif -%}
 <script>document.documentElement.classList.add("js");</script>
 <script src="/assets/js/site.js" defer></script>
+{% if pageScript %}<script src="/assets/js/{{ pageScript }}.js" defer></script>
+{% endif -%}
+{% if structuredData -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": {{ (site.url + "/#website") | dump | safe }},
+      "url": {{ (site.url + "/") | dump | safe }},
+      "name": {{ site.name | dump | safe }}
+    },
+    {
+      "@type": "MobileApplication",
+      "@id": {{ (site.url + "/#app") | dump | safe }},
+      "name": {{ site.name | dump | safe }},
+      "description": {{ pageDescription | dump | safe }},
+      "operatingSystem": "iOS",
+      "applicationCategory": "LifestyleApplication",
+      "url": {{ (site.url + "/") | dump | safe }},
+      "downloadUrl": {{ site.appStoreUrl | dump | safe }},
+      "installUrl": {{ site.appStoreUrl | dump | safe }},
+      "image": {{ (site.url + "/assets/img/og.png") | dump | safe }}
+    }
+  ]
+}
+</script>
+{% endif -%}
 </head>
 <body class="page{% if pageClass %} page--{{ pageClass }}{% endif %}">
 
@@ -49,8 +81,10 @@
 
     <nav class="masthead__nav" id="site-nav" aria-label="Site">
       <a class="masthead__link" href="/#features">Features</a>
-      <a class="masthead__link" href="/support"{% if canonical == "/support" %} aria-current="page"{% endif %}>Support</a>
-      {{ appStoreCta(site, "compact") }}
+      <a class="masthead__link" href="/#iphone-duo">What’s new</a>
+      <a class="masthead__link" href="/#pricing">Pricing</a>
+      <a class="masthead__link" href="/support/"{% if canonical == "/support/" %} aria-current="page"{% endif %}>Support</a>
+      <a class="masthead__cta" href="{{ site.appStoreUrl }}">Download<span class="masthead__cta-more"> on the App Store</span></a>
     </nav>
   </div>
 </header>
@@ -64,20 +98,23 @@
     <div class="colophon__grid">
       <div class="colophon__brand">
         {{ wordmark("footer") }}
-        <p class="colophon__tagline">{{ site.tagline }}</p>
+        <p class="colophon__tagline">{{ site.tagline | escape | replace("iPhone Duo", '<span class="nowrap">iPhone Duo</span>') | safe }}</p>
       </div>
 
       <nav class="colophon__nav" aria-label="Footer">
         <a href="/">Home</a>
-        <a href="/support">Support</a>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/terms">Terms of Service</a>
+        <a href="/support/">Support</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Service</a>
         <a href="{{ site.appStoreUrl }}">App Store</a>
         <a href="mailto:{{ site.contactEmail }}">{{ site.contactEmail }}</a>
       </nav>
     </div>
 
-    <p class="colophon__legal">© {{ site.legal.copyrightYear }}{% if build.year > (site.legal.copyrightYear | int) %}–{{ build.year }}{% endif %} FlavorDraft. All rights reserved.</p>
+    <div class="colophon__legal">
+      <p>© {{ site.legal.copyrightYear }}{% if build.year > (site.legal.copyrightYear | int) %}–{{ build.year }}{% endif %} FlavorDraft. All rights reserved.</p>
+      <p>{{ site.legal.appleCredit | escape | replace("iPhone Duo", '<span class="nowrap">iPhone Duo</span>') | replace("App Store", '<span class="nowrap">App Store</span>') | safe }}</p>
+    </div>
   </div>
 </footer>
 

@@ -1,0 +1,28 @@
+{%- from "brand.njk" import img with context -%}
+{#
+  Every way in, and the cookbook they fill: one composition of the app's real Add
+  Recipe menu and three of its recipe index cards. The menu is glass, app chrome,
+  so it stands square and casts the system's small shadow; the cards are paper,
+  dealt onto the page a little askew. Lasagna is the recipe the page follows into
+  Draft with AI and Cook View; the other two, from Weeknight Dinners, appear
+  nowhere else on the page.
+#}
+<section class="cookbook" aria-labelledby="cookbook-title">
+  <div class="wrap cookbook__grid">
+    <div class="cookbook__copy">
+      <h2 class="section-title" id="cookbook-title">Every recipe. One&nbsp;cookbook.</h2>
+      <p class="lede">A link, a video, a photo of a cookbook page, the back of a box, or a dish you describe in a few words. Wherever it starts, it ends up as a recipe card in a cookbook that’s yours.</p>
+    </div>
+
+    <div class="cookbook__pile">
+      <figure class="cookbook__ways">
+        {{ img("cookbook-chooser", "FlavorDraft’s Add Recipe menu: Scan a recipe, Scan food packaging, Import from link, Import from social media, Describe a dish or idea, and Add manually.", "(min-width: 80em) 241px, (min-width: 48em) 22vw, (min-width: 34em) 241px, 43vw", { class: "glass" }) }}
+      </figure>
+      <ul class="cookbook__cards" role="list" aria-label="Recipe cards in a FlavorDraft cookbook">
+        <li>{{ img("card-lasagna", "Lasagna (Enhanced Flavour Version), 4 hours 20 minutes, marked as a favorite.", "(min-width: 80em) 250px, (min-width: 48em) 23vw, (min-width: 34em) 250px, 45vw", { class: "index-card" }) }}</li>
+        <li>{{ img("card-salmon", "Best Baked Salmon, 15 minutes, marked as a favorite.", "(min-width: 80em) 250px, (min-width: 48em) 23vw, (min-width: 34em) 250px, 45vw", { class: "index-card" }) }}</li>
+        <li>{{ img("card-fish-tacos", "Fish Tacos, 10 minutes.", "(min-width: 80em) 250px, (min-width: 48em) 23vw, (min-width: 34em) 250px, 45vw", { class: "index-card" }) }}</li>
+      </ul>
+    </div>
+  </div>
+</section>

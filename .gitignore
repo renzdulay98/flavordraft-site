@@ -6,3 +6,7 @@ _site/
 # The screenshot archive and its extracted copy are inputs to `npm run screens`, not part of the site.
 /Archive.zip
 /screenshot-assets/
+
+# The copied FlavorDraft app documentation (13 GB of reference material, screenshots and video) is
+# read by `npm run screens` and `npm run media`; only their outputs under src/ are part of the site.
+/flavordraft-app-docs/

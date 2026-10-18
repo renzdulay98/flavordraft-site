@@ -1,0 +1,44 @@
+{%- from "brand.njk" import img with context -%}
+{#
+  Cook View, set in the app's own cooking voice: the headline is Charter, like the
+  step on a Cook View page. On the right, FlavorDraft's real page turn (two seconds
+  of the iPhone Duo film: step 16 at rest, Next pressed, the recorded turn, step 17),
+  cropped to the screen by scripts/build-media.mjs, beside the same recipe on
+  iPhone with its timer running. home.js plays the turn once when it comes into
+  view and holds on step 17; "Turn the page" plays it again, and says so to screen
+  readers. Under reduced motion it never plays: the button changes the page with a
+  short fade, as the app itself does.
+#}
+<section class="cook" aria-labelledby="cook-title">
+  <div class="wrap cook__grid">
+    <div class="cook__copy">
+      <h2 class="cook__title" id="cook-title">Cook <span class="nowrap">one step</span> <span class="nowrap">at a time.</span></h2>
+      <p class="lede">In Cook View every step gets a page of its own, set large enough to read from across the counter. Tap Next and the page turns. A step’s timer keeps running while you get on with the next one.</p>
+    </div>
+
+    <div class="cook__pages">
+      <figure class="cook__turn" data-turn>
+        <div class="shot cook__screen">
+          {{ img("cook-turn-start", "Cook View on iPhone Duo, partly folded: the lasagna recipe’s step 16 of 20, “Repeat layering: ragu, cheese sauce, parmesan, lasagna sheets, until you have three layers. Finish with a fourth layer of lasagna sheets and pour over the remaining cheese sauce.” Below it, Previous, No timer and Next.", "(min-width: 80em) 366px, (min-width: 62em) 29vw, (min-width: 48em) 374px, 53vw", { class: "cook__still" }) }}
+          {{ img("cook-turn-end", "Cook View on iPhone Duo, partly folded: step 17 of 20, “Sprinkle mozzarella and any remaining parmesan on top.”", "(min-width: 80em) 366px, (min-width: 62em) 29vw, (min-width: 48em) 374px, 53vw", { class: "cook__still cook__still--end", hidden: true }) }}
+          <video class="cook__video" muted playsinline preload="none" width="660" height="938" aria-hidden="true" data-turn-video>
+            <source src="/assets/media/cook/cook-turn.h264.mp4" type="video/mp4">
+            <source src="/assets/media/cook/cook-turn.vp9.webm" type="video/webm">
+          </video>
+        </div>
+        <figcaption class="caption cook__caption">
+          <span>On iPhone Duo, partly folded.</span>
+          <button class="text-button" type="button" hidden data-turn-again>Turn the page</button>
+          <span class="visually-hidden" aria-live="polite" data-turn-status></span>
+        </figcaption>
+      </figure>
+
+      <figure class="cook__iphone">
+        <div class="shot">
+          {{ img("cook-iphone", "Cook View on iPhone: “Bake for 25 minutes or until golden and bubbling.” Page 18 of 20, with the step’s timer running at 23:10 above Previous and Next.", "(min-width: 80em) 240px, (min-width: 62em) 19vw, (min-width: 48em) 245px, 35vw") }}
+        </div>
+        <figcaption class="caption">On iPhone, its timer running.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

@@ -1,11 +1,10 @@
-/* FlavorDraft — the few behaviours CSS cannot express. Every page renders
-   completely without this file; it only adds the header state, the small-screen
-   menu, gentle reveals, and the reading marker on the legal pages. */
+/* FlavorDraft — the few behaviours CSS cannot express, on every page. Each page
+   renders completely without this file; it only adds the header state, the
+   small-screen menu and the reading marker on the legal pages. The homepage's
+   film and page turn are in home.js. */
 
 (() => {
   "use strict";
-
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   /* Header: a hairline appears once the page has moved. */
   const masthead = document.getElementById("masthead");
@@ -21,13 +20,15 @@
     ).observe(sentinel);
   }
 
-  /* Small-screen menu. */
+  /* Small-screen menu. Its button says what a press will do. */
   const toggle = document.querySelector("[data-nav-toggle]");
   if (masthead && toggle) {
     const nav = document.getElementById(toggle.getAttribute("aria-controls"));
+    const label = toggle.querySelector(".masthead__toggle-label");
     const setOpen = (open) => {
       masthead.toggleAttribute("data-open", open);
       toggle.setAttribute("aria-expanded", String(open));
+      if (label) label.textContent = open ? "Close" : "Menu";
     };
     toggle.addEventListener("click", () => setOpen(!masthead.hasAttribute("data-open")));
     nav?.addEventListener("click", (event) => {
@@ -39,41 +40,30 @@
         toggle.focus();
       }
     });
-    document.addEventListener("click", (event) => {
-      if (masthead.hasAttribute("data-open") && !masthead.contains(event.target)) setOpen(false);
+    /* A tap outside the open menu only closes it: caught on the way down, it never
+       reaches the link or badge under the finger. */
+    document.addEventListener(
+      "click",
+      (event) => {
+        if (!masthead.hasAttribute("data-open") || masthead.contains(event.target)) return;
+        event.preventDefault();
+        event.stopPropagation();
+        setOpen(false);
+      },
+      true
+    );
+    /* Tabbing on past the last link closes it too, so it never covers the page.
+       (Only the keyboard's focus moves count: a tap is the handler above's.) */
+    let pointing = false;
+    document.addEventListener("pointerdown", () => (pointing = true), true);
+    document.addEventListener("keydown", () => (pointing = false), true);
+    nav?.addEventListener("focusout", (event) => {
+      if (pointing || !masthead.hasAttribute("data-open") || masthead.contains(event.relatedTarget)) return;
+      setOpen(false);
     });
     window.matchMedia("(min-width: 48em)").addEventListener("change", (mq) => {
       if (mq.matches) setOpen(false);
     });
-  }
-
-  /* Reveals: elements marked data-reveal fade in as they arrive. Without an
-     observer, or when motion is reduced, everything is simply shown. */
-  const reveals = document.querySelectorAll("[data-reveal]");
-  if (reveals.length) {
-    const show = (el) => el.setAttribute("data-reveal", "in");
-    if (reduceMotion.matches || !("IntersectionObserver" in window)) {
-      reveals.forEach(show);
-    } else {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (!entry.isIntersecting) continue;
-            show(entry.target);
-            observer.unobserve(entry.target);
-          }
-        },
-        { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
-      );
-      reveals.forEach((el) => observer.observe(el));
-      /* Anything already on screen at load shows at once. */
-      setTimeout(() => {
-        reveals.forEach((el) => {
-          const r = el.getBoundingClientRect();
-          if (r.top < window.innerHeight && r.bottom > 0) show(el);
-        });
-      }, 60);
-    }
   }
 
   /* Legal pages: mark the section currently being read in the contents list. */

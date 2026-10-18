@@ -1,0 +1,40 @@
+{%- from "brand.njk" import appStoreCta, img, ink with context -%}
+{#
+  The 2.0 announcement. The pen rings "2.0" and underlines "iPhone Duo" once, on
+  load; the words themselves are plain type. Beside them, FlavorDraft's real
+  screens, laid on the page side by side as the iPhone Duo film lays them (no
+  device is drawn; see scripts/screens.json on why the App Store frames' hardware
+  is not used): on iPhone Duo a recipe opens across two pages like a cookbook, and
+  the same cookbook sits on iPhone. On phones the screens come straight after the
+  headline (home.css), so the first screen carries all four messages.
+#}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <h1 class="hero__title" id="hero-title">
+        <span class="hero__news">FlavorDraft <span class="nowrap"><span class="inked inked--ring">2.0{{ ink("ring") }}</span> is here.</span></span>
+        <span class="hero__made">Made for <span class="inked inked--under">iPhone Duo{{ ink("underline") }}</span>.</span>
+      </h1>
+      <p class="hero__lead">Save recipes from videos, websites, photos and more, then keep them together in one personal cookbook, on iPhone and <span class="nowrap">iPhone Duo</span>.</p>
+      <div class="hero__actions">
+        {{ appStoreCta(site) }}
+        <a class="hero__more" href="#iphone-duo">See what’s new</a>
+      </div>
+    </div>
+
+    <div class="hero__stage">
+      <figure class="hero__duo">
+        <div class="shot">
+          {{ img("hero-duo", "FlavorDraft on iPhone Duo, unfolded: Chicken Parmesan open across the two pages like a cookbook, its method in numbered steps on the left and its ingredients on the right.", preloadSizes, { priority: true }) }}
+        </div>
+        <figcaption class="caption">On iPhone Duo, open across two pages.</figcaption>
+      </figure>
+      <figure class="hero__iphone">
+        <div class="shot">
+          {{ img("hero-iphone", "FlavorDraft on iPhone: Home, with “Good morning, Stan. What are you cooking today?” above the Recently Saved Tiramisu and, under Quick Access, the Weeknight Dinners and Desserts collections.", "(min-width: 90rem) 206px, (min-width: 80em) 15vw, (min-width: 75em) 14vw, (min-width: 62em) and (orientation: landscape) 14vw, (min-width: 40em) and (orientation: landscape) 12vw, 24vw", { eager: true }) }}
+        </div>
+        <figcaption class="caption">On iPhone.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

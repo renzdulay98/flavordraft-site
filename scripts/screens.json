@@ -1,34 +1,214 @@
 {
   "_readme": [
-    "Every screenshot the site shows, in one place. `from` is a path inside the FlavorDraft",
-    "screenshot set (the extracted Archive.zip: screenshot-source/… and screenshots/…).",
-    "To swap an image — for example to replace third-party recipe photography or the",
-    "packaging demo before launch — point `from` at the new 1320×2868 capture and run",
-    "`npm run screens`. `crop` is [x, y, width, height] in source pixels; `widths` are the",
-    "output widths written as WebP into src/assets/img/screens/."
+    "Every image and video the homepage shows, in one place. `from` is a path inside the FlavorDraft app",
+    "documentation (flavordraft-app-docs/, gitignored; SCREENS_SRC points elsewhere if needed).",
+    "`crop` is [x, y, width, height] in source pixels; `bands`, in its place, cuts several full-width",
+    "strips of one screen and sets them one under the other (an excerpt, as App Store screenshot 03",
+    "does: nothing retyped or redrawn). `radius` rounds the crop into an alpha mask",
+    "(`continuous` with an `exponent` makes the corners iOS's superellipse instead of circles),",
+    "`widths` are the output widths written as AVIF and WebP into src/assets/img/screens/.",
+    "A video source takes a `frame` (decoded as a browser shows it); `base: \"repo\"` reads a file",
+    "this repository generates (the page-turn clip from `npm run media`) instead of the docs.",
+    "`rights` is the reuse status the documentation records for what is visible in the image:",
+    "  owned            FlavorDraft's own interface or artwork only",
+    "  publisher-photos the screen shows recipe photographs imported from publishers; the slab and",
+    "                   Duo capture READMEs say: \"None of it is cleared for marketing use.\"",
+    "The build prints every image and video that is not `owned`, so none ships unnoticed. To replace",
+    "an image, point `from` at a re-seeded capture of the same screen and run `npm run screens`.",
+    "`media` records the rights of the video `npm run media` writes; it is not built from here.",
+    "No image here shows Apple hardware: the App Store frames' drawn and 3D-rendered devices and the",
+    "Duo Studio film (Track A) are not used on the website (see the rights review in the docs)."
   ],
   "images": [
-    { "name": "home", "from": "screenshot-source/home/home_primary.png", "widths": [400, 800, 1200] },
-
-    { "name": "import-link", "from": "screenshot-source/import/import_alt_00_link_found_french_toast.png", "widths": [400, 800, 1200] },
-    { "name": "import-progress", "from": "screenshot-source/import/import_alt_05_home_import_in_progress.png", "widths": [400, 800, 1200] },
-    { "name": "import-ready", "from": "screenshot-source/import/import_primary_recipe_imported_french_toast.png", "widths": [400, 800, 1200] },
-    { "name": "import-menu", "from": "screenshot-source/import/import_alt_02_add_menu_ways_in.png", "crop": [520, 1436, 790, 826], "widths": [300, 600, 900] },
-
-    { "name": "packaging", "from": "screenshots/final-png/03-turn-packaging-into-recipes.png", "crop": [0, 660, 1320, 2208], "widths": [480, 960, 1320], "quality": 84,
-      "_note": "Composite from the App Store set (the raw scan captures are not in the archive). Red #B62B25 background baked in; shows Hungry Jack packaging — see screenshots/RIGHTS_REVIEW.md before launch." },
-
-    { "name": "adapt-ask", "from": "screenshot-source/ai/ai_healthier_recipe.png", "widths": [400, 800, 1200] },
-    { "name": "adapt-changes", "from": "screenshot-source/ai/ai_suggested_changes_card.png", "widths": [400, 800, 1200] },
-
-    { "name": "grocery-choose", "from": "screenshot-source/grocery/grocery_add_to_grocery_selection_greek_salad.png", "widths": [400, 800, 1200] },
-    { "name": "grocery-list", "from": "screenshot-source/grocery/grocery_primary.png", "widths": [400, 800, 1200] },
-    { "name": "grocery-bought", "from": "screenshot-source/grocery/grocery_alt_bought_items.png", "widths": [400, 800, 1200] },
-    { "name": "grocery-already", "from": "screenshot-source/grocery/grocery_add_to_grocery_already_on_list.png", "crop": [40, 628, 1240, 470], "widths": [360, 720, 1080] },
-
-    { "name": "cookbook-collections", "from": "screenshot-source/collections/collections_primary.png", "widths": [400, 800, 1200] },
-    { "name": "cookbook-desserts", "from": "screenshot-source/collections/collection_detail_desserts.png", "widths": [400, 800, 1200] },
-
-    { "name": "closing-recipe", "from": "screenshot-source/recipe-detail/recipe_detail_primary_greek_chicken_salad.png", "widths": [400, 800, 1200] }
+    {
+      "name": "hero-duo",
+      "from": "app-store/2.0/duo/source/inner-landscape-recipe-video.png",
+      "crop": [0, 150, 2580, 1805],
+      "widths": [480, 800, 1200, 1600, 2000],
+      "rights": "publisher-photos",
+      "_note": "iPhone Duo inner display held wide: Chicken Parmesan as a cookbook spread, method on the left page, ingredients on the right, the fold between them (the Duo App Store frame 02's capture). Cropped to the two pages: the system's Vertical Bar and home indicator are left out. Shows the recipe's 44 pt video thumbnail (The Cooking Foodie) and the app's ingredient icons, whose pack licence for marketing is still to be confirmed (creative/validation/rights-inventory-r3.md)."
+    },
+    {
+      "name": "hero-iphone",
+      "from": "app-store/2.0/slab/source/01-home-a.png",
+      "widths": [200, 300, 450, 600],
+      "rights": "publisher-photos",
+      "_note": "iPhone 18 Pro Max: Home at rest, 'Good morning, Stan.' with the Recently Saved card."
+    },
+    {
+      "name": "film-poster",
+      "from": "app-store/2.0/duo-showcase/track-b-public-candidate/web/flavordraft-duo-screens_trackB_web_1920x1080_60fps_h264.mp4",
+      "frame": 0,
+      "widths": [960, 1280, 1920],
+      "quality": 60,
+      "rights": "publisher-photos",
+      "_note": "Frame 0 of the Track B (public candidate) web loop, decoded as a browser shows it, so the still and the playing film meet without a jump."
+    },
+    {
+      "name": "film-poster-narrow",
+      "from": "app-store/2.0/duo-showcase/track-b-public-candidate/web/flavordraft-duo-screens_trackB_web_1920x1080_60fps_h264.mp4",
+      "frame": 0,
+      "crop": [240, 0, 1440, 1080],
+      "widths": [480, 720, 960, 1440],
+      "quality": 60,
+      "rights": "publisher-photos",
+      "_note": "The same frame's centre 4:3, matching the film's object-fit crop on narrow screens."
+    },
+    {
+      "name": "video-card",
+      "from": "app-store/2.0/creative/search-results/stills/poster_3840x2560.png",
+      "crop": [120, 900, 1690, 1570],
+      "widths": [400, 640, 960, 1280],
+      "rights": "owned",
+      "_note": "The Search Results creative's paper video card: the painted pan (made by paint_r7.py, 'original work made here'), the campaign pen's play cue and the saved ribbon. Cropped short of the creative's own arrow."
+    },
+    {
+      "name": "video-steps",
+      "from": "app-store/2.0/slab/source/03-video-recipe-steps.png",
+      "crop": [0, 330, 1320, 1245],
+      "widths": [400, 600, 900, 1320],
+      "rights": "owned",
+      "_note": "Chicken Parmesan, Steps 1-7, imported from a YouTube video: no creator name, thumbnail or photo. Cut below the navigation bar, so no glass button tilts with the paper; the dish's name is in the caption instead."
+    },
+    {
+      "name": "cookbook-chooser",
+      "from": "app-store/2.0/slab/source/02-import-chooser-quiet.png",
+      "crop": [542, 1444, 748, 846],
+      "radius": 156,
+      "widths": [300, 450, 600, 750],
+      "rights": "owned",
+      "_note": "The Add Recipe menu's six ways in, opened over text so its glass is clean. Masked to the menu's own continuous (superellipse) corners, just inside its glass rim.",
+      "continuous": true,
+      "exponent": 3.2
+    },
+    {
+      "name": "card-lasagna",
+      "from": "app-store/2.0/duo/source/inner-portrait-my-recipes.png",
+      "crop": [693, 973, 621, 655],
+      "widths": [200, 300, 400, 621],
+      "rights": "publisher-photos",
+      "_note": "The recipe the page follows: drafted in 'Make recipes fit you', cooked in Cook View. The card and its shadow, 2 px of page around them."
+    },
+    {
+      "name": "card-salmon",
+      "from": "app-store/2.0/slab/source/06-collection-open.png",
+      "crop": [52, 1316, 598, 654],
+      "widths": [200, 300, 400, 598],
+      "rights": "publisher-photos",
+      "_note": "Best Baked Salmon, from Weeknight Dinners opened: a recipe shown nowhere else on the page."
+    },
+    {
+      "name": "card-fish-tacos",
+      "from": "app-store/2.0/slab/source/06-collection-open.png",
+      "crop": [671, 1316, 598, 654],
+      "widths": [200, 300, 400, 598],
+      "rights": "publisher-photos",
+      "_note": "Fish Tacos, from the same screen: also shown nowhere else."
+    },
+    {
+      "name": "draft-healthier",
+      "from": "app-store/2.0/slab/source/04-draft-healthier.png",
+      "bands": [[0, 483, 1320, 200], [0, 907, 1320, 321], [0, 842, 1320, 24]],
+      "widths": [400, 660, 990, 1320],
+      "rights": "owned",
+      "_note": "Draft with AI on Lasagna, approved for App Store screenshot 03: the request and the first two lines of FlavorDraft's list, set as that screenshot sets them (its reply's opening sentence left out), with a strip of the same screen's blank paper under the last line. The Tiramisu exchange is not used: it strikes two liqueur brands in red and was never approved for a layout (creative/archive/round-1/product-header/previous/v5-tiramisu-pen-strike/NOTE.md)."
+    },
+    {
+      "name": "draft-protein",
+      "from": "app-store/2.0/slab/source/04-draft-protein.png",
+      "bands": [[0, 483, 1320, 200], [0, 1136, 1320, 316], [0, 842, 1320, 24]],
+      "widths": [400, 660, 990, 1320],
+      "rights": "owned",
+      "_note": "The same conversation's second request and its list's second and third lines, the two screenshot 03 shows."
+    },
+    {
+      "name": "draft-sodium",
+      "from": "app-store/2.0/slab/source/04-draft-sodium.png",
+      "bands": [[0, 408, 1320, 200], [0, 829, 1320, 322], [0, 772, 1320, 24]],
+      "widths": [400, 660, 990, 1320],
+      "rights": "owned",
+      "_note": "The third request and its list's first two lines."
+    },
+    {
+      "name": "cook-iphone",
+      "from": "app-store/2.0/slab/source/05-cook-timer.png",
+      "widths": [300, 450, 600, 900],
+      "rights": "owned",
+      "_note": "Cook View on iPhone: Lasagna step 18, its timer running, Previous and Next."
+    },
+    {
+      "name": "cook-turn-start",
+      "base": "repo",
+      "from": "src/assets/media/cook/cook-turn.h264.mp4",
+      "frame": 0,
+      "widths": [330, 495, 660],
+      "rights": "owned",
+      "_note": "The page-turn clip's first frame (Track B frame 780): Cook View partly folded on step 16, at rest. Its poster, so the clip starts without a jump."
+    },
+    {
+      "name": "cook-turn-end",
+      "base": "repo",
+      "from": "src/assets/media/cook/cook-turn.h264.mp4",
+      "frame": 119,
+      "widths": [330, 495, 660],
+      "rights": "owned",
+      "_note": "The clip's last frame (Track B frame 899): the page has landed on step 17. Shown instead of the clip under reduced motion."
+    },
+    {
+      "name": "stack-weeknight-dinners",
+      "from": "app-store/2.0/duo/source/inner-landscape-collections.png",
+      "crop": [172, 615, 528, 667],
+      "widths": [180, 270, 360, 528],
+      "rights": "publisher-photos"
+    },
+    {
+      "name": "stack-desserts",
+      "from": "app-store/2.0/duo/source/inner-landscape-collections.png",
+      "crop": [719, 615, 528, 667],
+      "widths": [180, 270, 360, 528],
+      "rights": "publisher-photos"
+    },
+    {
+      "name": "stack-breakfast-brunch",
+      "from": "app-store/2.0/duo/source/inner-landscape-collections.png",
+      "crop": [1473, 615, 528, 667],
+      "widths": [180, 270, 360, 528],
+      "rights": "publisher-photos"
+    },
+    {
+      "name": "stack-comfort-food",
+      "from": "app-store/2.0/duo/source/inner-landscape-collections.png",
+      "crop": [2018, 615, 528, 667],
+      "widths": [180, 270, 360, 528],
+      "rights": "publisher-photos"
+    },
+    {
+      "name": "stack-fresh-light",
+      "from": "app-store/2.0/duo/source/inner-landscape-collections.png",
+      "crop": [172, 1336, 528, 667],
+      "widths": [180, 270, 360, 528],
+      "rights": "publisher-photos"
+    },
+    {
+      "name": "stack-quick-easy",
+      "from": "app-store/2.0/duo/source/inner-landscape-collections.png",
+      "crop": [719, 1336, 528, 667],
+      "widths": [180, 270, 360, 528],
+      "rights": "publisher-photos"
+    }
+  ],
+  "media": [
+    {
+      "name": "duo-film",
+      "files": "src/assets/media/duo/duo-film-*",
+      "rights": "publisher-photos",
+      "_note": "Track B of the Duo showcase (public candidate; publishing it is the owner's call). Its My Recipes and folded chapters show the seeded cookbook's publisher photographs, like the stills above."
+    },
+    {
+      "name": "cook-turn",
+      "files": "src/assets/media/cook/cook-turn.*",
+      "rights": "owned",
+      "_note": "Track B frames 780-899, cropped to the Cook View screen: no photograph."
+    }
   ]
 }

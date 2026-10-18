@@ -1,0 +1,275 @@
+{
+  "_generated": "by scripts/build-screens.mjs from scripts/screens.json; do not edit by hand",
+  "_media": {
+    "duo-film": {
+      "files": "src/assets/media/duo/duo-film-*",
+      "rights": "publisher-photos"
+    },
+    "cook-turn": {
+      "files": "src/assets/media/cook/cook-turn.*",
+      "rights": "owned"
+    }
+  },
+  "hero-duo": {
+    "w": 2580,
+    "h": 1805,
+    "alpha": false,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600,
+      2000
+    ],
+    "rights": "publisher-photos"
+  },
+  "hero-iphone": {
+    "w": 1320,
+    "h": 2868,
+    "alpha": false,
+    "widths": [
+      200,
+      300,
+      450,
+      600
+    ],
+    "rights": "publisher-photos"
+  },
+  "film-poster": {
+    "w": 1920,
+    "h": 1080,
+    "alpha": false,
+    "widths": [
+      960,
+      1280,
+      1920
+    ],
+    "rights": "publisher-photos"
+  },
+  "film-poster-narrow": {
+    "w": 1440,
+    "h": 1080,
+    "alpha": false,
+    "widths": [
+      480,
+      720,
+      960,
+      1440
+    ],
+    "rights": "publisher-photos"
+  },
+  "video-card": {
+    "w": 1690,
+    "h": 1570,
+    "alpha": false,
+    "widths": [
+      400,
+      640,
+      960,
+      1280
+    ],
+    "rights": "owned"
+  },
+  "video-steps": {
+    "w": 1320,
+    "h": 1245,
+    "alpha": false,
+    "widths": [
+      400,
+      600,
+      900,
+      1320
+    ],
+    "rights": "owned"
+  },
+  "cookbook-chooser": {
+    "w": 748,
+    "h": 846,
+    "alpha": true,
+    "widths": [
+      300,
+      450,
+      600,
+      750
+    ],
+    "rights": "owned"
+  },
+  "card-lasagna": {
+    "w": 621,
+    "h": 655,
+    "alpha": false,
+    "widths": [
+      200,
+      300,
+      400,
+      621
+    ],
+    "rights": "publisher-photos"
+  },
+  "card-salmon": {
+    "w": 598,
+    "h": 654,
+    "alpha": false,
+    "widths": [
+      200,
+      300,
+      400,
+      598
+    ],
+    "rights": "publisher-photos"
+  },
+  "card-fish-tacos": {
+    "w": 598,
+    "h": 654,
+    "alpha": false,
+    "widths": [
+      200,
+      300,
+      400,
+      598
+    ],
+    "rights": "publisher-photos"
+  },
+  "draft-healthier": {
+    "w": 1320,
+    "h": 545,
+    "alpha": false,
+    "widths": [
+      400,
+      660,
+      990,
+      1320
+    ],
+    "rights": "owned"
+  },
+  "draft-protein": {
+    "w": 1320,
+    "h": 540,
+    "alpha": false,
+    "widths": [
+      400,
+      660,
+      990,
+      1320
+    ],
+    "rights": "owned"
+  },
+  "draft-sodium": {
+    "w": 1320,
+    "h": 546,
+    "alpha": false,
+    "widths": [
+      400,
+      660,
+      990,
+      1320
+    ],
+    "rights": "owned"
+  },
+  "cook-iphone": {
+    "w": 1320,
+    "h": 2868,
+    "alpha": false,
+    "widths": [
+      300,
+      450,
+      600,
+      900
+    ],
+    "rights": "owned"
+  },
+  "cook-turn-start": {
+    "w": 660,
+    "h": 938,
+    "alpha": false,
+    "widths": [
+      330,
+      495,
+      660
+    ],
+    "rights": "owned"
+  },
+  "cook-turn-end": {
+    "w": 660,
+    "h": 938,
+    "alpha": false,
+    "widths": [
+      330,
+      495,
+      660
+    ],
+    "rights": "owned"
+  },
+  "stack-weeknight-dinners": {
+    "w": 528,
+    "h": 667,
+    "alpha": false,
+    "widths": [
+      180,
+      270,
+      360,
+      528
+    ],
+    "rights": "publisher-photos"
+  },
+  "stack-desserts": {
+    "w": 528,
+    "h": 667,
+    "alpha": false,
+    "widths": [
+      180,
+      270,
+      360,
+      528
+    ],
+    "rights": "publisher-photos"
+  },
+  "stack-breakfast-brunch": {
+    "w": 528,
+    "h": 667,
+    "alpha": false,
+    "widths": [
+      180,
+      270,
+      360,
+      528
+    ],
+    "rights": "publisher-photos"
+  },
+  "stack-comfort-food": {
+    "w": 528,
+    "h": 667,
+    "alpha": false,
+    "widths": [
+      180,
+      270,
+      360,
+      528
+    ],
+    "rights": "publisher-photos"
+  },
+  "stack-fresh-light": {
+    "w": 528,
+    "h": 667,
+    "alpha": false,
+    "widths": [
+      180,
+      270,
+      360,
+      528
+    ],
+    "rights": "publisher-photos"
+  },
+  "stack-quick-easy": {
+    "w": 528,
+    "h": 667,
+    "alpha": false,
+    "widths": [
+      180,
+      270,
+      360,
+      528
+    ],
+    "rights": "publisher-photos"
+  }
+}

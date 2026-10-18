@@ -3,6 +3,7 @@ import { existsSync } from "node:fs";
 import { RenderPlugin } from "@11ty/eleventy";
 
 import site from "./src/_data/site.json" with { type: "json" };
+import screens from "./src/_data/screens.json" with { type: "json" };
 
 export default function (eleventyConfig) {
   // /privacy and /terms render docs/privacy.md and docs/terms.md through
@@ -15,7 +16,10 @@ export default function (eleventyConfig) {
   // sit above its heading as a label. Email addresses become mailto links;
   // bare domains are left as text.
   eleventyConfig.amendLibrary("md", (md) => {
-    md.set({ linkify: true });
+    // Curly quotes and apostrophes, as the rest of the site sets them; none of
+    // markdown-it's other typographic replacements.
+    md.set({ linkify: true, typographer: true });
+    md.disable("replacements");
     md.linkify.set({ fuzzyLink: false });
     md.linkify.tlds("app", true);
 
@@ -41,6 +45,26 @@ export default function (eleventyConfig) {
           inline.children.unshift(label);
         }
       });
+    });
+
+    // Lists keep their list role in Safari, whose VoiceOver drops it from lists
+    // drawn without markers (as these are, with the site's own bullets).
+    md.renderer.rules.bullet_list_open = (tokens, index, options, env, self) => {
+      tokens[index].attrSet("role", "list");
+      return self.renderToken(tokens, index, options);
+    };
+
+    // Apple's names never break across a line. The documents are the app's own
+    // copies, byte for byte, so the no-break space is put in as they render. (The
+    // legal pages are set in Avenir, which draws it at a normal width.)
+    md.core.ruler.push("apple_names", (state) => {
+      for (const token of state.tokens) {
+        if (token.type !== "inline") continue;
+        for (const child of token.children) {
+          if (child.type !== "text") continue;
+          child.content = child.content.replace(/\b(?:App Store|Apple ID|Apple Account|iPhone Duo)\b/g, (name) => name.replace(" ", " "));
+        }
+      }
     });
   });
 
@@ -85,10 +109,28 @@ export default function (eleventyConfig) {
     const unresolved = [];
     if (!site.contactEmail) unresolved.push("site.contactEmail  → the footer's Contact link is hidden");
     if (!site.appStoreUrl) unresolved.push("site.appStoreUrl   → the App Store badges and /download lead nowhere");
+
+    // Images and video whose screens show something the documentation does not
+    // clear for marketing (scripts/screens.json, `rights`): publishers' recipe
+    // photographs.
+    const uncleared = Object.entries(screens)
+      .filter(([, image]) => image.rights && image.rights !== "owned")
+      .map(([name]) => name);
+    if (uncleared.length) {
+      unresolved.push(
+        `${uncleared.length} homepage images show publishers' recipe photos, not cleared for marketing use\n` +
+          `      (re-seed or clear them; see scripts/screens.json): ${uncleared.join(", ")}`
+      );
+    }
+    const film = Object.entries(screens._media ?? {}).filter(([, item]) => item.rights !== "owned");
+    for (const [name, item] of film) {
+      unresolved.push(`video "${name}" (${item.files}) shows publishers' recipe photos too`);
+    }
+
     if (!unresolved.length) return;
     const rule = "─".repeat(74);
     console.warn(
-      `\n${rule}\n  Unresolved values in src/_data/site.json — do not ship to production:\n` +
+      `\n${rule}\n  Unresolved before shipping to production:\n` +
         unresolved.map((line) => `    • ${line}`).join("\n") +
         `\n${rule}\n`
     );

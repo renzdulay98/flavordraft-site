@@ -1,0 +1,42 @@
+{%- from "brand.njk" import img with context -%}
+{#
+  The iPhone Duo film: Track B of the Duo showcase, FlavorDraft's real screens laid on
+  paper with no device drawn ("PUBLIC CANDIDATE" in its rights review), after its
+  web/EMBED.md with two changes: the still is the default and the film plays over it
+  only once home.js has checked it should (in view; not under reduced motion; not on
+  Save-Data), and narrow screens get the loop's middle 4:3 as a file of its own.
+  Without the script, nothing downloads but the still. The film is a seamless 17 s
+  loop starting on that still. Its chapters, measured from the file: unfolded 0-4.6 s,
+  partly folded in Cook View 5.4-10.2 s (the page turns at 7.6 s), folded 11.0-15.0 s,
+  dissolving back to the start. The still's alt text says what is on screen and the
+  chapter list narrates the sequence, so the video itself is hidden from assistive tech.
+#}
+<section class="film" id="iphone-duo" aria-labelledby="film-title">
+  <div class="wrap film__head">
+    <p class="kicker">New in 2.0</p>
+    <h2 class="section-title" id="film-title">Your cookbook, unfolded.</h2>
+    <p class="lede">On <span class="nowrap">iPhone Duo</span>, FlavorDraft lies open like a book, stands beside you in Cook View and closes into one hand.</p>
+  </div>
+
+  <figure class="film__figure wrap" data-film>
+    <div class="film__frame">
+      {{ img("film-poster", "FlavorDraft’s My Recipes on the unfolded iPhone Duo display: eight recipe cards across two pages.", "(min-width: 90rem) 1296px, (min-width: 40em) and (max-width: 61.99em) and (orientation: portrait) 120vw, (min-width: 40em) 90vw, 100vw", { class: "film__still", media: [["(max-width: 39.99em)", "film-poster-narrow"]] }) }}
+      <video class="film__video" muted loop playsinline preload="none" width="1920" height="1080" aria-hidden="true" data-film-video>
+        <source media="(max-width: 39.99em)" src="/assets/media/duo/duo-film-narrow.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L120.90"'>
+        <source media="(max-width: 39.99em)" src="/assets/media/duo/duo-film-narrow.h264.mp4" type='video/mp4; codecs="avc1.640032"'>
+        <source src="/assets/media/duo/duo-film-1920.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L123.90"'>
+        <source src="/assets/media/duo/duo-film-1920.vp9.webm" type='video/webm; codecs="vp9"'>
+        <source src="/assets/media/duo/duo-film-1920.h264.mp4" type='video/mp4; codecs="avc1.64002A"'>
+      </video>
+    </div>
+
+    <figcaption class="film__caption">
+      <button class="text-button film__toggle" type="button" hidden data-film-toggle>Play the film</button>
+      <ol class="film__chapters" role="list" data-film-chapters="0 4.98 10.6 15.4">
+        <li data-chapter="0"><b>Unfolded.</b> Your cookbook across two pages.</li>
+        <li data-chapter="1"><b>Partly folded.</b> Cook View sets the step above and the controls below, and Next turns the page.</li>
+        <li data-chapter="2"><b>Folded.</b> The same cookbook in one hand.</li>
+      </ol>
+    </figcaption>
+  </figure>
+</section>

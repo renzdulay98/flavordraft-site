@@ -1,0 +1,34 @@
+{%- from "brand.njk" import img, ink with context -%}
+{#
+  Saved cooking content, then the recipe FlavorDraft writes from it. The video card
+  is the App Store campaign's own paper card (painted pan, the pen's play cue, the
+  saved ribbon); the sheet is a real capture of the recipe a YouTube link became,
+  cut below the app's navigation bar (no glass control tilts with the paper) and
+  lying at the campaign's slight angle. The pen draws the arrow between them once,
+  when it comes into view.
+#}
+<section class="videos" id="features" aria-labelledby="videos-title">
+  <div class="wrap">
+    <div class="videos__head">
+      <h2 class="section-title" id="videos-title">Cook the videos you&nbsp;save.</h2>
+      <p class="lede">Paste a link to a public post on TikTok, Instagram, Facebook or YouTube. FlavorDraft reads the recipe out of it and writes it into your cookbook, with ingredients and steps you can cook from.</p>
+      <p class="aside">Posts that list their ingredients in the caption or description read best. When one doesn’t, FlavorDraft listens to the video for the ingredients and steps, and anything it misses you can fill in afterwards.</p>
+    </div>
+
+    <div class="videos__spread">
+      <figure class="videos__from">
+        {{ img("video-card", "A saved cooking video, drawn as a paper photo card: a skillet of tomato sauce with onion, basil and garlic, a red play mark, a progress line and a bookmark ribbon.", "(min-width: 90rem) 540px, (min-width: 40em) 38vw, 62vw") }}
+        <figcaption class="caption">The video you saved.</figcaption>
+      </figure>
+
+      <div class="videos__arrow">{{ ink("arrow", "ink--on-view") }}</div>
+
+      <figure class="videos__to">
+        <div class="paper-sheet">
+          {{ img("video-steps", "The recipe in FlavorDraft, on its Steps tab. 1, heat olive oil in a medium sized pan. 2, add chopped onion and sauté for 5 to 6 minutes, until slightly golden. 3, add crushed garlic and sauté for 1 to 2 minutes. 4, add tomato sauce, salt, pepper and oregano to the pan. 5, simmer the sauce for 5 to 6 minutes, then set aside. 6, preheat the oven to 425°F (220°C). 7, cut each chicken breast into two pieces.", "(min-width: 90rem) 540px, (min-width: 40em) 38vw, 80vw") }}
+        </div>
+        <figcaption class="caption">The recipe it became: <span class="nowrap">Chicken Parmesan</span>, step by step.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

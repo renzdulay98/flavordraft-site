@@ -1,204 +1,29 @@
 ---
 layout: base.njk
 canonical: /
-pageTitle: FlavorDraft — Your recipes, all in one place
-pageDescription: Import recipes from websites, social media, photos and food packaging. Organize your cookbook, adapt recipes and build grocery lists with FlavorDraft for iPhone.
-heroImage: home
+pageTitle: "FlavorDraft 2.0: a recipe cookbook for iPhone and iPhone Duo"
+pageDescription: "Save recipes from cooking videos, websites and photos into one personal cookbook, make them fit you with Draft with AI, and cook step by step on iPhone and iPhone Duo."
+pageClass: home
+pageStyles: home
+pageScript: home
+preloadImage: hero-duo
+# One value for the hero image's preload (base.njk) and its <img> (home/hero.njk), so the
+# two always choose the same file. Slots measured from the layout (home.css §4): the hero
+# is two columns from 75em, and from 40em when the screen is held landscape.
+preloadSizes: "(min-width: 90rem) 556px, (min-width: 80em) 39vw, (min-width: 75em) 36vw, (min-width: 62em) and (orientation: landscape) 36vw, (min-width: 40em) and (orientation: landscape) 32vw, 64vw"
+structuredData: true
 ---
-{% from "brand.njk" import wordmark, appStoreCta, screen, phone, doodle, mark %}
-
-{# ---------------------------------------------------------------- 1 · Hero #}
-<section class="hero" aria-labelledby="hero-title">
-  <div class="wrap hero__grid">
-    <div class="hero__copy">
-      {{ doodle("bookmark", "doodle--hero-bookmark") }}
-      <p class="eyebrow">FlavorDraft for iPhone</p>
-      <h1 class="display hero__title" id="hero-title">Every recipe you&nbsp;love. One&nbsp;cookbook.</h1>
-      <p class="lead hero__lead">Bring recipes from websites, social posts, photos and food packaging into one cookbook you can actually cook from.</p>
-      <div class="hero__actions">
-        <a class="button button--ghost" href="#how">See how it works</a>
-      </div>
-    </div>
-
-    <div class="hero__figure">
-      {{ doodle("whisk", "doodle--hero-whisk") }}
-      <div class="hero__phone" data-reveal>
-        {{ phone("home", "FlavorDraft's Home screen. Good morning, Stan. What are you cooking today? A French Toast recipe sits under Just Added, above Quick Access shelves for Weeknight Dinners and Desserts.", "(min-width: 62em) 26rem, 74vw", null, true) }}
-      </div>
-    </div>
-  </div>
-</section>
-
-{# -------------------------------------------------------------- 2 · Thesis #}
-<section class="thesis" aria-labelledby="thesis-title">
-  <div class="wrap thesis__grid">
-    <div class="thesis__head" data-reveal>
-      {{ doodle("squiggle", "doodle--thesis") }}
-      <h2 class="thesis__title" id="thesis-title">Saved isn't the same as organized.</h2>
-    </div>
-    <p class="thesis__text" data-reveal style="--i: 1">That recipe you saved last month shouldn't disappear into a browser bookmark, a screenshot folder or a social feed. FlavorDraft gives everything a permanent place.</p>
-  </div>
-</section>
-
-{# -------------------------------------------------------------- 3 · Import #}
-<section class="feature feature--import" id="features" aria-labelledby="import-title">
-  <div class="wrap feature__grid">
-    <div class="feature__copy" id="how" data-reveal>
-      <p class="eyebrow">Import</p>
-      <h2 class="h2" id="import-title">Found a recipe?<br>Bring it with you.</h2>
-      <p class="prose">Paste a link or share a recipe to FlavorDraft. We'll turn what the source provides into a clean recipe you can review before it joins your cookbook.</p>
-      <ol class="steps">
-        <li><span class="steps__num" aria-hidden="true">1</span><span><b>Paste or share.</b> Send a link from Safari or a social app, or paste it in.</span></li>
-        <li><span class="steps__num" aria-hidden="true">2</span><span><b>It imports in the background.</b> Keep using FlavorDraft. Progress shows on Home, and you'll see when the recipe is ready.</span></li>
-        <li><span class="steps__num" aria-hidden="true">3</span><span><b>Review, then save.</b> See what came through, credited to its source. Nothing is saved until you've looked at it.</span></li>
-      </ol>
-      <p class="sources">Works with links from
-        <span class="sources__marks" aria-hidden="true">{{ mark("tiktok") }}{{ mark("instagram") }}{{ mark("youtube") }}{{ mark("facebook") }}{{ mark("web") }}</span>
-        TikTok, Instagram, YouTube and Facebook posts, and from recipe websites and blogs. You can also scan a cookbook page, describe a dish, or add a recipe by hand.</p>
-    </div>
-
-    <div class="feature__figure stack stack--import">
-      <div class="phone stack__a" data-reveal style="--i: 0">
-        {{ phone("import-link", "The Import from link screen with a recipe URL pasted in. Under Found on the page, FlavorDraft lists French Toast with ingredients, method and photo detected, above an Import Recipe button.", "(min-width: 62em) 18rem, 90vw", null, false, 1) }}
-      </div>
-      <div class="phone stack__b" data-reveal style="--i: 1">
-        {{ phone("import-progress", "Home with an Imports card: Strawberry Shortcake from natashaskitchen.com, reading the recipe.", "(min-width: 62em) 18rem, 90vw", null, false, 2) }}
-      </div>
-      <div class="phone stack__c" data-reveal style="--i: 2">
-        {{ phone("import-ready", "Recipe imported: French Toast, with the recipe photo, 9 ingredients, 7 steps, 2 servings, the credit From Nagi, RecipeTin Eats, and Review Recipe and Save as is buttons.", "(min-width: 62em) 18rem, 90vw", null, false, 3) }}
-      </div>
-      <figure class="card stack__inset" data-reveal style="--i: 3">
-        {{ screen("import-menu", "The + menu in FlavorDraft: Scan a recipe, Scan food packaging, Import from link, Import from social media, Describe a dish or idea, Add manually.", "(min-width: 62em) 16rem, 60vw", [300, 600, 900], 790, 826) }}
-      </figure>
-    </div>
-  </div>
-</section>
-
-{# ----------------------------------------------------------- 4 · Packaging #}
-<section class="band band--red packaging" aria-labelledby="packaging-title">
-  {{ doodle("scan", "doodle--packaging") }}
-  <div class="wrap packaging__grid">
-    <div class="packaging__head" data-reveal>
-      <p class="eyebrow eyebrow--on-red">Scan packaging</p>
-      <h2 class="h2" id="packaging-title">Turn packaging into recipes.</h2>
-      <p class="lead">Turn the recipe on the box into a recipe you'll keep. Scan the packaging and FlavorDraft reads the useful details and drafts a recipe you can save, edit and cook from.</p>
-      <ol class="steps">
-        <li><span class="steps__num" aria-hidden="true">1</span><span><b>Front</b> The name and what's on the box.</span></li>
-        <li><span class="steps__num" aria-hidden="true">2</span><span><b>Ingredients</b> The panel that says what's actually in it.</span></li>
-        <li><span class="steps__num" aria-hidden="true">3</span><span><b>Nutrition</b> Serving size and the numbers that matter.</span></li>
-        <li><span class="steps__num" aria-hidden="true">4</span><span><b>Your recipe</b> A homemade version, drafted from the scan, ready to edit.</span></li>
-      </ol>
-      <p class="packaging__note">Drafted from what the packaging says, and yours to check and edit before you cook.</p>
-    </div>
-
-    {# One asset, on purpose: the packaging demo shows a real brand's box (see
-       screenshots/RIGHTS_REVIEW.md). Swap the source in scripts/screens.json
-       and run `npm run screens` to replace it before launch. #}
-    <figure class="packaging__figure" data-reveal>
-      {{ screen("packaging", "Three phones scanning a pancake mix box: the front, the ingredients panel and the nutrition panel. Below them, the resulting recipe, Homemade Buttermilk Pancake and Waffle Mix, marked Recreated from your scan.", "(min-width: 62em) 44rem, 92vw", [480, 960, 1320], 1320, 2208) }}
-    </figure>
-  </div>
-</section>
-
-{# --------------------------------------------------------------- 5 · Adapt #}
-<section class="band band--sunken feature feature--adapt" aria-labelledby="adapt-title">
-  <div class="wrap feature__grid feature__grid--flip">
-    <div class="feature__copy" data-reveal>
-      <p class="eyebrow">Adapt</p>
-      <h2 class="h2" id="adapt-title" style="position: relative">Make a recipe work for you.{{ doodle("message", "doodle--adapt") }}</h2>
-      <p class="prose">Ask for a change in plain language. FlavorDraft suggests specific edits to the recipe, and you decide whether to apply them.</p>
-      <ul class="asks">
-        <li>Make this healthier and keep it high-protein.</li>
-        <li>What can I use instead of the dairy?</li>
-        <li>Make this serve 4.</li>
-      </ul>
-      <ol class="steps">
-        <li><span class="steps__num" aria-hidden="true">1</span><span><b>Ask.</b> Healthier, higher-protein, a substitution, different servings.</span></li>
-        <li><span class="steps__num" aria-hidden="true">2</span><span><b>Review the suggested changes.</b> Every edit is shown against the original, ingredient by ingredient.</span></li>
-        <li><span class="steps__num" aria-hidden="true">3</span><span><b>Apply them, or keep the original.</b> Nothing changes until you say so.</span></li>
-      </ol>
-    </div>
-
-    <div class="feature__figure stack stack--adapt">
-      <div class="phone stack__a" data-reveal style="--i: 0">
-        {{ phone("adapt-ask", "A Draft with AI conversation on Best Homemade Pancakes. The request Make this healthier and keep it high-protein gets a reply suggesting whole-wheat flour, Greek yogurt, less sugar and less butter, with an Apply these changes button.", "(min-width: 62em) 21rem, 90vw", null, false, 1) }}
-      </div>
-      <div class="phone stack__b" data-reveal style="--i: 1">
-        {{ phone("adapt-changes", "The Suggested Changes card: original amounts struck through beside the new ones, added whole-wheat flour, Greek yogurt and chia, and Apply Changes or Keep Original buttons.", "(min-width: 62em) 21rem, 90vw", null, false, 2) }}
-      </div>
-    </div>
-  </div>
-</section>
-
-{# ------------------------------------------------------------- 6 · Grocery #}
-<section class="grocery" aria-labelledby="grocery-title">
-  {{ doodle("basket", "doodle--grocery") }}
-  <div class="wrap">
-    <div class="grocery__head" data-reveal>
-      <p class="eyebrow">Grocery</p>
-      <h2 class="h2" id="grocery-title">From recipe to grocery list in a few taps.</h2>
-      <p class="prose">Pick the ingredients you need from a recipe and they land on your list, grouped by aisle and still tied to the recipe they came from.</p>
-    </div>
-
-    <ol class="trio">
-      <li class="trio__item" data-reveal style="--i: 0">
-        {{ phone("grocery-choose", "The Add to Grocery sheet for Greek Chicken Salad, with eight ingredients ticked and a button reading Add 8 items.", "(min-width: 62em) 22rem, 90vw", "phone--cut", false, 1) }}
-        <figure class="card trio__inset" data-reveal style="--i: 2">
-          {{ screen("grocery-already", "Two ingredients in the Add to Grocery sheet, Bread of choice and Large eggs, each marked Already on your list.", "(min-width: 62em) 19rem, 70vw", [360, 720, 1080], 1240, 470) }}
-        </figure>
-        <p class="trio__caption"><b>Choose what you need.</b> Tick the ingredients you're missing. Anything already on your list is marked, so nothing gets added twice.</p>
-      </li>
-      <li class="trio__item" data-reveal style="--i: 1">
-        {{ phone("grocery-list", "The Grocery list, 16 to buy, grouped under Produce. Each item shows its quantity and the recipe it came from.", "(min-width: 62em) 22rem, 90vw", "phone--cut", false, 2) }}
-        <p class="trio__caption"><b>One list, by aisle.</b> Produce, dairy, pantry. Each item keeps its quantity and the recipe it's for.</p>
-      </li>
-      <li class="trio__item" data-reveal style="--i: 2">
-        {{ phone("grocery-bought", "The bottom of the Grocery list: Dairy and Eggs and Pantry items, then a Bought 3 group with lemon juice, bread and milk crossed off.", "(min-width: 62em) 22rem, 90vw", "phone--cut", false, 3) }}
-        <p class="trio__caption"><b>Check things off.</b> Tap items as you shop. Bought items move to the bottom, and an ingredient two recipes share becomes one line.</p>
-      </li>
-    </ol>
-  </div>
-</section>
-
-{# ------------------------------------------------------------ 7 · Cookbook #}
-<section class="feature cookbook" aria-labelledby="cookbook-title">
-  {{ doodle("book-open", "doodle--cookbook") }}
-  <div class="wrap feature__grid">
-    <div class="feature__copy" data-reveal>
-      <p class="eyebrow">Your cookbook</p>
-      <h2 class="h2" id="cookbook-title">Everything has a place.</h2>
-      <p class="prose">Create collections, keep favorites close, and search the recipes you've saved when you actually need them.</p>
-      <ul class="ruled-list">
-        <li><span class="ruled-list__term">Collections</span><span class="ruled-list__note">Shelves like Weeknight Dinners and Desserts. A recipe can sit on as many as you like.</span></li>
-        <li><span class="ruled-list__term">Favorites</span><span class="ruled-list__note">The ones you make on repeat, one filter away.</span></li>
-        <li><span class="ruled-list__term">Search</span><span class="ruled-list__note">By recipe name, or by the ingredients you have.</span></li>
-        <li><span class="ruled-list__term">Cooking profile</span><span class="ruled-list__note">Default servings, measurement units, dietary preference and cooking goals, kept in mind whenever FlavorDraft drafts for you.</span></li>
-      </ul>
-    </div>
-
-    <div class="feature__figure stack stack--cookbook">
-      <div class="phone stack__a" data-reveal style="--i: 0">
-        {{ phone("cookbook-collections", "My Recipes, Collections tab: Weeknight Dinners, Desserts, Breakfast and Brunch, Comfort Food, Fresh and Light and Quick and Easy, each with its own cover photo.", "(min-width: 62em) 23rem, 90vw") }}
-      </div>
-      <div class="phone stack__b" data-reveal style="--i: 1">
-        {{ phone("cookbook-desserts", "The Desserts collection, six recipes: Pavlova, Strawberry Shortcake, Tiramisu, Classic New York Cheesecake, Apple Crumble and Chocolate Chip Cookies.", "(min-width: 62em) 20rem, 90vw") }}
-      </div>
-    </div>
-  </div>
-</section>
-
-{# ------------------------------------------------------------- 8 · Closing #}
-<section class="band band--red closing" aria-labelledby="closing-title">
-  {{ doodle("utensils", "doodle--closing") }}
-  {{ doodle("spoon", "doodle--closing-2") }}
-  <div class="wrap closing__inner">
-    <h2 class="display closing__title" id="closing-title" data-reveal>Your next favorite recipe already has a place.</h2>
-    <div data-reveal style="--i: 1">{{ wordmark("closing", true) }}</div>
-    <div data-reveal style="--i: 2">{{ appStoreCta(site, "on-red") }}</div>
-    <div class="closing__window">
-      <div class="closing__phone" data-reveal style="--i: 3">
-        {{ phone("closing-recipe", "A recipe screen for Greek Chicken Salad, credited to Lisa Bryan on downshiftology.com, with cooking time, servings and the ingredient list.", "(min-width: 62em) 21rem, 70vw") }}
-      </div>
-    </div>
-  </div>
-</section>
+{#
+  The homepage, top to bottom. Each section is its own partial in _includes/home/;
+  the images they show are listed, with their sources and rights, in
+  scripts/screens.json, and the video in scripts/build-media.mjs.
+#}
+{% include "home/hero.njk" %}
+{% include "home/film.njk" %}
+{% include "home/videos.njk" %}
+{% include "home/cookbook.njk" %}
+{% include "home/draft.njk" %}
+{% include "home/cook.njk" %}
+{% include "home/shelf.njk" %}
+{% include "home/pricing.njk" %}
+{% include "home/closing.njk" %}

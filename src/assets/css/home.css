@@ -1,0 +1,1181 @@
+/* ==========================================================================
+   FlavorDraft — the homepage (loaded after site.css, on / only)
+
+   The page is the cookbook's paper. Real FlavorDraft screens lie on it the way
+   the iPhone Duo film lays them (no device is drawn), and the only pieces of
+   paper are recipe content: the recipe sheet, the index cards, the collection
+   stacks, the Draft with AI slips. Loose paper lies a little askew; screens and
+   app chrome stand square. The red pen marks the page in two places: the
+   hero's announcement and the arrow from a saved video to its recipe.
+   Nothing else moves except the film and the page turn, and only when the
+   reader allows motion (see home.js).
+
+   Sections alternate rather than repeat: the hero sets words left and screens
+   right, the film is centred, the Draft slips and the shelf come before their
+   words, and pricing and the close are plain type. Words set in a right-hand
+   half start on one line, under the shelf's fourth divider (see --stack-gap).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1 · Tokens
+   -------------------------------------------------------------------------- */
+
+.page--home {
+  --home-y: clamp(5rem, 10vw, 8.5rem);
+
+  /* The campaign's pen (creative/shared/js/kit.js): quick to start and careful
+     to finish. */
+  --ease-pen: cubic-bezier(0.3, 0.05, 0.25, 1);
+
+  /* A real screen laid on the page (the film's cards): a small radius of its
+     own, not the display's shape. */
+  --shot-radius: clamp(6px, 0.9vw, 12px);
+
+  /* Anything laid on the page lies close to it: a fine cut edge and a short
+     contact shadow, never more lift than the film's own cards. */
+  --lie-shadow: 0 0 0 0.5px rgba(140, 115, 79, 0.2), 0 1px 2px rgba(var(--shadow-rgb), 0.1),
+    0 10px 20px -14px rgba(var(--shadow-rgb), 0.24);
+
+  /* The one loose sheet on top in its section lifts a little more. */
+  --lift-shadow: 0 0 0 0.5px rgba(140, 115, 79, 0.22), 0 1.5px 4px rgba(var(--shadow-rgb), 0.11),
+    0 18px 30px -20px rgba(var(--shadow-rgb), 0.32);
+
+  /* Half the gap between a section's two halves. */
+  --half-gap: clamp(1.25rem, 3vw, 2.5rem);
+
+  /* The gap between collection dividers on the shelf. Words set in a right-hand
+     half start where its fourth divider does: half the page plus half of this. */
+  --stack-gap: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+/* --------------------------------------------------------------------------
+   2 · Shared pieces
+   -------------------------------------------------------------------------- */
+
+/* The one label on the page, over the film. Capitals are set by CSS, so it
+   never holds an Apple product name. */
+.kicker {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-quiet);
+  line-height: 1.4;
+}
+
+.kicker + .section-title {
+  margin-top: var(--s3);
+}
+
+/* Section headlines: the campaign's lines in the brand red, a clear step below
+   the hero's announcement. */
+.section-title {
+  font-size: clamp(2rem, 1.45rem + 1.6vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.024em;
+  color: var(--brand-red);
+}
+
+.lede {
+  margin-top: var(--s5);
+  font-family: var(--serif);
+  font-size: clamp(1.125rem, 1.02rem + 0.4vw, 1.3125rem);
+  line-height: 1.55;
+  color: var(--ink-body);
+  max-width: 31em;
+}
+
+.lede + .lede {
+  margin-top: var(--s4);
+}
+
+.aside {
+  margin-top: var(--s4);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--ink-quiet);
+  max-width: 34em;
+}
+
+/* Every caption starts at the left edge of the picture it describes. */
+.caption {
+  margin-top: var(--s3);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--ink-quiet);
+  text-wrap: balance;
+}
+
+/* A real screen, whole, laid on the page. */
+.shot {
+  position: relative;
+  border-radius: var(--shot-radius);
+  overflow: hidden;
+  background: var(--paper);
+  box-shadow: var(--lie-shadow);
+}
+
+.shot img,
+.shot video {
+  width: 100%;
+  height: auto;
+}
+
+/* A recipe sheet: the capture is the paper; the page gives it a cut edge. */
+.paper-sheet {
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--paper-raised);
+  box-shadow: var(--lie-shadow);
+}
+
+.paper-sheet img {
+  width: 100%;
+  height: auto;
+}
+
+/* A control that acts on the moving picture beside it ("Play the film", "Turn
+   the page"): words in the pen's red, because they are the reader's action, and
+   no box, so they never pass for part of the app. Its 44 px hit area is a
+   pseudo-element reaching past its line, so the line is no taller and the focus
+   ring hugs the words. */
+.text-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--red);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--red) 35%, transparent);
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.text-button::after {
+  content: "";
+  position: absolute;
+  inset: calc((1.45em - 2.75rem) / 2) 0;
+}
+
+.text-button:hover {
+  color: var(--red-deep);
+  text-decoration-color: currentColor;
+}
+
+.text-button[hidden] {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   3 · The pen
+
+   A mark is a filled stroke (src/_data/pen.js) seen through a mask; the mask
+   strokes the mark's centre line, and drawing that stroke on along its length
+   reveals the ink the way the pen laid it. Multiplied, the ink lands on the
+   app's red wherever it falls. Decorative: the words never depend on it.
+   -------------------------------------------------------------------------- */
+
+.ink {
+  position: absolute;
+  max-width: none;
+  overflow: visible;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+.ink__stroke {
+  fill: var(--pen);
+}
+
+.ink__reveal {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 0;
+}
+
+@keyframes ink-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4 · Hero
+   -------------------------------------------------------------------------- */
+
+.hero {
+  padding-block: clamp(2rem, 5vw, 3.5rem) clamp(3.5rem, 8vw, 5rem);
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 3.5rem);
+}
+
+.hero__title {
+  color: var(--ink);
+}
+
+.hero__news {
+  display: block;
+  font-size: clamp(2.625rem, 1.5rem + 3.6vw, 4.625rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.033em;
+}
+
+.hero__made {
+  display: block;
+  margin-top: 0.42em;
+  font-family: var(--serif);
+  font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.875rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.012em;
+}
+
+/* The words the pen marks. Each stays in one piece, so its mark fits it. */
+.inked {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* The ring is sized from the type, not the word, so it sits the same round
+   "2.0" in any of the stack's faces. */
+.inked--ring {
+  margin-inline: 0.22em 0.26em;
+}
+
+.inked--ring .ink {
+  left: 50%;
+  top: 41%;
+  width: 2.42em;
+  height: 1.27em;
+  transform: translate(-50%, -50%);
+}
+
+.inked--under .ink {
+  left: -0.03em;
+  top: 94%;
+  width: calc(100% + 0.08em);
+  height: 0.3em;
+}
+
+/* One gesture, on arrival: the ring, then the underline. */
+.ink--ring .ink__reveal {
+  animation: ink-draw 0.72s var(--ease-pen) 0.35s both;
+}
+
+.ink--underline .ink__reveal {
+  animation: ink-draw 0.58s var(--ease-pen) 1.12s both;
+}
+
+.hero__lead {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  font-family: var(--serif);
+  font-size: clamp(1.125rem, 1.02rem + 0.45vw, 1.375rem);
+  line-height: 1.55;
+  color: var(--ink-body);
+  max-width: 27em;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s3) var(--s7);
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+.hero__more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in srgb, var(--ink) 25%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+.hero__more:hover {
+  color: var(--red);
+  text-decoration-color: currentColor;
+}
+
+/* The two screens side by side on one line, each with its own caption: iPhone
+   Duo open across two pages, and iPhone beside it. Each figure takes two rows
+   of the stage, so the screens share a bottom edge and the captions a top line
+   however their words wrap. */
+.hero__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.37fr);
+  grid-template-rows: auto auto;
+  column-gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.hero__duo,
+.hero__iphone {
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+}
+
+.hero__stage .shot {
+  align-self: end;
+}
+
+/* Phones: the screens come straight after the headline, so the first screen
+   holds the news, the cookbook, iPhone Duo and iPhone; the badge follows. */
+@media (max-width: 39.99em) {
+  .hero__copy {
+    display: contents;
+  }
+
+  .hero__grid {
+    gap: 0;
+  }
+
+  .hero__title {
+    order: 1;
+  }
+
+  .hero__stage {
+    order: 2;
+    margin-top: 1.75rem;
+  }
+
+  .hero__actions {
+    order: 3;
+    margin-top: 1.5rem;
+    gap: var(--s3) var(--s6);
+  }
+
+  .hero__lead {
+    order: 4;
+    margin-top: 1.25rem;
+  }
+}
+
+/* Wide screens, and any screen from 40em up held landscape (the iPhone Duo
+   open wide, a phone on its side): words left, screens right, and the hero is
+   the whole first screen, its content a little above the middle, where the eye
+   puts the centre. The words' column never narrows past "2.0 is here.", which
+   stays on one line. A tall portrait tablet keeps the stack, with the screens
+   full width under the words. */
+@media (min-width: 40em) and (orientation: landscape), (min-width: 75em) {
+  .hero {
+    display: grid;
+    align-content: center;
+    min-height: calc(100vh - var(--header-h));
+    min-height: min(calc(100svh - var(--header-h)), 60rem);
+    padding-block: clamp(1.5rem, 3vh, 2.5rem) clamp(2rem, 5vh, 3.5rem);
+  }
+
+  .hero__grid {
+    grid-template-columns: minmax(min-content, 5fr) minmax(0, 7fr);
+    align-items: center;
+    column-gap: clamp(2rem, 4vw, 4.5rem);
+  }
+}
+
+@media (min-width: 40em) and (max-width: 61.99em) and (orientation: landscape) {
+  .hero__grid {
+    grid-template-columns: minmax(min-content, 1fr) minmax(0, 1.15fr);
+  }
+}
+
+/* A small phone on its side: the screens sit beside the title, not centred on
+   the taller column of words, so both are in the first screen. */
+@media (min-width: 40em) and (max-width: 47.99em) and (orientation: landscape) {
+  .hero__grid {
+    align-items: start;
+  }
+
+  .hero__stage {
+    margin-top: 0.5rem;
+  }
+}
+
+@media (min-width: 80em) {
+  .hero__grid {
+    grid-template-columns: minmax(min-content, 4.4fr) minmax(0, 7.6fr);
+  }
+}
+
+/* On a tall screen the hero leaves the film's heading at the foot of the first
+   screen, so the page plainly goes on. */
+@media (min-width: 40em) and (orientation: landscape) and (min-height: 60em), (min-width: 75em) and (min-height: 60em) {
+  .hero {
+    min-height: calc(100vh - var(--header-h) - 15rem);
+    min-height: min(calc(100svh - var(--header-h) - 15rem), 60rem);
+  }
+}
+
+/* A tall portrait window on a wide screen (a rotated monitor, half of a large
+   one) keeps the two columns but not the full-height hero, whose content would
+   float in bands of blank paper. */
+@media (min-width: 75em) and (orientation: portrait) {
+  .hero {
+    display: block;
+    min-height: 0;
+    padding-block: clamp(2rem, 5vw, 3.5rem) clamp(3.5rem, 8vw, 5rem);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5 · The iPhone Duo film — the page's one centred moment
+   -------------------------------------------------------------------------- */
+
+.film {
+  padding-top: clamp(3.5rem, 7vw, 5.5rem);
+}
+
+/* After a hero that fills the first screen, the film follows closely: the
+   hero's own space is the pause. */
+@media (min-width: 40em) and (orientation: landscape), (min-width: 75em) {
+  .film {
+    padding-top: clamp(2.5rem, 4vw, 3.5rem);
+  }
+}
+
+@media (min-width: 40em) and (orientation: landscape) and (min-height: 60em), (min-width: 75em) and (min-height: 60em) {
+  .film {
+    padding-top: 2.5rem;
+  }
+}
+
+@media (min-width: 75em) and (orientation: portrait) {
+  .film {
+    padding-top: clamp(3.5rem, 7vw, 5.5rem);
+  }
+}
+
+.film__figure {
+  margin-top: clamp(2rem, 4vw, 3.25rem);
+}
+
+.film__frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.film__frame picture,
+.film__still,
+.film__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* The film's paper is the page's, a level apart; its edges are faded into the
+   page so the frame never shows as a box. */
+.film__still,
+.film__video {
+  object-fit: cover;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent),
+    linear-gradient(to bottom, transparent, #000 5%, #000 95%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent),
+    linear-gradient(to bottom, transparent, #000 5%, #000 95%, transparent);
+  mask-composite: intersect;
+}
+
+/* The film covers its still only once it is actually playing (home.js). Its
+   first frame is the still, so the change cannot be seen. */
+.film__video {
+  opacity: 0;
+}
+
+.film__figure[data-state="playing"] .film__video {
+  opacity: 1;
+}
+
+/* Under the film: its control, then its chapters as they play, one to a line,
+   the current one inked. It runs the width of the unfolded screen and starts
+   right under it (the still carries its own margin of paper inside the frame,
+   which the negative share of the width takes back). */
+.film__caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1.5rem;
+  margin-top: clamp(0.875rem, 1.8vw, 1.25rem);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--ink-quiet);
+}
+
+/* As wide for "Pause the film" as for "Play the film", so nothing beside it
+   moves when the film starts or stops. */
+.film__toggle {
+  flex: none;
+  min-width: 6.5em;
+}
+
+.film__chapters {
+  flex: 1 1 20rem;
+}
+
+.film__chapters li {
+  display: block;
+}
+
+.film__chapters b {
+  color: var(--ink);
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.film__chapters [data-current] b {
+  color: var(--red);
+}
+
+@media (min-width: 40em) {
+  .film__head {
+    text-align: center;
+  }
+
+  .film__head .lede {
+    margin-inline: auto;
+  }
+
+  .film__caption {
+    position: relative;
+    width: 70.4%;
+    margin: calc(var(--s3) - 3.6%) auto 0;
+  }
+}
+
+/* A portrait tablet, or iPhone Duo held open upright: the frame keeps the film's
+   middle 4:3 too, so the unfolded screen fills the width instead of 70% of it. */
+@media (min-width: 40em) and (max-width: 61.99em) and (orientation: portrait) {
+  .film__frame {
+    aspect-ratio: 4 / 3;
+  }
+
+  .film__caption {
+    width: 93.9%;
+    margin-top: calc(var(--s3) - 4.9%);
+  }
+}
+
+/* Narrow screens: the film runs edge to edge and keeps its middle 4:3, where
+   every screen in it sits whole (the still and the film switch to that crop). */
+@media (max-width: 39.99em) {
+  .film__frame {
+    aspect-ratio: 4 / 3;
+    margin-inline: calc(-1 * var(--gutter));
+  }
+
+  .film__caption {
+    position: relative;
+    margin-top: calc(var(--s3) - 4.95% - 0.099 * var(--gutter));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6 · Cook the videos you save
+   -------------------------------------------------------------------------- */
+
+.videos {
+  padding-top: var(--home-y);
+}
+
+.videos__head {
+  max-width: 40rem;
+}
+
+.videos__spread {
+  display: grid;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* The card is cut from the campaign's page, which is this page's paper too;
+   its edges are faded so the cut never shows. */
+.videos__from img {
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent),
+    linear-gradient(to bottom, transparent, #000 3%, #000 97%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent),
+    linear-gradient(to bottom, transparent, #000 3%, #000 97%, transparent);
+  mask-composite: intersect;
+}
+
+/* The caption meets the card's visible edge, inside its faded margin. */
+.videos__from .caption {
+  margin-top: 0;
+  padding-left: 4%;
+}
+
+/* The recipe is the loose sheet on top: a little askew, a little lifted. */
+.videos__to .paper-sheet {
+  transform: rotate(1deg);
+  box-shadow: var(--lift-shadow);
+}
+
+/* Phones: a diagonal down the page, the card at the left, the recipe at the
+   right, the pen's arrow between them turned to point down to it. */
+.videos__from {
+  width: 68%;
+}
+
+.videos__arrow {
+  --arrow-length: 4.5rem;
+  position: relative;
+  height: calc(var(--arrow-length) * 0.75);
+}
+
+.videos__arrow .ink {
+  left: 62%;
+  top: 50%;
+  width: var(--arrow-length);
+  height: calc(var(--arrow-length) * 84 / 240);
+  transform: translate(-50%, -50%) rotate(62deg);
+}
+
+.videos__to {
+  width: 88%;
+  justify-self: end;
+}
+
+/* From small tablets (and iPhone Duo open upright): the two side by side, the
+   arrow across the gap. Each figure takes two rows of the spread, so the
+   pictures share a bottom edge and the captions a top line however they wrap. */
+@media (min-width: 40em) {
+  .videos__spread {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 2fr) minmax(0, 5fr);
+    grid-template-rows: auto auto;
+  }
+
+  .videos__from,
+  .videos__to {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+  }
+
+  .videos__from {
+    grid-column: 1;
+  }
+
+  .videos__to {
+    grid-column: 3;
+  }
+
+  .videos__from > picture,
+  .videos__to > .paper-sheet {
+    align-self: end;
+  }
+
+  .videos__to > .paper-sheet {
+    margin-bottom: var(--s3);
+  }
+
+  .videos__to .caption {
+    margin-top: 0;
+  }
+
+  .videos__arrow {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+  }
+
+  .videos__from,
+  .videos__to {
+    width: 100%;
+  }
+
+  .videos__arrow {
+    height: auto;
+    aspect-ratio: 240 / 84;
+  }
+
+  .videos__arrow .ink {
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-54%, -90%);
+  }
+
+  .videos__to .paper-sheet {
+    transform: rotate(1.5deg);
+  }
+}
+
+/* The arrow: shaft, then head, when it comes into view (home.js). Until then
+   it waits undrawn; without the script it is simply there. */
+.ink--on-view.is-waiting .ink__reveal {
+  stroke-dashoffset: 1;
+}
+
+.ink--on-view.is-drawing mask:nth-of-type(1) .ink__reveal {
+  animation: ink-draw 0.55s var(--ease-pen) both;
+}
+
+.ink--on-view.is-drawing mask:nth-of-type(2) .ink__reveal {
+  animation: ink-draw 0.3s var(--ease-pen) 0.5s both;
+}
+
+/* --------------------------------------------------------------------------
+   7 · Every recipe. One cookbook. — the import chapter continued
+   -------------------------------------------------------------------------- */
+
+.cookbook {
+  padding-top: clamp(3.5rem, 7vw, 6rem);
+}
+
+.cookbook__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+/* One composition: the Add Recipe menu takes the first place, standing square
+   and a little forward of it, and three recipe cards are dealt into the rest. */
+.cookbook__pile {
+  position: relative;
+  width: min(100%, 32rem);
+}
+
+.cookbook__cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 1.75rem) clamp(0.75rem, 2.5vw, 1.5rem);
+}
+
+.cookbook__cards li:nth-child(1) {
+  grid-column: 2;
+  transform: rotate(1.2deg) translateY(0.375rem);
+}
+
+.cookbook__cards li:nth-child(2) {
+  transform: rotate(-1.5deg);
+}
+
+.cookbook__cards li:nth-child(3) {
+  transform: rotate(0.7deg) translateY(0.625rem);
+}
+
+.index-card {
+  width: 100%;
+  height: auto;
+}
+
+/* The menu is glass, app chrome: square, and only the system's small shadow. */
+.cookbook__ways {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 47%;
+  transform: translate(-4%, -5%);
+}
+
+.glass {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 1px 1.5px rgba(var(--shadow-rgb), 0.1)) drop-shadow(0 6px 16px rgba(var(--shadow-rgb), 0.12));
+}
+
+@media (min-width: 48em) {
+  .cookbook__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: center;
+  }
+
+  .cookbook__pile {
+    justify-self: end;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8 · Make recipes fit you — the slips first, then the words
+   -------------------------------------------------------------------------- */
+
+/* The page's longer pause: from getting recipes in to making them yours. */
+.draft {
+  padding-top: clamp(7rem, 14vw, 12.5rem);
+}
+
+.draft__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+/* Three slips of the conversation's paper, laid down one under another as App
+   Store screenshot 03 lays them: stepping left, right, left, each a little askew.
+   They never overlap, so no slip covers another's words. */
+.draft__slips {
+  width: min(100%, 30rem);
+}
+
+.draft__notes {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.draft__notes li {
+  width: 96%;
+}
+
+.draft__notes li:nth-child(1) {
+  transform: rotate(-1.1deg);
+}
+
+.draft__notes li:nth-child(2) {
+  justify-self: end;
+  transform: rotate(0.9deg);
+}
+
+.draft__notes li:nth-child(3) {
+  margin-left: 5%;
+  transform: rotate(-0.5deg);
+}
+
+.draft__slips .caption {
+  margin-top: var(--s4);
+}
+
+@media (min-width: 48em) {
+  .draft__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    column-gap: calc(2 * var(--half-gap));
+  }
+
+  .draft__slips {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .draft__notes li {
+    width: 92%;
+  }
+}
+
+/* On a tablet the slips take a little more of the row, so their words stay
+   legible; from 62em the halves are equal again and share the page's line. */
+@media (min-width: 48em) and (max-width: 61.99em) {
+  .draft__grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+}
+
+@media (min-width: 62em) {
+  .draft__notes li {
+    width: 88%;
+  }
+
+  .draft__copy {
+    margin-left: calc(var(--stack-gap) / 2 - var(--half-gap));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9 · Cook one step at a time
+   -------------------------------------------------------------------------- */
+
+.cook {
+  padding-top: var(--home-y);
+}
+
+.cook__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+/* Cook View's own voice: the step on its page is set in Charter. A step below
+   the closing line, which signs the page off. */
+.cook__title {
+  font-family: var(--serif);
+  font-size: clamp(1.875rem, 1.25rem + 2vw, 2.875rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.014em;
+  color: var(--ink);
+}
+
+/* The two screens at true scale: widths in proportion to their shapes, so they
+   stand the same height with their tops level. Captions share the next row. */
+.cook__pages {
+  display: grid;
+  grid-template-columns: minmax(0, 0.704fr) minmax(0, 0.46fr);
+  grid-template-rows: auto auto;
+  column-gap: clamp(1rem, 3vw, 2.25rem);
+  width: min(100%, 40rem);
+}
+
+.cook__turn,
+.cook__iphone {
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+}
+
+/* The button always starts its own line under the words, so a longer label
+   ("Turn the page again") never re-wraps the caption and moves the page. */
+.cook__caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.625rem;
+}
+
+.cook__caption > span:first-child {
+  flex-basis: 100%;
+}
+
+/* The page turn: the clip plays over its first frame, holds on its last, and
+   under reduced motion the two stills trade places with the app's fade. */
+.cook__screen {
+  aspect-ratio: 660 / 938;
+}
+
+.cook__screen picture,
+.cook__screen img,
+.cook__screen video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cook__still--end,
+.cook__video {
+  opacity: 0;
+}
+
+.cook__still--end {
+  transition: opacity 0.24s ease;
+}
+
+[data-turn][data-state="turning"] .cook__video,
+[data-turn][data-state="turned"] .cook__video,
+[data-turn][data-state="landed"] .cook__still--end {
+  opacity: 1;
+}
+
+@media (min-width: 62em) {
+  .cook__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+  }
+
+  .cook__pages {
+    justify-self: end;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10 · A place for every recipe — the shelf first, then the words
+   -------------------------------------------------------------------------- */
+
+.shelf {
+  padding-top: var(--home-y);
+}
+
+.shelf .wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.shelf__head {
+  max-width: 40rem;
+}
+
+/* The stacks stand in the app's order, like dividers in a recipe box. Their
+   captures carry a margin of the app's paper, so they never overlap. */
+.shelf__stacks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.5rem) var(--stack-gap);
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.shelf__stacks img {
+  width: 100%;
+  height: auto;
+}
+
+/* Four make the point on a phone and a tablet. */
+@media (max-width: 61.99em) {
+  .shelf__stacks li:nth-child(n + 5) {
+    display: none;
+  }
+}
+
+/* Tablets: the same four as one shelf, every other divider a little lower. */
+@media (min-width: 40em) and (max-width: 61.99em) {
+  .shelf__stacks {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .shelf__stacks li:nth-child(even) {
+    margin-top: clamp(1rem, 2vw, 1.75rem);
+  }
+}
+
+/* Wide screens: one shelf of all six across the page, every other divider a
+   little lower, and the words under its right half, starting where the fourth
+   divider does. */
+@media (min-width: 62em) {
+  .shelf__stacks {
+    order: -1;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    align-items: start;
+    margin-top: 0;
+  }
+
+  .shelf__stacks li:nth-child(even) {
+    margin-top: clamp(1rem, 2vw, 1.75rem);
+  }
+
+  .shelf__head {
+    max-width: 38rem;
+    margin: clamp(2.5rem, 4vw, 3.5rem) 0 0 calc(50% + var(--stack-gap) / 2);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11 · Pricing — said plainly, like the price on a cookbook's back cover.
+   Information, so plain type under one hairline, no paper.
+   -------------------------------------------------------------------------- */
+
+.pricing {
+  padding-top: var(--home-y);
+}
+
+.pricing__body {
+  display: grid;
+  gap: var(--s4) clamp(2rem, 5vw, 4.5rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--rule);
+}
+
+.pricing__title {
+  font-size: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.pricing__text {
+  font-family: var(--serif);
+  font-size: clamp(1.125rem, 1.02rem + 0.4vw, 1.3125rem);
+  line-height: 1.55;
+  color: var(--ink-body);
+  max-width: 34em;
+}
+
+/* An amount never breaks from its period. */
+.price {
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.pricing__fine {
+  margin-top: var(--s2);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--ink-quiet);
+  max-width: 46em;
+}
+
+/* Wide screens: the name in the left half, the terms in the right, starting on
+   the page's right-hand line. */
+@media (min-width: 62em) {
+  .pricing__body {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--stack-gap);
+  }
+
+  .pricing__title {
+    grid-row: span 3;
+  }
+
+  .pricing__text,
+  .pricing__fine {
+    grid-column: 2;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12 · Closing — the last page: one line in the cookbook's voice, and the badge
+   -------------------------------------------------------------------------- */
+
+.closing {
+  padding-block: var(--home-y);
+}
+
+.closing__inner {
+  display: grid;
+  justify-items: start;
+  gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.closing__title {
+  font-family: var(--serif);
+  font-size: clamp(2.25rem, 1.55rem + 2.2vw, 3.375rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   13 · Very narrow screens: a phone at 150% page zoom is about 260 px wide, so
+   the headline's and the close's kept-together words may break there.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 22.49em) {
+  .hero__news .nowrap,
+  .closing__title .nowrap {
+    white-space: normal;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14 · Reduced motion: every mark is simply on the page; nothing plays.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .ink__reveal,
+  .ink--on-view.is-waiting .ink__reveal {
+    animation: none !important;
+    stroke-dashoffset: 0;
+  }
+
+  /* The page turn's short fade is the app's own reduced-motion change of page,
+     so it is kept (site.css otherwise cuts every transition). */
+  .cook__still--end {
+    transition-duration: 0.24s !important;
+  }
+}

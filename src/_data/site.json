@@ -1,8 +1,9 @@
 {
   "name": "FlavorDraft",
   "url": "https://flavordraft.app",
-  "tagline": "A personal recipe cookbook for iPhone.",
+  "tagline": "A personal recipe cookbook for iPhone and iPhone Duo.",
   "themeColor": "#FAF3E8",
+  "ogImageAlt": "FlavorDraft 2.0 is here. Made for iPhone Duo. Beside the words, Cook View on iPhone Duo and on iPhone.",
 
   "contactEmail": "support@flavordraft.app",
 
@@ -10,6 +11,8 @@
   "appStoreUrl": "https://apps.apple.com/app/id6809896491",
 
   "legal": {
-    "copyrightYear": "2026"
+    "copyrightYear": "2026",
+    "_note_appleCredit": "Apple's credit line, placed once where the site gives legal notice (the footer). Drafted from Apple's templates in the iPhone Duo rights review (§5.8) for the owner to finalise; it lists every Apple mark the site uses (Safari is named on /support), and Apple and the Apple logo because the App Store badge appears. App Store is on Apple's list as a service mark, not a trademark (duo-showcase/rights/evidence/pages/tmlist.txt).",
+    "appleCredit": "Apple, the Apple logo, iPhone and Safari are trademarks of Apple Inc., registered in the U.S. and other countries and regions. App Store is a service mark of Apple Inc., registered in the U.S. and other countries and regions. iPhone Duo is a trademark of Apple Inc."
   }
 }
