@@ -2,24 +2,24 @@
 {#
   Collections, as the app draws them: each one a divider cut from the recipe card's
   stock, its tab on top, the first recipes' cards peeking behind. Real captures from
-  My Recipes on iPhone Duo, set out in the app's own order. On wide screens the shelf
-  is set first and the words follow it (home.css); the heading stays first in the
-  markup. Phones show the first four.
+  My Recipes on iPhone Duo, in the app's own order, set out beside the words as a
+  cookbook spread: two rows, the second stepped across, each divider standing a
+  little off its neighbours. They settle onto the page as they come into view.
 #}
 <section class="shelf" aria-labelledby="shelf-title">
-  <div class="wrap">
+  <div class="wrap shelf__grid">
     <div class="shelf__head">
       <h2 class="section-title" id="shelf-title">A place for every&nbsp;recipe.</h2>
       <p class="lede">Collections are the sections of your cookbook: weeknight dinners, desserts, the things you make on repeat. A recipe can sit in as many as you like, and you can put them in your own order.</p>
     </div>
 
     <ul class="shelf__stacks" role="list" aria-label="Collections in a FlavorDraft cookbook">
-      <li>{{ img("stack-weeknight-dinners", "Weeknight Dinners, 8 recipes.", "(min-width: 90rem) 200px, (min-width: 62em) 14vw, (min-width: 40em) 21vw, 44vw") }}</li>
-      <li>{{ img("stack-desserts", "Desserts, 6 recipes.", "(min-width: 90rem) 200px, (min-width: 62em) 14vw, (min-width: 40em) 21vw, 44vw") }}</li>
-      <li>{{ img("stack-breakfast-brunch", "Breakfast and Brunch, 5 recipes.", "(min-width: 90rem) 200px, (min-width: 62em) 14vw, (min-width: 40em) 21vw, 44vw") }}</li>
-      <li>{{ img("stack-comfort-food", "Comfort Food, 6 recipes.", "(min-width: 90rem) 200px, (min-width: 62em) 14vw, (min-width: 40em) 21vw, 44vw") }}</li>
-      <li>{{ img("stack-fresh-light", "Fresh and Light, 6 recipes.", "(min-width: 90rem) 200px, (min-width: 62em) 14vw, (min-width: 40em) 21vw, 44vw") }}</li>
-      <li>{{ img("stack-quick-easy", "Quick and Easy, 6 recipes.", "(min-width: 90rem) 200px, (min-width: 62em) 14vw, (min-width: 40em) 21vw, 44vw") }}</li>
+      <li class="settle" style="--i: 0">{{ img("stack-weeknight-dinners", "Weeknight Dinners, 8 recipes.", "(min-width: 90rem) 232px, (min-width: 62em) 13vw, (min-width: 40em) 26vw, 46vw") }}</li>
+      <li class="settle" style="--i: 1">{{ img("stack-desserts", "Desserts, 6 recipes.", "(min-width: 90rem) 232px, (min-width: 62em) 13vw, (min-width: 40em) 26vw, 46vw") }}</li>
+      <li class="settle" style="--i: 2">{{ img("stack-breakfast-brunch", "Breakfast and Brunch, 5 recipes.", "(min-width: 90rem) 232px, (min-width: 62em) 13vw, (min-width: 40em) 26vw, 46vw") }}</li>
+      <li class="settle" style="--i: 3">{{ img("stack-comfort-food", "Comfort Food, 6 recipes.", "(min-width: 90rem) 232px, (min-width: 62em) 13vw, (min-width: 40em) 26vw, 46vw") }}</li>
+      <li class="settle" style="--i: 4">{{ img("stack-fresh-light", "Fresh and Light, 6 recipes.", "(min-width: 90rem) 232px, (min-width: 62em) 13vw, (min-width: 40em) 26vw, 46vw") }}</li>
+      <li class="settle" style="--i: 5">{{ img("stack-quick-easy", "Quick and Easy, 6 recipes.", "(min-width: 90rem) 232px, (min-width: 62em) 13vw, (min-width: 40em) 26vw, 46vw") }}</li>
     </ul>
   </div>
 </section>

@@ -11,27 +11,26 @@
     }
   },
   "hero-duo": {
-    "w": 2580,
-    "h": 1805,
-    "alpha": false,
+    "w": 1732,
+    "h": 1219,
+    "alpha": true,
     "widths": [
-      480,
+      500,
       800,
-      1200,
-      1600,
-      2000
+      1100,
+      1700
     ],
     "rights": "publisher-photos"
   },
   "hero-iphone": {
-    "w": 1320,
-    "h": 2868,
-    "alpha": false,
+    "w": 857,
+    "h": 1624,
+    "alpha": true,
     "widths": [
-      200,
-      300,
-      450,
-      600
+      220,
+      330,
+      440,
+      700
     ],
     "rights": "publisher-photos"
   },
@@ -79,18 +78,6 @@
       600,
       900,
       1320
-    ],
-    "rights": "owned"
-  },
-  "cookbook-chooser": {
-    "w": 748,
-    "h": 846,
-    "alpha": true,
-    "widths": [
-      300,
-      450,
-      600,
-      750
     ],
     "rights": "owned"
   },
@@ -166,37 +153,65 @@
     ],
     "rights": "owned"
   },
+  "cook-duo": {
+    "w": 1485,
+    "h": 1293,
+    "alpha": true,
+    "widths": [
+      480,
+      720,
+      960,
+      1500
+    ],
+    "rights": "owned",
+    "quads": {
+      "top": [
+        [
+          0.05494,
+          0.13408
+        ],
+        [
+          0.76231,
+          0.02418
+        ],
+        [
+          0.76071,
+          0.47704
+        ],
+        [
+          0.05694,
+          0.58718
+        ]
+      ],
+      "bottom": [
+        [
+          0.05694,
+          0.58718
+        ],
+        [
+          0.76071,
+          0.47704
+        ],
+        [
+          0.86943,
+          0.84688
+        ],
+        [
+          0.16165,
+          0.95834
+        ]
+      ]
+    }
+  },
   "cook-iphone": {
-    "w": 1320,
-    "h": 2868,
-    "alpha": false,
+    "w": 857,
+    "h": 1624,
+    "alpha": true,
     "widths": [
-      300,
-      450,
-      600,
-      900
-    ],
-    "rights": "owned"
-  },
-  "cook-turn-start": {
-    "w": 660,
-    "h": 938,
-    "alpha": false,
-    "widths": [
+      220,
       330,
-      495,
-      660
-    ],
-    "rights": "owned"
-  },
-  "cook-turn-end": {
-    "w": 660,
-    "h": 938,
-    "alpha": false,
-    "widths": [
-      330,
-      495,
-      660
+      440,
+      700
     ],
     "rights": "owned"
   },

@@ -2,10 +2,10 @@
  * Regenerates the raster icons and the social-share image.
  *
  * Everything here is derived from assets that already exist in the repo — the
- * shipped app-icon master (src/assets/img/appicon.svg, copied verbatim from the
- * design system), the two pages in scripts/og/, which are laid out with the
- * site's own tokens and typeface, and the approved wordmark raster, which is
- * only resampled. Nothing is drawn by hand.
+ * approved 2.0 app icon (src/assets/img/appicon-1024.png, the master from the
+ * approved icon bundle, only resampled), the share card's page in scripts/og/,
+ * which is laid out with the site's own tokens and typeface, and the approved
+ * wordmark raster, also only resampled. Nothing is drawn by hand.
  *
  * macOS + Google Chrome only; this is a local authoring tool, not part of the
  * production build. Its outputs are committed, so `npm run build` never runs it.
@@ -47,11 +47,7 @@ async function withPen(from) {
    large and resampled down. */
 const MIN_WINDOW = 500;
 
-const targets = [
-  { from: "scripts/og/icon.html", to: "src/root/apple-touch-icon.png", w: 180, h: 180 },
-  { from: "scripts/og/icon.html", to: "src/root/favicon-32.png", w: 32, h: 32 },
-  { from: "scripts/og/og.html", to: "src/assets/img/og.png", w: 1200, h: 630 }
-];
+const targets = [{ from: "scripts/og/og.html", to: "src/assets/img/og.png", w: 1200, h: 630 }];
 
 for (const { from, to, w, h } of targets) {
   const out = resolve(root, to);
@@ -79,6 +75,16 @@ for (const { from, to, w, h } of targets) {
   }
 
   console.log(`${to}  ${w}×${h}${scale === 1 ? "" : `  (rendered ${scale}×)`}`);
+}
+
+/* The app icon: the approved master, square and unrounded (iOS rounds the touch icon
+   itself), resampled to the favicon and touch-icon sizes. */
+const ICON = "src/assets/img/appicon-1024.png";
+for (const [width, to] of [[180, "src/root/apple-touch-icon.png"], [32, "src/root/favicon-32.png"], [16, "src/root/favicon-16.png"]]) {
+  // Pillow (already needed for `npm run screens`): a Lanczos resample and an optimised
+  // PNG, opaque (the master's ground is its cream; iOS rounds the touch icon itself).
+  await run("python3", ["-I", "-c", "import sys; from PIL import Image; w=int(sys.argv[2]); Image.open(sys.argv[1]).convert('RGB').resize((w, w), Image.LANCZOS).save(sys.argv[3], optimize=True)", resolve(root, ICON), String(width), resolve(root, to)]);
+  console.log(`${to}  ${width}×${width}`);
 }
 
 /* The approved wordmark (wordmark_handoff/README.md) ships as one 1193 px raster.

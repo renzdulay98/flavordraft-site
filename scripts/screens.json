@@ -9,6 +9,9 @@
     "`widths` are the output widths written as AVIF and WebP into src/assets/img/screens/.",
     "A video source takes a `frame` (decoded as a browser shows it); `base: \"repo\"` reads a file",
     "this repository generates (the page-turn clip from `npm run media`) instead of the docs.",
+    "A `device` renders the capture inside the campaign's own hardware first (the kits in the docs'",
+    "tools/: the Star White iPhone Duo model in a `pose`, or the drawn dark iPhone), with alpha;",
+    "`quads` records where the laptop pose's two display halves fall, for the page turn.",
     "`rights` is the reuse status the documentation records for what is visible in the image:",
     "  owned            FlavorDraft's own interface or artwork only",
     "  publisher-photos the screen shows recipe photographs imported from publishers; the slab and",
@@ -16,24 +19,26 @@
     "The build prints every image and video that is not `owned`, so none ships unnoticed. To replace",
     "an image, point `from` at a re-seeded capture of the same screen and run `npm run screens`.",
     "`media` records the rights of the video `npm run media` writes; it is not built from here.",
-    "No image here shows Apple hardware: the App Store frames' drawn and 3D-rendered devices and the",
-    "Duo Studio film (Track A) are not used on the website (see the rights review in the docs)."
+    "The hardware is the App Store campaign's own: its drawn iPhone and its modelled iPhone Duo, the",
+    "same renders the approved screenshots use. The Duo Studio film (Track A, Apple's own 3D model) is",
+    "not used on the website (see the rights review in the docs)."
   ],
   "images": [
     {
       "name": "hero-duo",
       "from": "app-store/2.0/duo/source/inner-landscape-recipe-video.png",
-      "crop": [0, 150, 2580, 1805],
-      "widths": [480, 800, 1200, 1600, 2000],
+      "device": { "kit": "duo", "pose": "lying_open", "camera": 78, "px": 1.7 },
+      "widths": [500, 800, 1100, 1700],
       "rights": "publisher-photos",
-      "_note": "iPhone Duo inner display held wide: Chicken Parmesan as a cookbook spread, method on the left page, ingredients on the right, the fold between them (the Duo App Store frame 02's capture). Cropped to the two pages: the system's Vertical Bar and home indicator are left out. Shows the recipe's 44 pt video thumbnail (The Cooking Foodie) and the app's ingredient icons, whose pack licence for marketing is still to be confirmed (creative/validation/rights-inventory-r3.md)."
+      "_note": "The iPhone Duo lying open and level, as App Store frame 02 shows it: Chicken Parmesan as a cookbook spread, method on the left page, ingredients on the right, the fold between them. Shows the recipe's 44 pt video thumbnail (The Cooking Foodie) and the app's ingredient icons, whose pack licence for marketing is still to be confirmed (creative/validation/rights-inventory-r3.md)."
     },
     {
       "name": "hero-iphone",
       "from": "app-store/2.0/slab/source/01-home-a.png",
-      "widths": [200, 300, 450, 600],
+      "device": { "kit": "slab", "scale": 0.5 },
+      "widths": [220, 330, 440, 700],
       "rights": "publisher-photos",
-      "_note": "iPhone 18 Pro Max: Home at rest, 'Good morning, Stan.' with the Recently Saved card."
+      "_note": "The campaign's dark iPhone holding Home at rest: 'Good morning, Stan.' with the Recently Saved card."
     },
     {
       "name": "film-poster",
@@ -69,17 +74,6 @@
       "widths": [400, 600, 900, 1320],
       "rights": "owned",
       "_note": "Chicken Parmesan, Steps 1-7, imported from a YouTube video: no creator name, thumbnail or photo. Cut below the navigation bar, so no glass button tilts with the paper; the dish's name is in the caption instead."
-    },
-    {
-      "name": "cookbook-chooser",
-      "from": "app-store/2.0/slab/source/02-import-chooser-quiet.png",
-      "crop": [542, 1444, 748, 846],
-      "radius": 156,
-      "widths": [300, 450, 600, 750],
-      "rights": "owned",
-      "_note": "The Add Recipe menu's six ways in, opened over text so its glass is clean. Masked to the menu's own continuous (superellipse) corners, just inside its glass rim.",
-      "continuous": true,
-      "exponent": 3.2
     },
     {
       "name": "card-lasagna",
@@ -130,29 +124,22 @@
       "_note": "The third request and its list's first two lines."
     },
     {
+      "name": "cook-duo",
+      "from": "app-store/2.0/duo-showcase/track-b-public-candidate/renders/flavordraft-duo-screens_trackB_nomination_3840x2160_60fps_h264.mp4",
+      "frame": 780,
+      "crop": [1260, 130, 1322, 1880],
+      "device": { "kit": "duo", "pose": "laptop", "opening": 90, "yaw": 12, "camera": 40, "distance": 60000, "px": 1.6, "quads": true },
+      "widths": [480, 720, 960, 1500],
+      "rights": "owned",
+      "_note": "The iPhone Duo folded like a laptop (App Store frame 05's pose: hinge 90, turned 12, seen from 40 above the counter through a long lens) with the page-turn clip's first frame on its display: Cook View on step 16, at rest. The clip (npm run media) plays over the two display halves at the recorded quads, so the still and the moving picture are the same frame."
+    },
+    {
       "name": "cook-iphone",
       "from": "app-store/2.0/slab/source/05-cook-timer.png",
-      "widths": [300, 450, 600, 900],
+      "device": { "kit": "slab", "scale": 0.5 },
+      "widths": [220, 330, 440, 700],
       "rights": "owned",
-      "_note": "Cook View on iPhone: Lasagna step 18, its timer running, Previous and Next."
-    },
-    {
-      "name": "cook-turn-start",
-      "base": "repo",
-      "from": "src/assets/media/cook/cook-turn.h264.mp4",
-      "frame": 0,
-      "widths": [330, 495, 660],
-      "rights": "owned",
-      "_note": "The page-turn clip's first frame (Track B frame 780): Cook View partly folded on step 16, at rest. Its poster, so the clip starts without a jump."
-    },
-    {
-      "name": "cook-turn-end",
-      "base": "repo",
-      "from": "src/assets/media/cook/cook-turn.h264.mp4",
-      "frame": 119,
-      "widths": [330, 495, 660],
-      "rights": "owned",
-      "_note": "The clip's last frame (Track B frame 899): the page has landed on step 17. Shown instead of the clip under reduced motion."
+      "_note": "The campaign's dark iPhone holding Cook View: Lasagna step 18, its timer running, Previous and Next."
     },
     {
       "name": "stack-weeknight-dinners",

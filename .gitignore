@@ -10,3 +10,4 @@ _site/
 # The copied FlavorDraft app documentation (13 GB of reference material, screenshots and video) is
 # read by `npm run screens` and `npm run media`; only their outputs under src/ are part of the site.
 /flavordraft-app-docs/
+/FlavorDraft_Approved_App_Icon_Bundle.zip

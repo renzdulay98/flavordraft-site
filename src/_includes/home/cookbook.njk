@@ -1,11 +1,13 @@
-{%- from "brand.njk" import img with context -%}
+{%- from "brand.njk" import img, icon with context -%}
 {#
-  Every way in, and the cookbook they fill: one composition of the app's real Add
-  Recipe menu and three of its recipe index cards. The menu is glass, app chrome,
-  so it stands square and casts the system's small shadow; the cards are paper,
-  dealt onto the page a little askew. Lasagna is the recipe the page follows into
-  Draft with AI and Cook View; the other two, from Weeknight Dinners, appear
-  nowhere else on the page.
+  Every way in, and the cookbook they fill: one composition. The ways in are set
+  on a paper index card, in the site's own editorial language (outside a device,
+  the app's menu would be chrome on paper), using the app's own six labels and
+  the line icons the campaign draws with. Beside and behind it, three real recipe
+  cards from the app, dealt onto the page a little askew: Lasagna, the recipe the
+  page follows into Draft with AI and Cook View, and two from Weeknight Dinners
+  that appear nowhere else on the page. The card and the recipe cards settle
+  onto the page as they come into view (home.js, home.css).
 #}
 <section class="cookbook" aria-labelledby="cookbook-title">
   <div class="wrap cookbook__grid">
@@ -15,13 +17,21 @@
     </div>
 
     <div class="cookbook__pile">
-      <figure class="cookbook__ways">
-        {{ img("cookbook-chooser", "FlavorDraft’s Add Recipe menu: Scan a recipe, Scan food packaging, Import from link, Import from social media, Describe a dish or idea, and Add manually.", "(min-width: 80em) 241px, (min-width: 48em) 22vw, (min-width: 34em) 241px, 43vw", { class: "glass" }) }}
-      </figure>
+      <div class="ways settle" style="--i: 0">
+        <p class="ways__title">Six ways in</p>
+        <ul class="ways__list" role="list">
+          <li>{{ icon("scan") }}Scan a recipe</li>
+          <li>{{ icon("package") }}Scan food packaging</li>
+          <li>{{ icon("link") }}Import from link</li>
+          <li>{{ icon("share") }}Import from social media</li>
+          <li>{{ icon("message-circle") }}Describe a dish or idea</li>
+          <li>{{ icon("pencil-line") }}Add manually</li>
+        </ul>
+      </div>
       <ul class="cookbook__cards" role="list" aria-label="Recipe cards in a FlavorDraft cookbook">
-        <li>{{ img("card-lasagna", "Lasagna (Enhanced Flavour Version), 4 hours 20 minutes, marked as a favorite.", "(min-width: 80em) 250px, (min-width: 48em) 23vw, (min-width: 34em) 250px, 45vw", { class: "index-card" }) }}</li>
-        <li>{{ img("card-salmon", "Best Baked Salmon, 15 minutes, marked as a favorite.", "(min-width: 80em) 250px, (min-width: 48em) 23vw, (min-width: 34em) 250px, 45vw", { class: "index-card" }) }}</li>
-        <li>{{ img("card-fish-tacos", "Fish Tacos, 10 minutes.", "(min-width: 80em) 250px, (min-width: 48em) 23vw, (min-width: 34em) 250px, 45vw", { class: "index-card" }) }}</li>
+        <li class="settle" style="--i: 1">{{ img("card-lasagna", "Lasagna (Enhanced Flavour Version), 4 hours 20 minutes, marked as a favorite.", "(min-width: 80em) 250px, (min-width: 48em) 23vw, (min-width: 34em) 250px, 45vw", { class: "index-card" }) }}</li>
+        <li class="settle" style="--i: 2">{{ img("card-salmon", "Best Baked Salmon, 15 minutes, marked as a favorite.", "(min-width: 80em) 250px, (min-width: 48em) 23vw, (min-width: 34em) 250px, 45vw", { class: "index-card" }) }}</li>
+        <li class="settle" style="--i: 3">{{ img("card-fish-tacos", "Fish Tacos, 10 minutes.", "(min-width: 80em) 250px, (min-width: 48em) 23vw, (min-width: 34em) 250px, 45vw", { class: "index-card" }) }}</li>
       </ul>
     </div>
   </div>

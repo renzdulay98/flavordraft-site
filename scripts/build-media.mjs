@@ -39,8 +39,8 @@ const film = [
 
 // The page turn in the 4K master: frames 780-899 (13.00-14.98 s); the screen sits at
 // x 1260, y 130, 1322 × 1880 (the crop of stills/paper-animation-frames/, measured
-// against frame 807). The posters, cook-turn-start and -end in scripts/screens.json,
-// are frames 780 and 899 of the same master at the same crop.
+// against frame 807). The Cook View device's display (cook-duo in scripts/screens.json)
+// is frame 780 of the same master at the same crop, so the clip starts on the still.
 const master = "renders/flavordraft-duo-screens_trackB_nomination_3840x2160_60fps_h264.mp4";
 const turn = { start: 13.0, frames: 120, crop: "1322:1880:1260:130", width: 660, height: 938 };
 const colour = ["-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "iec61966-2-1", "-color_range", "tv"];

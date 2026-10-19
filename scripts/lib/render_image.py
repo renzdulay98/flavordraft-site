@@ -4,8 +4,8 @@ Called by scripts/build-screens.mjs with one JSON argument:
 
   {"src": "/abs/source.png", "crop": [x, y, w, h] | null,
    "bands": [[x, y, w, h], ...] | null, "radius": px | null, "continuous": bool,
-   "widths": [400, 800], "quality": 55, "out": "/abs/dir", "name": "hero-duo",
-   "tmp": "/abs/tmpdir"}
+   "alpha": bool, "widths": [400, 800], "quality": 55, "out": "/abs/dir",
+   "name": "hero-duo", "tmp": "/abs/tmpdir"}
 
 For every width it writes <out>/<name>-<w>.avif (AV1, 4:4:4 so the app's red
 type and strikes keep their edges) and a lossless <tmp>/<name>-<w>.png that the
@@ -14,8 +14,9 @@ alpha mask (used for the glass menu, which sits over other content in its
 capture). `bands`, in place of `crop`, cuts several full-width strips of one
 screen and sets them one under the other: an excerpt, as the App Store
 screenshots make one (nothing is retyped or redrawn; the strips share the
-screen's own paper, so the joins do not show). Prints {"w": ..., "h": ...,
-"alpha": ...} for the result.
+screen's own paper, so the joins do not show). `alpha` keeps the alpha a source
+already has (a phone rendered on nothing, by render_device.py). Prints {"w": ...,
+"h": ..., "alpha": ...} for the result.
 
 Needs Pillow with AVIF support (Pillow 11.3 or later).
 """
@@ -69,7 +70,8 @@ def rounded_mask(size, radius, scale=4, continuous=False, exponent=5):
 def main():
     spec = json.loads(sys.argv[1])
     image = Image.open(spec["src"])
-    image = image.convert("RGBA" if spec.get("radius") else "RGB")
+    keep_alpha = bool(spec.get("radius") or spec.get("alpha"))
+    image = image.convert("RGBA" if keep_alpha else "RGB")
 
     if spec.get("bands"):
         strips = [image.crop((x, y, x + w, y + h)) for x, y, w, h in spec["bands"]]
@@ -102,7 +104,7 @@ def main():
         )
         sized.save(os.path.join(spec["tmp"], f"{stem}.png"))
 
-    print(json.dumps({"w": image.width, "h": image.height, "alpha": bool(spec.get("radius"))}))
+    print(json.dumps({"w": image.width, "h": image.height, "alpha": keep_alpha}))
 
 
 if __name__ == "__main__":

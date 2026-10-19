@@ -8,3 +8,7 @@ Per-shot vocabulary: KEEP — notebook, bookmark, grid, sticky note, folders, op
 IMPORT — import, share, curved arrows · TURN — scan frames, clipboard, checklists · ADAPT — chat
 bubbles, sparkles, pencil · BUILD — basket, checklists, check marks · ORGANIZE — folders, layers,
 grid, bookmark. No ingredient illustrations.
+
+The homepage's paper import card ("Every recipe. One cookbook.") sets six of these inline, in
+the espresso text colour, one per way into the app: scan, package, link, share, message-circle,
+pencil-line. `package.svg` and `link.svg` were added for it from the same Lucide release.

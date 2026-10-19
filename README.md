@@ -14,10 +14,11 @@ src/
   _data/screens.json   every homepage image's shape, widths and rights (generated: npm run screens)
   _data/pen.js         the red pen's marks (the hero's ring and underline, the arrow), built from the
                        App Store campaign's pen model at build time
+  _data/icons.js       the line icons in assets/img/doodles/, read for the ways-in card
   _data/build.js       values from the build itself (the footer's year)
   _data/legal.js       reads the two documents in docs/ for the legal pages
   _includes/base.njk   header, footer, <head> — shared by every page
-  _includes/brand.njk  wordmark, App Store badge, img (responsive AVIF/WebP), ink (pen marks)
+  _includes/brand.njk  wordmark, App Store badge, img (responsive AVIF/WebP), ink (pen marks), icon
   _includes/home/      the homepage, one partial per section, in page order from index.njk
   _includes/legal.njk  the legal-page layout
   assets/css/site.css  styles shared by every page; tokens at the top
@@ -28,7 +29,8 @@ src/
   assets/media/        the homepage's video (generated: npm run media)
   index.njk  support.njk  privacy.njk  terms.njk  download.njk
 scripts/screens.json     every homepage image (the capture it is cut from) and video, with its rights status
-scripts/build-screens.mjs  regenerates assets/img/screens/ and _data/screens.json (lib/render_image.py does the pixels)
+scripts/build-screens.mjs  regenerates assets/img/screens/ and _data/screens.json (lib/render_image.py does the
+                         pixels; lib/render_device.py puts a capture inside the campaign's hardware first)
 scripts/build-media.mjs  copies the iPhone Duo film and cuts the page-turn clip into assets/media/
 scripts/build-icons.mjs  regenerates the raster icons, the share image and the wordmark's sizes
 scripts/og/              their source pages (not part of the site)
@@ -59,15 +61,16 @@ npm install
 npm start        # local preview with live reload → http://localhost:8080
 npm run build    # static output into _site/
 npm run media    # copy the iPhone Duo film, cut its phone crop and the page-turn clip (needs ffmpeg with libx264, libx265 and libvpx-vp9)
-npm run screens  # regenerate the homepage images (needs python3 + Pillow 11.3+, cwebp, ffmpeg)
+npm run screens  # regenerate the homepage images (needs python3 + Pillow 11.3+ and numpy, cwebp, ffmpeg)
 npm run icons    # regenerate favicon / apple-touch-icon / og.png / wordmark sizes (macOS + Chrome)
 ```
 
 `media` and `screens` read the FlavorDraft app documentation folder,
 `flavordraft-app-docs/` at the repo root (gitignored, 13 GB; `SCREENS_SRC`
-points elsewhere). Run `media` before `screens`: two posters are frames of the
-clip it cuts. Their outputs are committed, so a production build never needs
-the sources or the tools.
+points elsewhere). Run `media` first only when a manifest entry uses `base:
+"repo"` (none does at present: the posters are frames of the Track B files in
+the docs). Their outputs are committed, so a production build never needs the
+sources or the tools.
 
 `_site/` is the deploy directory. Nothing is generated at request time, so it
 can be served from any static host.
@@ -87,30 +90,40 @@ are empty, and naming every homepage image that is not cleared (below).
 
 One partial per section in `src/_includes/home/`: hero, the iPhone Duo film,
 "Cook the videos you save", "Every recipe. One cookbook.", "Make recipes fit
-you", "Cook one step at a time", "A place for every recipe", pricing, closing.
+you", "Cook one step at a time", "A place for every recipe", closing. There is
+no pricing on the site: the app presents its plans in its own onboarding.
 
-- **No device is drawn.** FlavorDraft's real screens lie on the page as cards,
-  the way the iPhone Duo film (Track B) shows them. The App Store frames' iPhone
-  (drawn) and iPhone Duo (3D-rendered), and the Duo Studio film (Track A, Apple's
-  own model), are not cleared for the website: Apple's marketing guidelines name
-  3D renders and simulations of its products as not permitted.
-- **Paper is recipe content only:** the recipe sheet, the index cards, the
-  collection stacks, the Draft with AI slips. Loose paper lies a little askew;
-  screens and chrome stand square. Chrome (header, buttons, pricing, footer) is
+- **The devices are the campaign's.** FlavorDraft's real screens are shown
+  inside the hardware the approved App Store screenshots use: the dark iPhone
+  `tools/slabkit.py` draws and the Star White iPhone Duo `tools/duokit.py`
+  models, rendered by `npm run screens` from the same captures (`device` in
+  `scripts/screens.json`). The Duo Studio film (Track A, Apple's own 3D model)
+  is not used: its rights review marks it internal only.
+- **The page turn on the device** is the real one: two seconds of the Track B
+  film, cut to the display by `npm run media`, drawn by `home.js` onto the two
+  halves of the rendered Duo's display at the planes the render recorded. It
+  runs by itself while in view: hold, turn, hold, dissolve back, again.
+- **Paper is recipe content and the site's own artefacts:** the recipe sheet,
+  the index cards, the ways-in card, the collection stacks, the Draft with AI
+  slips. Loose paper lies a little askew. Chrome (header, buttons, footer) is
   never paper. There is no tape.
 - **Draft with AI** shows the three requests on Lasagna that the campaign
   approved for App Store screenshot 03, each an excerpt of its real capture
   (`bands` in `scripts/screens.json`: the request and two lines of the answer,
   nothing retyped). The Tiramisu exchange is not used: it strikes two liqueur
   brands through in red and was never approved for a layout.
-- **The red pen** draws twice: the hero's ring and underline on load, and the
-  arrow in "Cook the videos you save" when it comes into view. Its marks are
-  computed in `src/_data/pen.js` and drawn on with a CSS mask. Apart from them,
-  the film and the page turn, nothing on the page moves: no reveals, no
-  parallax. Pen ink is never drawn over an app capture.
-- **Video** (`home.js`): the film and the page turn play only in view, never under
-  `prefers-reduced-motion` or Save-Data, and never without a visible control.
-  Without the script, both show their stills and no video downloads.
+- **Motion is sparing, and each move is one of the app's.** The hero's words
+  arrive from the left in three steps; then the red pen rings "2.0" and
+  underlines "iPhone Duo" (marks computed in `src/_data/pen.js` as a hand lays
+  them, drawn on with a CSS mask), and later draws the arrow in "Cook the videos
+  you save"; paper settles onto the page as it comes into view; the film plays;
+  the page turns. Nothing else moves: no reveals on every section, no parallax.
+  Pen ink is never drawn over an app capture.
+- **Video** (`home.js`): the film and the page turn play only in view and never
+  under `prefers-reduced-motion` or Save-Data. The film has its Play/Pause; the
+  page turn runs by itself and has a Pause under the device (it is never a
+  button that must be pressed). Without the script, both show their stills and
+  no video downloads.
 
 ## Images and video
 
@@ -125,7 +138,10 @@ edges) with WebP for browsers without AVIF; each `<img>` gets its size from
 seeded cookbook's recipe photographs, imported from publishers: "None of it is
 cleared for marketing use." Thirteen images and the iPhone Duo film show them
 (`rights: "publisher-photos"`; the film's entry is under `media`; every build
-lists them). Re-seed those screens with owned or
+lists them). The hero's iPhone Duo also shows the app's ingredient icon pack,
+whose licence for marketing use is still to be confirmed
+(`creative/validation/rights-inventory-r3.md` in the docs); confirm it, or
+re-capture the spread on the Method pages. Re-seed those screens with owned or
 licensed photography, or secure permission, then recapture and regenerate. The
 iPhone Duo film carries the same photographs; recapturing it means re-rendering
 Track B (`source/trackb.py` in the app docs).
@@ -159,11 +175,16 @@ recolour, crop, outline, animate or redraw it, and keep clear space around it.
 One badge per screen: the header says Download in words instead. Replace the
 files rather than editing them.
 
+The app icon is the approved 2.0 icon (`src/assets/img/appicon-1024.png`, the
+master from the approved icon bundle; the bundle itself is not tracked). `npm run
+icons` resamples it to the favicons and the touch icon.
+
 The wordmark is the approved raster from `wordmark_handoff/` (see its README
 for specs): `src/assets/img/wordmark-flavordraft.png` on paper, served at the
 140–560 px sizes `npm run icons` resamples from it, always placed by width. The
-`-mono` file (reversed, for red) is kept but not used at present, as are the
-Lucide doodles in `src/assets/img/doodles/` (ISC; see `SOURCES.txt`).
+`-mono` file (reversed, for red) is kept but not used at present. Six of the
+Lucide icons in `src/assets/img/doodles/` (ISC; see `SOURCES.txt`) are set
+inline on the ways-in card; the rest are kept but unused.
 
 ## Legal pages
 

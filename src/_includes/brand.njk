@@ -17,6 +17,9 @@
                    records, so no template states an image's dimensions.
    ink()           (with context) A mark of the red pen, from src/_data/pen.js.
                    Decorative and always aria-hidden; home.css draws it on.
+   icon()          (with context) One of the line icons in src/assets/img/doodles/
+                   (src/_data/icons.js), inline, in the text's colour; aria-hidden,
+                   because the word beside it says what it is.
    --------------------------------------------------------------------------- #}
 
 {% macro wordmark(size) %}
@@ -66,4 +69,8 @@
 <path class="ink__stroke" d="{{ stroke.shape }}" mask="url(#ink-{{ name }}-{{ loop.index }})"/>
 {%- endfor %}
 </svg>
+{%- endmacro %}
+
+{% macro icon(name, class) %}
+<svg class="icon{% if class %} {{ class }}{% endif %}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">{{ icons[name] | safe }}</svg>
 {%- endmacro %}

@@ -11,8 +11,10 @@
  *   npm run screens                       # sources in ./flavordraft-app-docs
  *   SCREENS_SRC=/path/to/docs npm run screens
  *
- * Needs python3 with Pillow 11.3+ (AVIF support), cwebp (`brew install webp`), and
- * ffmpeg/ffprobe for the posters cut from video frames.
+ * Needs python3 with Pillow 11.3+ (AVIF support) and numpy, cwebp (`brew install webp`),
+ * and ffmpeg/ffprobe for the posters cut from video frames. An entry with a `device` is
+ * first rendered inside the campaign's own hardware (scripts/lib/render_device.py, which
+ * runs the kits in the app documentation's tools/), with alpha.
  */
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -65,9 +67,24 @@ for (const image of manifest.images) {
     process.exit(1);
   }
   if (image.frame != null) from = await frameOf(from, image.frame, image.name);
+  let quads = null;
+  let crop = image.crop ?? null;
+  let alpha = false;
+  if (image.device) {
+    await mkdir(tmp, { recursive: true });
+    const rendered = join(tmp, `${image.name}-device.png`);
+    const geometry = image.device.quads ? join(tmp, `${image.name}-device.json`) : null;
+    const deviceSpec = { src: from, crop, tools: join(src, "app-store/2.0/tools"), device: image.device, out: rendered, quads: geometry };
+    await run("python3", ["-I", resolve(root, "scripts/lib/render_device.py"), JSON.stringify(deviceSpec)], { maxBuffer: 1 << 24 });
+    if (geometry) quads = JSON.parse(await readFile(geometry, "utf8")).quads;
+    from = rendered;
+    crop = null;
+    alpha = true;
+  }
   const spec = {
     src: from,
-    crop: image.crop ?? null,
+    crop,
+    alpha,
     bands: image.bands ?? null,
     radius: image.radius ?? null,
     continuous: image.continuous ?? false,
@@ -88,7 +105,7 @@ for (const image of manifest.images) {
     count += 2;
   }
 
-  shapes[image.name] = { ...shape, widths: image.widths, rights: image.rights };
+  shapes[image.name] = { ...shape, widths: image.widths, rights: image.rights, ...(quads ? { quads } : {}) };
   console.log(`${image.name.padEnd(24)} ${shape.w}×${shape.h}  ${image.widths.join(" · ")}${image.rights === "owned" ? "" : `  [${image.rights}]`}`);
 }
 

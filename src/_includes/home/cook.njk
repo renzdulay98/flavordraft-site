@@ -1,13 +1,18 @@
 {%- from "brand.njk" import img with context -%}
 {#
   Cook View, set in the app's own cooking voice: the headline is Charter, like the
-  step on a Cook View page. On the right, FlavorDraft's real page turn (two seconds
-  of the iPhone Duo film: step 16 at rest, Next pressed, the recorded turn, step 17),
-  cropped to the screen by scripts/build-media.mjs, beside the same recipe on
-  iPhone with its timer running. home.js plays the turn once when it comes into
-  view and holds on step 17; "Turn the page" plays it again, and says so to screen
-  readers. Under reduced motion it never plays: the button changes the page with a
-  short fade, as the app itself does.
+  step on a Cook View page. The main picture is the campaign's iPhone Duo folded
+  like a laptop (App Store frame 05's pose) with Cook View on it, the step standing
+  and the controls lying; beside it the campaign's dark iPhone with the same recipe
+  and its timer running. The Duo's display is the first frame of FlavorDraft's real
+  page turn (two seconds of the iPhone Duo film: step 16 at rest, Next pressed, the
+  recorded turn, step 17), cut to the display by scripts/build-media.mjs. home.js
+  lays that clip over the display's two halves, each at the plane the render
+  recorded for it (scripts/screens.json, `quads`), and lets it run on its own
+  while the section is in view: a hold, the turn, a hold on step 17, a dissolve
+  back. Nothing needs pressing; a text control under the device pauses it, as the
+  film's does. Under reduced motion, or without the script, the device simply
+  holds step 16.
 #}
 <section class="cook" aria-labelledby="cook-title">
   <div class="wrap cook__grid">
@@ -16,27 +21,25 @@
       <p class="lede">In Cook View every step gets a page of its own, set large enough to read from across the counter. Tap Next and the page turns. A step’s timer keeps running while you get on with the next one.</p>
     </div>
 
-    <div class="cook__pages">
-      <figure class="cook__turn" data-turn>
-        <div class="shot cook__screen">
-          {{ img("cook-turn-start", "Cook View on iPhone Duo, partly folded: the lasagna recipe’s step 16 of 20, “Repeat layering: ragu, cheese sauce, parmesan, lasagna sheets, until you have three layers. Finish with a fourth layer of lasagna sheets and pour over the remaining cheese sauce.” Below it, Previous, No timer and Next.", "(min-width: 80em) 366px, (min-width: 62em) 29vw, (min-width: 48em) 374px, 53vw", { class: "cook__still" }) }}
-          {{ img("cook-turn-end", "Cook View on iPhone Duo, partly folded: step 17 of 20, “Sprinkle mozzarella and any remaining parmesan on top.”", "(min-width: 80em) 366px, (min-width: 62em) 29vw, (min-width: 48em) 374px, 53vw", { class: "cook__still cook__still--end", hidden: true }) }}
-          <video class="cook__video" muted playsinline preload="none" width="660" height="938" aria-hidden="true" data-turn-video>
+    <div class="cook__stage">
+      <figure class="cook__duo" data-turn data-turn-quads="{{ screens['cook-duo'].quads | dump }}">
+        <div class="cook__device">
+          {{ img("cook-duo", "Cook View on iPhone Duo, folded like a laptop on the counter: on the standing half, the lasagna recipe’s step 16 of 20, “Repeat layering: ragu, cheese sauce, parmesan, lasagna sheets, until you have three layers. Finish with a fourth layer of lasagna sheets and pour over the remaining cheese sauce.” On the lying half, Previous, No timer and Next. Tapping Next turns the page to step 17, “Sprinkle mozzarella and any remaining parmesan on top.”", "(min-width: 90rem) 548px, (min-width: 62em) 38vw, 68vw", { class: "cook__still" }) }}
+          <canvas class="cook__page cook__page--top" width="660" height="469" aria-hidden="true" data-turn-half="top"></canvas>
+          <canvas class="cook__page cook__page--bottom" width="660" height="469" aria-hidden="true" data-turn-half="bottom"></canvas>
+          <video class="cook__video" muted playsinline preload="none" width="660" height="938" aria-hidden="true" tabindex="-1" data-turn-video>
             <source src="/assets/media/cook/cook-turn.h264.mp4" type="video/mp4">
             <source src="/assets/media/cook/cook-turn.vp9.webm" type="video/webm">
           </video>
         </div>
         <figcaption class="caption cook__caption">
-          <span>On iPhone Duo, partly folded.</span>
-          <button class="text-button" type="button" hidden data-turn-again>Turn the page</button>
-          <span class="visually-hidden" aria-live="polite" data-turn-status></span>
+          <span>On <span class="nowrap">iPhone Duo</span>, folded like a laptop: the step above, the controls below, and the page turns.</span>
+          <button class="text-button" type="button" hidden data-turn-toggle>Pause the page turn</button>
         </figcaption>
       </figure>
 
       <figure class="cook__iphone">
-        <div class="shot">
-          {{ img("cook-iphone", "Cook View on iPhone: “Bake for 25 minutes or until golden and bubbling.” Page 18 of 20, with the step’s timer running at 23:10 above Previous and Next.", "(min-width: 80em) 240px, (min-width: 62em) 19vw, (min-width: 48em) 245px, 35vw") }}
-        </div>
+        {{ img("cook-iphone", "Cook View on iPhone: “Bake for 25 minutes or until golden and bubbling.” Page 18 of 20, with the step’s timer running at 23:10 above Previous and Next.", "(min-width: 90rem) 200px, (min-width: 62em) 14vw, 25vw") }}
         <figcaption class="caption">On iPhone, its timer running.</figcaption>
       </figure>
     </div>

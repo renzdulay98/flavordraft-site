@@ -10,7 +10,7 @@ preloadImage: hero-duo
 # One value for the hero image's preload (base.njk) and its <img> (home/hero.njk), so the
 # two always choose the same file. Slots measured from the layout (home.css §4): the hero
 # is two columns from 75em, and from 40em when the screen is held landscape.
-preloadSizes: "(min-width: 90rem) 556px, (min-width: 80em) 39vw, (min-width: 75em) 36vw, (min-width: 62em) and (orientation: landscape) 36vw, (min-width: 40em) and (orientation: landscape) 32vw, 64vw"
+preloadSizes: "(min-width: 90rem) 648px, (min-width: 80em) 46vw, (min-width: 75em) 43vw, (min-width: 62em) and (orientation: landscape) 43vw, (min-width: 40em) and (orientation: landscape) 38vw, 74vw"
 structuredData: true
 ---
 {#
@@ -25,5 +25,4 @@ structuredData: true
 {% include "home/draft.njk" %}
 {% include "home/cook.njk" %}
 {% include "home/shelf.njk" %}
-{% include "home/pricing.njk" %}
 {% include "home/closing.njk" %}

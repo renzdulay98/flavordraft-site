@@ -3,8 +3,9 @@
      `npm run icons`, which first replaces each pen marker below (a comment that
      names a mark) with that mark of the red pen from src/_data/pen.js, finished:
      the hero's ring and underline. Laid out with the site's own tokens and faces.
-     The two screens are Cook View, photo-free, from the site's own image set
-     (`npm run screens`). -->
+     The two devices are Cook View, photo-free, from the site's own image set
+     (`npm run screens`): the campaign's iPhone Duo folded like a laptop and its
+     dark iPhone. -->
 <html><head><meta charset="utf-8">
 <style>
   * { box-sizing: border-box; margin: 0; }
@@ -17,7 +18,7 @@
   }
   .wordmark { position: absolute; left: 72px; top: 64px; width: 210px; }
   .words { position: absolute; left: 72px; top: 178px; }
-  .news { display: block; font-size: 92px; font-weight: 800; line-height: 1.02; letter-spacing: -0.033em; }
+  .news { display: block; font-size: 86px; font-weight: 800; line-height: 1.02; letter-spacing: -0.033em; }
   .made { display: block; margin-top: 0.42em; font-family: Charter, "Iowan Old Style", Georgia, serif; font-size: 50px; line-height: 1.12; letter-spacing: -0.012em; }
   .inked { position: relative; display: inline-block; white-space: nowrap; }
   .inked svg { position: absolute; overflow: visible; mix-blend-mode: multiply; }
@@ -26,11 +27,10 @@
   .ring svg { left: 50%; top: 41%; width: 2.42em; height: 1.27em; transform: translate(-50%, -50%); }
   .under svg { left: -0.03em; top: 94%; width: calc(100% + 0.08em); height: 0.3em; }
   .site { position: absolute; left: 72px; bottom: 58px; font-size: 22px; color: #7a6c60; }
-  .shot { position: absolute; border-radius: 9px; overflow: hidden; background: #faf3e8;
-    box-shadow: 0 1px 1px rgba(44,38,34,.08), 0 2px 6px -2px rgba(44,38,34,.14), 0 24px 48px -22px rgba(44,38,34,.4); }
+  .shot { position: absolute; }
   .shot img { display: block; width: 100%; height: auto; }
-  .duo { right: 222px; top: 76px; width: 300px; }
-  .iphone { right: 60px; top: 188px; width: 150px; border-radius: 11px; }
+  .duo { right: 150px; top: 118px; width: 470px; }
+  .iphone { right: 56px; top: 212px; width: 132px; }
 </style></head>
 <body>
   <img class="wordmark" src="../../src/assets/img/wordmark-flavordraft.png" alt="">
@@ -39,6 +39,6 @@
     <span class="made">Made for <span class="inked under">iPhone Duo<!--pen:underline--></span>.</span>
   </p>
   <p class="site">flavordraft.app</p>
-  <div class="shot duo"><img src="../../src/assets/img/screens/cook-turn-start-660.webp" alt=""></div>
-  <div class="shot iphone"><img src="../../src/assets/img/screens/cook-iphone-450.webp" alt=""></div>
+  <div class="shot duo"><img src="../../src/assets/img/screens/cook-duo-960.webp" alt=""></div>
+  <div class="shot iphone"><img src="../../src/assets/img/screens/cook-iphone-330.webp" alt=""></div>
 </body></html>
