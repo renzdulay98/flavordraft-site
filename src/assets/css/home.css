@@ -369,22 +369,22 @@
 /* The device family as one shot, the way the campaign's first Duo frame stacks
    its phones: the iPhone Duo lying open is the anchor, right of centre; the
    iPhone stands in front at the lower left, over the Duo's corner; the Duo
-   closed lies in front at the lower right, resting on the other corner; the Duo
-   stood like a tent is behind, above the upper right. A diagonal runs from the
-   iPhone up to the tent. The scene is sized by its width (every offset is a
-   share of it), so the family keeps its scale at any size, and each phone is
-   about the share of the open Duo the brief asks for: the iPhone 0.44, the
-   closed Duo 0.31, the tent 0.28. Each render carries its own shadow from the
-   one light. */
+   stood like a tent stands in front along the Duo's lower edge, centre right,
+   over its foot; the Duo closed lies at the lower right, resting on the other
+   corner, a little higher. The three smaller phones run along the Duo's foot
+   as one cluster. The scene is sized by its width (every offset is a share of
+   it), so the family keeps its scale at any size, and each phone is about the
+   share of the open Duo the brief asks for: the iPhone 0.44, the tent 0.32,
+   the closed Duo 0.31. Each render carries its own shadow from the one light. */
 .hero__stage {
   position: relative;
 }
 
-/* Padding, not a margin on the Duo, keeps the room above it inside the scene,
-   so the tent's place at the top is clear of the Duo. */
+/* Padding, not a margin on the Duo, keeps the room below it inside the scene,
+   where the phones in front stand past the Duo's foot. */
 .hero__scene {
   position: relative;
-  padding: 17% 0 12%;
+  padding: 2% 0 12%;
 }
 
 .hero__device img {
@@ -401,10 +401,10 @@
 
 .hero__device--tent {
   position: absolute;
-  z-index: 1;
-  top: 6%;
-  right: 1%;
-  width: 21%;
+  z-index: 3;
+  left: 52%;
+  bottom: 0;
+  width: 24%;
 }
 
 .hero__device--iphone {
@@ -419,7 +419,7 @@
   position: absolute;
   z-index: 3;
   right: -2%;
-  bottom: 0;
+  bottom: 2%;
   width: 23%;
 }
 
@@ -453,10 +453,6 @@
 @media (min-width: 40em) and (max-width: 61.99em) and (orientation: landscape) {
   .hero__device--tent {
     display: none;
-  }
-
-  .hero__scene {
-    padding-top: 4%;
   }
 }
 
