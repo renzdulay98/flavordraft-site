@@ -97,11 +97,13 @@ no pricing on the site: the app presents its plans in its own onboarding.
   inside the hardware the approved App Store screenshots use: the dark iPhone
   `tools/slabkit.py` draws and the Star White iPhone Duo `tools/duokit.py`
   models, rendered by `npm run screens` from the same captures (`device` in
-  `scripts/screens.json`). The hero shows the family as the Duo App Store
-  frame 01 arranges it: the Duo lying open (the anchor), the iPhone in front
-  over its corner, the Duo stood like a tent in front along the Duo's foot,
-  and the Duo closed resting on the other corner, all seen by one camera
-  under one light. Phones show the open Duo and the iPhone only. The Duo Studio film (Track A, Apple's
+  `scripts/screens.json`). The hero shows the family: the Duo lying open (the
+  anchor), the iPhone in front over its corner, the Duo stood like a tent in
+  front along the Duo's foot, and the Duo closed resting on the other corner,
+  each seen from where it reads true (the campaign's level camera for the
+  phones lying open and closed, a little lower for the tent) under one light,
+  so every phone keeps the hardware's own proportion, and placed by width
+  alone at one scale. Phones show the open Duo and the iPhone only. The Duo Studio film (Track A, Apple's
   own 3D model) is not used: its rights review marks it internal only.
 - **The page turn on the device** is the real one: two seconds of the Track B
   film, cut to the display by `npm run media`, drawn by `home.js` onto the two

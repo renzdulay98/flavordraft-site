@@ -366,16 +366,18 @@
   text-decoration-color: currentColor;
 }
 
-/* The device family as one shot, the way the campaign's first Duo frame stacks
-   its phones: the iPhone Duo lying open is the anchor, right of centre; the
-   iPhone stands in front at the lower left, over the Duo's corner; the Duo
-   stood like a tent stands in front along the Duo's lower edge, centre right,
-   over its foot; the Duo closed lies at the lower right, resting on the other
-   corner, a little higher. The three smaller phones run along the Duo's foot
-   as one cluster. The scene is sized by its width (every offset is a share of
-   it), so the family keeps its scale at any size, and each phone is about the
-   share of the open Duo the brief asks for: the iPhone 0.44, the tent 0.32,
-   the closed Duo 0.31. Each render carries its own shadow from the one light. */
+/* The device family as one shot: the iPhone Duo lying open and level is the
+   anchor, right of centre; the iPhone stands in front at the lower left, over
+   the Duo's corner; the Duo stood like a tent stands in front along the Duo's
+   foot, centre right; the Duo closed lies at the lower right, resting on the
+   other corner. Every render is the campaign's model from its level camera (the
+   tent from a little lower, where a tent reads true), so each phone keeps the
+   hardware's own proportion, and each is placed by width alone (its height
+   follows), so nothing is ever stretched. The widths are one scale: measured
+   from the renders' bodies, the iPhone is 0.42 of the open Duo's body width
+   (the hardware's 0.47, a touch back), the tent 0.39 and the closed Duo 0.31.
+   The scene is sized by its width, so the family keeps that scale at any size.
+   Each render carries its own shadow from the one light. */
 .hero__stage {
   position: relative;
 }
@@ -384,7 +386,7 @@
    where the phones in front stand past the Duo's foot. */
 .hero__scene {
   position: relative;
-  padding: 2% 0 12%;
+  padding: 0 0 19%;
 }
 
 .hero__device img {
@@ -395,16 +397,16 @@
 .hero__device--duo {
   position: relative;
   z-index: 2;
-  width: 75%;
-  margin-left: 25%;
+  width: 74%;
+  margin-left: 26%;
 }
 
 .hero__device--tent {
   position: absolute;
   z-index: 3;
-  left: 52%;
+  left: 43%;
   bottom: 0;
-  width: 24%;
+  width: 32%;
 }
 
 .hero__device--iphone {
@@ -412,15 +414,15 @@
   z-index: 4;
   left: 0;
   bottom: 0;
-  width: 33%;
+  width: 37%;
 }
 
 .hero__device--folded {
   position: absolute;
   z-index: 3;
   right: -2%;
-  bottom: 2%;
-  width: 23%;
+  bottom: 0;
+  width: 24%;
 }
 
 /* Phones: the words first, then only the open Duo and the iPhone, large. */
@@ -435,8 +437,8 @@
   }
 
   .hero__device--duo {
-    width: 78%;
-    margin-left: 22%;
+    width: 76%;
+    margin-left: 24%;
   }
 
   .hero__scene {
@@ -444,7 +446,7 @@
   }
 
   .hero__device--iphone {
-    width: 31%;
+    width: 36%;
   }
 }
 

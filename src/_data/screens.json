@@ -11,8 +11,8 @@
     }
   },
   "hero-duo": {
-    "w": 1812,
-    "h": 1155,
+    "w": 1797,
+    "h": 1336,
     "alpha": true,
     "widths": [
       500,
@@ -23,8 +23,8 @@
     "rights": "publisher-photos"
   },
   "hero-folded": {
-    "w": 1182,
-    "h": 1196,
+    "w": 1056,
+    "h": 1328,
     "alpha": true,
     "widths": [
       260,
@@ -35,14 +35,14 @@
     "rights": "publisher-photos"
   },
   "hero-tent": {
-    "w": 1711,
-    "h": 1449,
+    "w": 1720,
+    "h": 1501,
     "alpha": true,
     "widths": [
-      260,
-      400,
-      560,
-      800
+      300,
+      450,
+      640,
+      900
     ],
     "rights": "owned"
   },
