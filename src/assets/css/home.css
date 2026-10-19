@@ -135,11 +135,11 @@
   height: auto;
 }
 
-/* A control that acts on the moving picture beside it ("Play the film", "Pause
-   the page turn"): words in the pen's red, because they are the reader's action,
-   and no box, so they never pass for part of the app. Its 44 px hit area is a
-   pseudo-element reaching past its line, so the line is no taller and the focus
-   ring hugs the words. */
+/* A control set as words in the pen's red, because they are the reader's
+   action, and no box, so they never pass for part of the app. Its 44 px hit area
+   is a pseudo-element reaching past its line, so the line is no taller and the
+   focus ring hugs the words. (Kept for the page's text controls; the film and
+   the page turn are their own controls.) */
 .text-button {
   position: relative;
   display: inline-flex;
@@ -293,17 +293,26 @@
 }
 
 /* The ring is sized from the type, not the word, so it sits the same round
-   "2.0" in any of the stack's faces. */
+   "2.0" in any of the stack's faces, with room round the numerals: its oval
+   clears their corners, and the words after it stand clear of its right side.
+   On a phone it is a little smaller, so it stays inside the gutter. */
 .inked--ring {
-  margin-inline: 0.22em 0.26em;
+  margin-inline: 0.22em 0.52em;
 }
 
 .inked--ring .ink {
-  left: 50%;
-  top: 41%;
-  width: 2.42em;
-  height: 1.27em;
+  left: 52%;
+  top: 42%;
+  width: 2.98em;
+  height: 1.46em;
   transform: translate(-50%, -50%);
+}
+
+@media (max-width: 39.99em) {
+  .inked--ring .ink {
+    width: 2.76em;
+    height: 1.4em;
+  }
 }
 
 .inked--under .ink {
@@ -357,50 +366,97 @@
   text-decoration-color: currentColor;
 }
 
-/* The two devices as one composition, the way the campaign's first frame
-   stacks its phones: the iPhone Duo lying open across the stage, the iPhone
-   in front at the lower left, over the Duo's corner and a little past its
-   foot. Both renders carry their own shadows. */
+/* The device family as one shot, the way the campaign's first Duo frame stacks
+   its phones: the iPhone Duo lying open is the anchor, right of centre; the
+   iPhone stands in front at the lower left, over the Duo's corner; the Duo
+   closed lies in front at the lower right, resting on the other corner; the Duo
+   stood like a tent is behind, above the upper right. A diagonal runs from the
+   iPhone up to the tent. The scene is sized by its width (every offset is a
+   share of it), so the family keeps its scale at any size, and each phone is
+   about the share of the open Duo the brief asks for: the iPhone 0.44, the
+   closed Duo 0.31, the tent 0.28. Each render carries its own shadow from the
+   one light. */
+.hero__stage {
+  position: relative;
+}
+
+/* Padding, not a margin on the Duo, keeps the room above it inside the scene,
+   so the tent's place at the top is clear of the Duo. */
 .hero__scene {
   position: relative;
-  padding-bottom: 9%;
+  padding: 17% 0 12%;
 }
 
-.hero__duo {
-  margin-left: 18%;
-}
-
-.hero__duo img,
-.hero__iphone img {
+.hero__device img {
   width: 100%;
   height: auto;
 }
 
-.hero__iphone {
+.hero__device--duo {
+  position: relative;
+  z-index: 2;
+  width: 75%;
+  margin-left: 25%;
+}
+
+.hero__device--tent {
   position: absolute;
+  z-index: 1;
+  top: 6%;
+  right: 1%;
+  width: 21%;
+}
+
+.hero__device--iphone {
+  position: absolute;
+  z-index: 4;
   left: 0;
   bottom: 0;
-  width: 24%;
-  z-index: 2;
+  width: 33%;
 }
 
-.hero__caption {
-  margin-top: clamp(1rem, 2vw, 1.5rem);
-  max-width: 32em;
+.hero__device--folded {
+  position: absolute;
+  z-index: 3;
+  right: -2%;
+  bottom: 0;
+  width: 23%;
 }
 
-/* Phones: the words first, then the devices. */
+/* Phones: the words first, then only the open Duo and the iPhone, large. */
 @media (max-width: 39.99em) {
   .hero__grid {
     gap: 2rem;
   }
 
-  .hero__scene {
-    padding-bottom: 11%;
+  .hero__device--tent,
+  .hero__device--folded {
+    display: none;
   }
 
-  .hero__iphone {
-    width: 25%;
+  .hero__device--duo {
+    width: 78%;
+    margin-left: 22%;
+  }
+
+  .hero__scene {
+    padding: 0 0 12%;
+  }
+
+  .hero__device--iphone {
+    width: 31%;
+  }
+}
+
+/* A tablet or phone on its side, where the scene is narrow: three phones; the
+   tent would be too small to read. */
+@media (min-width: 40em) and (max-width: 61.99em) and (orientation: landscape) {
+  .hero__device--tent {
+    display: none;
+  }
+
+  .hero__scene {
+    padding-top: 4%;
   }
 }
 
@@ -538,10 +594,10 @@
   opacity: 1;
 }
 
-/* Under the film: its control, then its chapters as they play, one to a line,
-   the current one inked. It runs the width of the unfolded screen and starts
-   right under it (the still carries its own margin of paper inside the frame,
-   which the negative share of the width takes back). */
+/* Under the film: its chapters as they play, one to a line, the current one
+   inked. It runs the width of the unfolded screen and starts right under it
+   (the still carries its own margin of paper inside the frame, which the
+   negative share of the width takes back). */
 .film__caption {
   display: flex;
   flex-wrap: wrap;
@@ -555,9 +611,29 @@
 
 /* As wide for "Pause the film" as for "Play the film", so nothing beside it
    moves when the film starts or stops. */
+/* The film is its own control: the button covers the frame, drawn only as a
+   focus ring for a keyboard, so the picture stays clean. */
 .film__toggle {
-  flex: none;
-  min-width: 6.5em;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.film__toggle:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: -2px;
+  border-radius: var(--r-sm);
+}
+
+.film__toggle[hidden] {
+  display: none;
 }
 
 .film__chapters {
@@ -1083,15 +1159,28 @@
   pointer-events: none;
 }
 
-/* The control starts its own line under the words. */
-.cook__caption {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 0.625rem;
+/* The device is its own control, as the film is. */
+.cook__toggle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-.cook__caption > span:first-child {
-  flex-basis: 100%;
+.cook__toggle:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: -2px;
+  border-radius: var(--r-md);
+}
+
+.cook__toggle[hidden] {
+  display: none;
 }
 
 @media (min-width: 62em) {

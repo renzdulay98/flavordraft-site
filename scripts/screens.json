@@ -27,10 +27,26 @@
     {
       "name": "hero-duo",
       "from": "app-store/2.0/duo/source/inner-landscape-recipe-video.png",
-      "device": { "kit": "duo", "pose": "lying_open", "camera": 78, "px": 1.7 },
+      "device": { "kit": "duo", "pose": "lying_open", "camera": 56, "yaw": -6, "px": 1.7 },
       "widths": [500, 800, 1100, 1700],
       "rights": "publisher-photos",
-      "_note": "The iPhone Duo lying open and level, as App Store frame 02 shows it: Chicken Parmesan as a cookbook spread, method on the left page, ingredients on the right, the fold between them. Shows the recipe's 44 pt video thumbnail (The Cooking Foodie) and the app's ingredient icons, whose pack licence for marketing is still to be confirmed (creative/validation/rights-inventory-r3.md)."
+      "_note": "The iPhone Duo lying open, seen as the Duo App Store frame 01 sees its open phone (from 56 degrees, turned 6): Chicken Parmesan as a cookbook spread, method on the left page, ingredients on the right, the fold between them. The anchor of the hero's device family; the closed and tent phones below are seen by the same camera. Shows the recipe's 44 pt video thumbnail (The Cooking Foodie) and the app's ingredient icons, whose pack licence for marketing is still to be confirmed (creative/validation/rights-inventory-r3.md)."
+    },
+    {
+      "name": "hero-folded",
+      "from": "app-store/2.0/duo/source/outer-portrait-my-recipes.png",
+      "device": { "kit": "duo", "pose": "lying_closed", "camera": 56, "yaw": 14, "px": 1.7 },
+      "widths": [260, 400, 560, 800],
+      "rights": "publisher-photos",
+      "_note": "The iPhone Duo closed, My Recipes on its outer display, as frame 01's closed phone (camera 56, turned 14)."
+    },
+    {
+      "name": "hero-tent",
+      "from": "app-store/2.0/duo/source/outer-landscape-cook-timer.png",
+      "device": { "kit": "duo", "pose": "tent", "opening": 74, "yaw": -38, "camera": 56, "px": 1.7 },
+      "widths": [260, 400, 560, 800],
+      "rights": "owned",
+      "_note": "The iPhone Duo stood like a tent with Cook View on its outer display, as frame 01's tent (opened 74, turned 38, camera 56): its side, both rails, the hinge and its white back show. No photograph."
     },
     {
       "name": "hero-iphone",

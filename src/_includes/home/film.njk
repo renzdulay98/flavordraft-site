@@ -6,7 +6,9 @@
   only once home.js has checked it should (in view; not under reduced motion; not on
   Save-Data), and narrow screens get the loop's middle 4:3 as a file of its own.
   Without the script, nothing downloads but the still. The film is a seamless 17 s
-  loop starting on that still. Its chapters, measured from the file: unfolded 0-4.6 s,
+  loop starting on that still. The film itself is its control: a press or a key on
+  it pauses and plays it (the button is the frame, named but drawn only as a focus
+  ring), so nothing is added to the composition. Its chapters, measured from the file: unfolded 0-4.6 s,
   partly folded in Cook View 5.4-10.2 s (the page turns at 7.6 s), folded 11.0-15.0 s,
   dissolving back to the start. The still's alt text says what is on screen and the
   chapter list narrates the sequence, so the video itself is hidden from assistive tech.
@@ -28,10 +30,10 @@
         <source src="/assets/media/duo/duo-film-1920.vp9.webm" type='video/webm; codecs="vp9"'>
         <source src="/assets/media/duo/duo-film-1920.h264.mp4" type='video/mp4; codecs="avc1.64002A"'>
       </video>
+      <button class="film__toggle" type="button" hidden aria-label="Pause the film" data-film-toggle></button>
     </div>
 
     <figcaption class="film__caption">
-      <button class="text-button film__toggle" type="button" hidden data-film-toggle>Play the film</button>
       <ol class="film__chapters" role="list" data-film-chapters="0 4.98 10.6 15.4">
         <li data-chapter="0"><b>Unfolded.</b> Your cookbook across two pages.</li>
         <li data-chapter="1"><b>Partly folded.</b> Cook View sets the step above and the controls below, and Next turns the page.</li>

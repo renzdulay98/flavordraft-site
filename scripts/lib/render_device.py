@@ -11,9 +11,11 @@ Called by scripts/build-screens.mjs for a manifest entry that has a `device`:
 `kit: "duo"` is the campaign's iPhone Duo model (duokit.py: one physical model in Star
 White, ray-traced, the capture laid on the plane of the display it belongs to), in one
 of its postures: `lying_open` (flat, inner display up; a tall capture gives the phone
-lying tall), `laptop` (held tall and folded partway: the capture's lower half lies, the
-upper half stands; `opening`, `yaw`), with `camera` (its elevation in degrees, and
-`distance`) and `px` (picture pixels to the point). `kit: "slab"` is the campaign's dark
+lying tall; `yaw`), `lying_closed` (closed, the outer display up, spine to the left;
+`yaw`), `laptop` (held tall and folded partway: the capture's lower half lies, the
+upper half stands; `opening`, `yaw`) and `tent` (stood on its two free edges, hinge
+up, the outer display facing the viewer on its side; `opening`, `yaw`), with `camera`
+(its elevation in degrees, and `distance`) and `px` (picture pixels to the point). `kit: "slab"` is the campaign's dark
 iPhone (slabkit.py: the drawn body, the capture as its display) at `scale` pixels to
 the capture's pixel. The phone's own shadow on the paper is composited under it, and
 the result is cut to its bounds. Nothing on a display is drawn here: it is the capture.
@@ -64,8 +66,12 @@ def main():
         px = device.get("px", 1.5)
         if pose == "lying_open":
             duo = dk.lying_open(capture, yaw=device.get("yaw", 0.0))
+        elif pose == "lying_closed":
+            duo = dk.lying_closed(capture, yaw=device.get("yaw", 0.0))
         elif pose == "laptop":
             duo = dk.laptop(capture, opening=device.get("opening", 95.0), yaw=device.get("yaw", 0.0))
+        elif pose == "tent":
+            duo = dk.tent(capture, opening=device.get("opening", 70.0), yaw=device.get("yaw", 0.0))
         else:
             sys.exit(f"unknown pose {pose}")
         picture, shadow, origin = dk.render(duo, cam, px)

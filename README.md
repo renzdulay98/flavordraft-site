@@ -97,8 +97,12 @@ no pricing on the site: the app presents its plans in its own onboarding.
   inside the hardware the approved App Store screenshots use: the dark iPhone
   `tools/slabkit.py` draws and the Star White iPhone Duo `tools/duokit.py`
   models, rendered by `npm run screens` from the same captures (`device` in
-  `scripts/screens.json`). The Duo Studio film (Track A, Apple's own 3D model)
-  is not used: its rights review marks it internal only.
+  `scripts/screens.json`). The hero shows the family as the Duo App Store
+  frame 01 arranges it: the Duo lying open (the anchor), the iPhone in front
+  over its corner, the Duo closed resting on the other corner, and the Duo
+  stood like a tent behind, all seen by one camera under one light. Phones
+  show the open Duo and the iPhone only. The Duo Studio film (Track A, Apple's
+  own 3D model) is not used: its rights review marks it internal only.
 - **The page turn on the device** is the real one: two seconds of the Track B
   film, cut to the display by `npm run media`, drawn by `home.js` onto the two
   halves of the rendered Duo's display at the planes the render recorded. It
@@ -120,10 +124,11 @@ no pricing on the site: the app presents its plans in its own onboarding.
   the page turns. Nothing else moves: no reveals on every section, no parallax.
   Pen ink is never drawn over an app capture.
 - **Video** (`home.js`): the film and the page turn play only in view and never
-  under `prefers-reduced-motion` or Save-Data. The film has its Play/Pause; the
-  page turn runs by itself and has a Pause under the device (it is never a
-  button that must be pressed). Without the script, both show their stills and
-  no video downloads.
+  under `prefers-reduced-motion` or Save-Data. Each is its own control: a press
+  or a key on the film or on the device pauses and plays it (a named button over
+  the picture, drawn only as a focus ring), so nothing is added to the
+  composition and nothing must be pressed. Without the script, both show their
+  stills and no video downloads.
 
 ## Images and video
 
@@ -136,7 +141,7 @@ edges) with WebP for browsers without AVIF; each `<img>` gets its size from
 
 **Before launch:** the slab and Duo capture READMEs in the app docs say of the
 seeded cookbook's recipe photographs, imported from publishers: "None of it is
-cleared for marketing use." Thirteen images and the iPhone Duo film show them
+cleared for marketing use." Fourteen images and the iPhone Duo film show them
 (`rights: "publisher-photos"`; the film's entry is under `media`; every build
 lists them). The hero's iPhone Duo also shows the app's ingredient icon pack,
 whose licence for marketing use is still to be confirmed

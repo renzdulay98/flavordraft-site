@@ -49,7 +49,8 @@
      It plays while a quarter of it is on screen and pauses when it leaves. The
      button always says what a press will do, so it stays true when autoplay is
      refused or the film scrolls away; a reader's pause is kept. The chapter that
-     is playing is marked in the caption beside it. */
+     is playing is marked in the caption beside it. The control is the frame itself,
+     named for assistive tech, so nothing is drawn over the film. */
   const film = document.querySelector("[data-film]");
   if (film) {
     const video = film.querySelector("[data-film-video]");
@@ -60,7 +61,7 @@
     let wanted = mayMove();
 
     const label = () => {
-      toggle.textContent = video.paused ? "Play the film" : "Pause the film";
+      toggle.setAttribute("aria-label", video.paused ? "Play the film" : "Pause the film");
     };
 
     video.addEventListener("play", label);
@@ -124,8 +125,8 @@
      It runs on its own while the section is in view: a hold on the still, the
      turn, a hold on step 17, a dissolve back to the still (the clip's own first
      frame) and round again. Nothing needs pressing, and nothing moves but the
-     page; a text control under the device pauses it, as the film's does. Under
-     reduced motion or Save-Data the device simply holds step 16. */
+     page; the device itself is the pause, named for assistive tech, as the film is
+     its own. Under reduced motion or Save-Data the device simply holds step 16. */
   const turn = document.querySelector("[data-turn]");
   if (turn && mayMove()) {
     const video = turn.querySelector("[data-turn-video]");
@@ -232,7 +233,7 @@
        plays again, even if the section scrolls away and back. */
     if (toggle) {
       const label = () => {
-        toggle.textContent = wanted ? "Pause the page turn" : "Play the page turn";
+        toggle.setAttribute("aria-label", wanted ? "Pause the page turn" : "Play the page turn");
       };
       toggle.hidden = false;
       label();

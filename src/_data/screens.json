@@ -11,8 +11,8 @@
     }
   },
   "hero-duo": {
-    "w": 1732,
-    "h": 1219,
+    "w": 1812,
+    "h": 1155,
     "alpha": true,
     "widths": [
       500,
@@ -21,6 +21,30 @@
       1700
     ],
     "rights": "publisher-photos"
+  },
+  "hero-folded": {
+    "w": 1182,
+    "h": 1196,
+    "alpha": true,
+    "widths": [
+      260,
+      400,
+      560,
+      800
+    ],
+    "rights": "publisher-photos"
+  },
+  "hero-tent": {
+    "w": 1711,
+    "h": 1449,
+    "alpha": true,
+    "widths": [
+      260,
+      400,
+      560,
+      800
+    ],
+    "rights": "owned"
   },
   "hero-iphone": {
     "w": 857,

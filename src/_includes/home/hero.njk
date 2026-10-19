@@ -2,11 +2,14 @@
 {#
   The 2.0 announcement. The words arrive from the left in three quiet steps
   (home.css), then the pen rings "2.0" and underlines "iPhone Duo"; the words
-  themselves are plain type. Beside them, the App Store campaign's own hardware
-  with FlavorDraft's real screens on it (scripts/screens.json): the iPhone Duo
-  lying open with a recipe across its two pages like a cookbook, and the dark
-  iPhone with the same cookbook's Home, resting over the Duo's corner. On phones
-  the words come first and the devices follow.
+  themselves are plain type. Beside them, the family: the App Store campaign's
+  own hardware with FlavorDraft's real screens on it (scripts/screens.json), as
+  the Duo App Store frame 01 arranges its phones. The iPhone Duo lying open with
+  a recipe across its two pages like a cookbook is the anchor; the dark iPhone
+  with Home rests in front over its corner; the Duo closed, with My Recipes on its
+  outer display, lies at the lower right; and the Duo stood like a tent in Cook
+  View stands behind at the upper right. No caption: the devices say it. On
+  phones the words come first and only the open Duo and the iPhone follow.
 #}
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap hero__grid">
@@ -22,16 +25,21 @@
       </div>
     </div>
 
-    <figure class="hero__stage">
+    <div class="hero__stage">
       <div class="hero__scene">
-      <div class="hero__duo">
-        {{ img("hero-duo", "FlavorDraft on iPhone Duo, lying open: Chicken Parmesan across the two pages like a cookbook, its method in numbered steps on the left page and its ingredients on the right.", preloadSizes, { priority: true }) }}
+        <div class="hero__device hero__device--duo">
+          {{ img("hero-duo", "FlavorDraft on iPhone Duo, lying open: Chicken Parmesan across the two pages like a cookbook, its method in numbered steps on the left page and its ingredients on the right.", preloadSizes, { priority: true }) }}
+        </div>
+        <div class="hero__device hero__device--tent">
+          {{ img("hero-tent", "iPhone Duo stood like a tent, Cook View on its outer display: “Bake for 25 minutes or until golden and bubbling”, with Previous, the step’s timer running and Next.", "(min-width: 90rem) 162px, (min-width: 80em) 12vw, (min-width: 75em) 11vw, (min-width: 62em) and (orientation: landscape) 11vw, 19vw") }}
+        </div>
+        <div class="hero__device hero__device--iphone">
+          {{ img("hero-iphone", "FlavorDraft on iPhone: Home, with “Good morning, Stan. What are you cooking today?” above the Recently Saved Tiramisu and, under Quick Access, the Weeknight Dinners and Desserts collections.", "(min-width: 90rem) 254px, (min-width: 80em) 18vw, (min-width: 75em) 17vw, (min-width: 62em) and (orientation: landscape) 17vw, (min-width: 40em) and (orientation: landscape) 16vw, 30vw", { eager: true }) }}
+        </div>
+        <div class="hero__device hero__device--folded">
+          {{ img("hero-folded", "iPhone Duo closed, My Recipes on its outer display: Chicken Parmesan, Lasagna, Carbonara and Tiramisu as index cards, two to a row.", "(min-width: 90rem) 178px, (min-width: 80em) 13vw, (min-width: 75em) 12vw, (min-width: 62em) and (orientation: landscape) 12vw, (min-width: 40em) and (orientation: landscape) 11vw, 21vw") }}
+        </div>
       </div>
-      <div class="hero__iphone">
-        {{ img("hero-iphone", "FlavorDraft on iPhone: Home, with “Good morning, Stan. What are you cooking today?” above the Recently Saved Tiramisu and, under Quick Access, the Weeknight Dinners and Desserts collections.", "(min-width: 90rem) 200px, (min-width: 80em) 14vw, (min-width: 75em) 13vw, (min-width: 62em) and (orientation: landscape) 13vw, (min-width: 40em) and (orientation: landscape) 11vw, 26vw", { eager: true }) }}
-      </div>
-      </div>
-      <figcaption class="caption hero__caption">On <span class="nowrap">iPhone Duo</span>, a recipe opens across two pages. The same cookbook, on iPhone.</figcaption>
-    </figure>
+    </div>
   </div>
 </section>

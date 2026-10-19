@@ -10,9 +10,9 @@
   lays that clip over the display's two halves, each at the plane the render
   recorded for it (scripts/screens.json, `quads`), and lets it run on its own
   while the section is in view: a hold, the turn, a hold on step 17, a dissolve
-  back. Nothing needs pressing; a text control under the device pauses it, as the
-  film's does. Under reduced motion, or without the script, the device simply
-  holds step 16.
+  back. Nothing needs pressing; the device itself is the pause (a press or a key on
+  it, named for assistive tech, drawn only as a focus ring), as the film is its
+  own. Under reduced motion, or without the script, the device simply holds step 16.
 #}
 <section class="cook" aria-labelledby="cook-title">
   <div class="wrap cook__grid">
@@ -31,11 +31,9 @@
             <source src="/assets/media/cook/cook-turn.h264.mp4" type="video/mp4">
             <source src="/assets/media/cook/cook-turn.vp9.webm" type="video/webm">
           </video>
+          <button class="cook__toggle" type="button" hidden aria-label="Pause the page turn" data-turn-toggle></button>
         </div>
-        <figcaption class="caption cook__caption">
-          <span>On <span class="nowrap">iPhone Duo</span>, folded like a laptop: the step above, the controls below, and the page turns.</span>
-          <button class="text-button" type="button" hidden data-turn-toggle>Pause the page turn</button>
-        </figcaption>
+        <figcaption class="caption">On <span class="nowrap">iPhone Duo</span>, folded like a laptop: the step above, the controls below, and the page turns.</figcaption>
       </figure>
 
       <figure class="cook__iphone">
