@@ -27,10 +27,10 @@
     {
       "name": "hero-duo",
       "from": "app-store/2.0/duo/source/inner-landscape-recipe-video.png",
-      "device": { "kit": "duo", "pose": "lying_open", "camera": 78, "yaw": -5, "px": 1.7 },
+      "device": { "kit": "duo", "pose": "lying_open", "camera": 56, "yaw": -6, "px": 1.7 },
       "widths": [500, 800, 1100, 1700],
       "rights": "publisher-photos",
-      "_note": "The iPhone Duo lying open and level, seen from the campaign's level camera (78 degrees, as its frames 02, 03 and 06 see their open phones; turned 5), so the hardware keeps its own proportion (987 x 705 pt, two phone halves opened out, the fold between them): Chicken Parmesan as a cookbook spread, method on the left page, ingredients on the right. The anchor of the hero's device family. Shows the recipe's 44 pt video thumbnail (The Cooking Foodie) and the app's ingredient icons, whose pack licence for marketing is still to be confirmed (creative/validation/rights-inventory-r3.md)."
+      "_note": "The iPhone Duo lying open, seen as the Duo App Store frame 01 sees its open phone (from 56 degrees, turned 6): Chicken Parmesan as a cookbook spread, method on the left page, ingredients on the right, the fold between them. The anchor of the hero's device family; the closed and tent phones below are seen by the same camera. Shows the recipe's 44 pt video thumbnail (The Cooking Foodie) and the app's ingredient icons, whose pack licence for marketing is still to be confirmed (creative/validation/rights-inventory-r3.md)."
     },
     {
       "name": "hero-folded",
