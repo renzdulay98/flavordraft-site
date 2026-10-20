@@ -3,11 +3,11 @@
 
    One page for the App Store featuring nomination's supplemental materials: the
    homepage hero's own line, centred, and the iPhone Duo film beneath it across
-   most of the page, on the site's paper. The film's frame, still and control
-   are the homepage's (home.css §5), carried here so the page loads only what it
-   shows; home.js runs the film. Nothing else is on the page: no card under the
-   film, no player chrome, no second call to action, and nothing moves but the
-   film itself.
+   most of the page, on the site's paper. The film plays in the browser's own
+   player, laid on the page like a print: the film's paper is a shade of the
+   page's, so only a cut edge and a short contact shadow mark the frame, and the
+   player's controls are the only chrome. Nothing else is on the page: no card
+   under the film, no second call to action, and nothing moves but the film.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -40,90 +40,49 @@
 }
 
 /* --------------------------------------------------------------------------
-   2 · The film: the homepage's frame, the whole 16:9 picture at every width
+   2 · The film, in the browser's player, whole at every width
    -------------------------------------------------------------------------- */
 
 .showcase__film {
-  margin-top: clamp(2rem, 4.5vw, 3.5rem);
+  margin: clamp(2rem, 4.5vw, 3.5rem) auto 0;
 }
 
-.film__frame {
-  position: relative;
-  aspect-ratio: 16 / 9;
+.showcase__frame {
   margin-inline: auto;
 }
 
 /* Most of the page's width, centred, from a desktop up. */
 @media (min-width: 62em) {
-  .film__frame {
+  .showcase__frame {
     width: 85%;
   }
 }
 
-/* Phones: the film runs edge to edge, whole (a small file of the whole frame,
-   never a crop of it); its faded edges keep it from showing as a box. */
-@media (max-width: 39.99em) {
-  .film__frame {
-    margin-inline: calc(-1 * var(--gutter));
-  }
-}
-
-.film__frame picture,
-.film__still,
-.film__video {
-  position: absolute;
-  inset: 0;
+/* The player: the film's own paper behind it (#FAF2E6 in every frame, a shade
+   off the page's cream) until the poster paints, so no box flashes; the page's
+   cut edge and contact shadow, as its loose paper has; its 16:9 reserved before
+   anything loads, so nothing shifts. Its native controls draw over it. */
+.showcase__player {
+  display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #faf2e6;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: 0 0 0 0.5px rgba(140, 115, 79, 0.2), 0 1px 2px rgba(var(--shadow-rgb), 0.1),
+    0 10px 20px -14px rgba(var(--shadow-rgb), 0.24);
 }
 
-/* The film's paper is the page's, a level apart; its edges are faded into the
-   page so the frame never shows as a box. The picture and the frame share one
-   aspect, so nothing is cut. */
-.film__still,
-.film__video {
-  object-fit: cover;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent),
-    linear-gradient(to bottom, transparent, #000 5%, #000 95%, transparent);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent),
-    linear-gradient(to bottom, transparent, #000 5%, #000 95%, transparent);
-  mask-composite: intersect;
-}
-
-/* The film covers its still only once it is actually playing (home.js). Its
-   first frame is the still, so the change cannot be seen. */
-.film__video {
-  opacity: 0;
-}
-
-.film__figure[data-state="playing"] .film__video {
-  opacity: 1;
-}
-
-/* The film is its own control: the button covers the frame, drawn only as a
-   focus ring for a keyboard, so the picture stays clean. */
-.film__toggle {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-.film__toggle:focus-visible {
+.showcase__player:focus-visible {
   outline: 2px solid var(--red);
-  outline-offset: -2px;
-  border-radius: var(--r-sm);
+  outline-offset: 3px;
 }
 
-.film__toggle[hidden] {
-  display: none;
+@media (max-width: 39.99em) {
+  .showcase__player {
+    border-radius: var(--r-sm);
+  }
 }
 
 /* One line under the film, set like a plate's caption in a cookbook. */

@@ -1,5 +1,5 @@
 /**
- * Writes the homepage's video into src/assets/media/.
+ * Writes the site's video into src/assets/media/.
  *
  * 1. The iPhone Duo film: Track B of the Duo showcase ("PUBLIC CANDIDATE": FlavorDraft's
  *    real screens, no Apple hardware). Its 1920 HEVC, VP9 and H.264 web encodes (the ones
@@ -10,8 +10,11 @@
  *    Track B's stills/paper-animation-frames/, so those stills are this clip's first and
  *    last frames. Nothing is interpolated or redrawn. Encoded once as H.264 and VP9.
  *
- * Track A (the Duo Studio render of Apple's own 3D iPhone Duo) is internal only and is
- * never read here.
+ * 3. The iPhone Duo showcase page's film (/duo-showcase/): Track A of the Duo showcase, the
+ *    Duo Studio cinematic of Apple's own 3D iPhone Duo model, "INTERNAL ONLY" in the
+ *    showcase's rights review (web/EMBED.md, rights/APPLE_DUO_ASSET_USAGE_REVIEW.md). On the
+ *    owner's explicit instruction of 2026-10-20 its web encodes (1080p HEVC, VP9 and H.264,
+ *    and the 720p file for phones) are copied unchanged; the 4K masters stay out of the repo.
  *
  *   npm run media                       # sources in ./flavordraft-app-docs
  *   SCREENS_SRC=/path/to/docs npm run media
@@ -29,12 +32,19 @@ const run = promisify(execFile);
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const src = resolve(root, process.env.SCREENS_SRC || "flavordraft-app-docs");
 const trackB = join(src, "app-store/2.0/duo-showcase/track-b-public-candidate");
+const trackA = join(src, "app-store/2.0/duo-showcase");
 const out = resolve(root, "src/assets/media");
 
 const film = [
   ["web/flavordraft-duo-screens_trackB_web_1920x1080_60fps_hevc.mp4", "duo/duo-film-1920.hevc.mp4"],
   ["web/flavordraft-duo-screens_trackB_web_1920x1080_60fps.webm", "duo/duo-film-1920.vp9.webm"],
   ["web/flavordraft-duo-screens_trackB_web_1920x1080_60fps_h264.mp4", "duo/duo-film-1920.h264.mp4"]
+];
+const showcase = [
+  ["web/flavordraft-duo-showcase_web_1920x1080_60fps_hevc.mp4", "showcase/duo-showcase-1920.hevc.mp4"],
+  ["web/flavordraft-duo-showcase_web_1920x1080_60fps.webm", "showcase/duo-showcase-1920.vp9.webm"],
+  ["web/flavordraft-duo-showcase_web_1920x1080_60fps_h264.mp4", "showcase/duo-showcase-1920.h264.mp4"],
+  ["web/flavordraft-duo-showcase_web_1280x720_h264.mp4", "showcase/duo-showcase-720.h264.mp4"]
 ];
 
 // The page turn in the 4K master: frames 780-899 (13.00-14.98 s); the screen sits at
@@ -53,6 +63,7 @@ if (!existsSync(trackB)) {
 await rm(out, { recursive: true, force: true });
 await mkdir(join(out, "duo"), { recursive: true });
 await mkdir(join(out, "cook"), { recursive: true });
+await mkdir(join(out, "showcase"), { recursive: true });
 
 const size = async (file) => ((await stat(file)).size / 1e6).toFixed(2) + " MB";
 
@@ -106,24 +117,10 @@ for (const name of ["duo/duo-film-narrow.hevc.mp4", "duo/duo-film-narrow.h264.mp
   console.log(`${name.padEnd(32)} ${await size(join(out, name))}  (the loop's middle 4:3, for narrow screens)`);
 }
 
-// The showcase page (/duo-showcase/) shows the whole frame at every width, so phones
-// get the full 16:9 loop small: 960 × 540, the same keyframe spacing as the narrow file.
-const small = ["-v", "error", "-y", "-i", loop, "-an", "-vf", "scale=960:540:flags=lanczos"];
-await run("ffmpeg", [
-  ...small,
-  "-c:v", "libx265", "-preset", "slow", "-crf", "26", "-tag:v", "hvc1", "-pix_fmt", "yuv420p",
-  "-x265-params", "keyint=600:min-keyint=600:log-level=error",
-  ...colour, "-movflags", "+faststart",
-  join(out, "duo/duo-film-960.hevc.mp4")
-]);
-await run("ffmpeg", [
-  ...small,
-  "-c:v", "libx264", "-preset", "veryslow", "-crf", "24", "-profile:v", "high", "-pix_fmt", "yuv420p", "-g", "600",
-  ...colour, "-movflags", "+faststart",
-  join(out, "duo/duo-film-960.h264.mp4")
-]);
-for (const name of ["duo/duo-film-960.hevc.mp4", "duo/duo-film-960.h264.mp4"]) {
-  console.log(`${name.padEnd(32)} ${await size(join(out, name))}  (the whole loop at 960 × 540, for the showcase on phones)`);
+// The showcase page's film: Track A's web encodes, copied unchanged (see the header).
+for (const [from, to] of showcase) {
+  await copyFile(join(trackA, from), join(out, to));
+  console.log(`${to.padEnd(32)} ${await size(join(out, to))}  (copied: ${from})`);
 }
 
 // The rights of what was written are recorded in scripts/screens.json ("media"),
@@ -131,5 +128,5 @@ for (const name of ["duo/duo-film-960.hevc.mp4", "duo/duo-film-960.h264.mp4"]) {
 const { media = [] } = JSON.parse(await readFile(resolve(root, "scripts/screens.json"), "utf8"));
 const uncleared = media.filter((item) => item.rights !== "owned").map((item) => `${item.name} (${item.files})`);
 if (uncleared.length) {
-  console.warn(`\nNot cleared for marketing use (publisher photographs on screen): ${uncleared.join(", ")}`);
+  console.warn(`\nNot cleared for marketing use (scripts/screens.json says why): ${uncleared.join(", ")}`);
 }

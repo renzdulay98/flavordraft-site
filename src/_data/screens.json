@@ -5,6 +5,10 @@
       "files": "src/assets/media/duo/duo-film-*",
       "rights": "publisher-photos"
     },
+    "duo-showcase": {
+      "files": "src/assets/media/showcase/duo-showcase-*",
+      "rights": "track-a"
+    },
     "cook-turn": {
       "files": "src/assets/media/cook/cook-turn.*",
       "rights": "owned"
@@ -80,6 +84,17 @@
       1440
     ],
     "rights": "publisher-photos"
+  },
+  "showcase-poster": {
+    "w": 1920,
+    "h": 1080,
+    "alpha": false,
+    "widths": [
+      960,
+      1280,
+      1920
+    ],
+    "rights": "track-a"
   },
   "video-card": {
     "w": 1690,

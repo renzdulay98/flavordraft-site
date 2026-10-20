@@ -122,5 +122,5 @@ await rm(tmp, { recursive: true, force: true });
 const uncleared = [...Object.entries(shapes), ...Object.entries(media)].filter(([, s]) => s.rights !== "owned").map(([name]) => name);
 console.log(`\n${count} files written to src/assets/img/screens/, shapes to src/_data/screens.json`);
 if (uncleared.length) {
-  console.warn(`\nNot cleared for marketing use (publisher photographs on screen): ${uncleared.join(", ")}`);
+  console.warn(`\nNot cleared for marketing use (scripts/screens.json says why): ${uncleared.join(", ")}`);
 }

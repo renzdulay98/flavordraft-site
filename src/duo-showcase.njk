@@ -4,28 +4,27 @@ canonical: /duo-showcase/
 pageTitle: "FlavorDraft — Made for iPhone Duo"
 pageDescription: "FlavorDraft 2.0 on iPhone Duo: a personal cookbook that opens across two pages, stands beside you in Cook View and closes into one hand. The showcase film, for App Store featuring."
 ogImage: /assets/img/og-duo-showcase.jpg
-ogImageAlt: "FlavorDraft’s My Recipes on the unfolded iPhone Duo display: eight recipe cards across two pages."
+ogImageAlt: "FlavorDraft’s My Recipes across the unfolded iPhone Duo display: eight recipe cards on two pages."
 pageClass: showcase
 pageStyles: showcase
-pageScript: home
-preloadImage: film-poster
-# One value for the still's preload (base.njk) and its <img>, so the two always choose the
-# same file. Slots measured from showcase.css: 85% of the content width from 62em, the content
-# width on tablets, edge to edge on phones.
-preloadSizes: "(min-width: 90rem) 1102px, (min-width: 62em) 76.5vw, (min-width: 40em) 90vw, 100vw"
 ---
-{%- from "brand.njk" import img with context -%}
 {#
   The iPhone Duo showcase, for the App Store featuring nomination's supplemental
-  materials: one editorial page, the film and little else. The film is Track B of
-  the Duo showcase (FlavorDraft's real screens laid on paper, "PUBLIC CANDIDATE" in
-  its rights review); Track A, the cinematic render of Apple's own iPhone Duo model,
-  is internal only and is not published here. The film's markup and behaviour are
-  the homepage's (home.js, which also runs this page: its other parts find nothing
-  here and do nothing): the still is the default, the film plays over it in view,
-  never under reduced motion or Save-Data, and the frame itself is its control.
-  Unlike the homepage, the frame keeps the whole 16:9 picture at every width: phones
-  get a small full-frame file, never a crop.
+  materials: one editorial page, the film and little else. The film is Track A of
+  the Duo showcase, the Duo Studio cinematic (the folded phone, the unfold, the
+  cookbook across the open display, Cook View with the phone stood as a tent and as
+  a laptop, the real page turn, and the fold back to the start, 23.3 s, a seamless
+  loop). The showcase's rights review marks Track A internal only, because the
+  phone is Apple's own 3D model; it is published here on the owner's explicit
+  instruction (2026-10-20). The files are the campaign's own web encodes of that
+  exact edit, copied unchanged by scripts/build-media.mjs; the poster is its first
+  frame (scripts/screens.json).
+
+  The player is the browser's: it starts by itself, muted, and loops; its own
+  controls are the way to pause, scrub or go full screen, so anyone who lands here
+  with autoplay held back (Low Power Mode, say) still sees a player with a play
+  button, not a picture. Under reduced motion or Save-Data the short script after
+  the player keeps it from starting; the poster shows and the controls remain.
 #}
 <section class="showcase" aria-labelledby="showcase-title">
   <div class="wrap showcase__intro">
@@ -34,17 +33,26 @@ preloadSizes: "(min-width: 90rem) 1102px, (min-width: 62em) 76.5vw, (min-width: 
     <p class="lead">A personal cookbook designed around the way <span class="nowrap">iPhone Duo</span> changes <span class="nowrap">posture —</span> folded, unfolded, tent, and laptop.</p>
   </div>
 
-  <figure class="film__figure showcase__film wrap" data-film>
-    <div class="film__frame">
-      {{ img("film-poster", "FlavorDraft’s My Recipes on the unfolded iPhone Duo display: eight recipe cards across two pages.", preloadSizes, { class: "film__still", priority: true }) }}
-      <video class="film__video" muted loop playsinline preload="none" width="1920" height="1080" aria-hidden="true" data-film-video>
-        <source media="(max-width: 39.99em)" src="/assets/media/duo/duo-film-960.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L93.90"'>
-        <source media="(max-width: 39.99em)" src="/assets/media/duo/duo-film-960.h264.mp4" type='video/mp4; codecs="avc1.64001F"'>
-        <source src="/assets/media/duo/duo-film-1920.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L123.90"'>
-        <source src="/assets/media/duo/duo-film-1920.vp9.webm" type='video/webm; codecs="vp9"'>
-        <source src="/assets/media/duo/duo-film-1920.h264.mp4" type='video/mp4; codecs="avc1.64002A"'>
+  <figure class="showcase__film wrap">
+    <div class="showcase__frame">
+      <video class="showcase__player" id="showcase-film" controls autoplay muted loop playsinline preload="auto" width="1920" height="1080" poster="/assets/img/screens/showcase-poster-1920.webp" aria-label="FlavorDraft on iPhone Duo: My Recipes on the folded phone, the cookbook across the unfolded display, Cook View with the phone stood as a tent and then as a laptop, turning to the next step." data-showcase-film>
+        <source media="(max-width: 39.99em)" src="/assets/media/showcase/duo-showcase-720.h264.mp4" type='video/mp4; codecs="avc1.64002A"'>
+        <source src="/assets/media/showcase/duo-showcase-1920.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L123.90"'>
+        <source src="/assets/media/showcase/duo-showcase-1920.vp9.webm" type='video/webm; codecs="vp9"'>
+        <source src="/assets/media/showcase/duo-showcase-1920.h264.mp4" type='video/mp4; codecs="avc1.64002A"'>
       </video>
-      <button class="film__toggle" type="button" hidden aria-label="Pause the film" data-film-toggle></button>
+      <script>
+        (function () {
+          var film = document.getElementById("showcase-film");
+          var connection = navigator.connection;
+          var saveData = Boolean(connection && (connection.saveData || /2g$/.test(connection.effectiveType || "")));
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || saveData) {
+            film.autoplay = false;
+            film.preload = "metadata";
+            film.pause();
+          }
+        })();
+      </script>
     </div>
     <figcaption class="showcase__line">Folded. Unfolded. Tent. Laptop. One cookbook that moves with you.</figcaption>
   </figure>

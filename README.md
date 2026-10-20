@@ -45,7 +45,7 @@ scripts/og/              their source pages (not part of the site)
 | `/support/` | `src/support.njk` | The App Store Connect **Support URL**. Contact address, quick help, contact again. |
 | `/privacy/` | `docs/privacy.md` | Linked from the Terms and from the app; do not move |
 | `/terms/` | `docs/terms.md` | |
-| `/duo-showcase/` | `src/duo-showcase.njk` | The iPhone Duo showcase film on one editorial page, for the App Store featuring nomination's supplemental materials. Track B (the public candidate); Track A is never published. |
+| `/duo-showcase/` | `src/duo-showcase.njk` | The iPhone Duo showcase film on one editorial page, for the App Store featuring nomination's supplemental materials. Track A, the Duo Studio cinematic, on the owner's instruction (see "The film" below). |
 | `/download` | `src/download.njk` | The short link to share. Redirects to `appStoreUrl`; `noindex`, and out of the sitemap |
 | `/sitemap.xml` `/robots.txt` | `src/sitemap.njk`, `src/root/` | Every page with a `canonical` is in the sitemap |
 
@@ -155,26 +155,34 @@ licensed photography, or secure permission, then recapture and regenerate. The
 iPhone Duo film carries the same photographs; recapturing it means re-rendering
 Track B (`source/trackb.py` in the app docs).
 
-The film is Track B of the iPhone Duo showcase, "PUBLIC CANDIDATE" in its
-rights review (the same 17 s edit as Track B's nomination master, at 1920).
-Its three 1920 encodes are copied unchanged by `npm run media` (`web/EMBED.md`
-in the app docs describes the files). Three pieces are new encodes, for the
-owner to sign off with the film: the phone film (`duo-film-narrow.*`, the
-loop's middle 4:3 at 1200 × 900), the whole loop at 960 × 540 (`duo-film-960.*`,
-for the showcase page on phones, where nothing may be cropped), and the Cook
-View page-turn clip, two seconds of the same film's 4K master cropped to the
-screen. Track A of the showcase (the cinematic render of Apple's own iPhone Duo
-model, which also shows the tent posture) is marked internal only in that
-review and is never published; a copy at the repository root is ignored by git.
+The homepage's film is Track B of the iPhone Duo showcase, "PUBLIC CANDIDATE"
+in its rights review (the same 17 s edit as Track B's nomination master, at
+1920). Its three 1920 encodes are copied unchanged by `npm run media`
+(`web/EMBED.md` in the app docs describes the files). Two pieces are new
+encodes, for the owner to sign off with the film: the phone film
+(`duo-film-narrow.*`, the loop's middle 4:3 at 1200 × 900) and the Cook View
+page-turn clip, two seconds of the same film's 4K master cropped to the screen.
 
 The showcase page (`/duo-showcase/`, for the App Store featuring nomination's
-supplemental materials) is the film alone under the hero's line, whole at every
-width: 85% of the content width from a desktop up, the content width on
-tablets, edge to edge on phones with the 960 file. Its markup is the homepage
-film's and home.js runs it (the page's other parts find nothing there). It has
-its own share card (`assets/img/og-duo-showcase.jpg`, the film's first frame
-cut to 1200 × 630) through the `ogImage`/`ogImageAlt` front matter base.njk
-takes, and its own stylesheet (`assets/css/showcase.css`).
+supplemental materials) plays Track A of the showcase: the Duo Studio cinematic
+of Apple's own 3D iPhone Duo model (folded, unfolded, tent, laptop, the real
+page turn; 23.3 s, a seamless loop), which the same review marks "INTERNAL /
+CONCEPT MASTER: INTERNAL ONLY", because Apple's guidelines list rendering or
+simulating an Apple product among uses not permitted in marketing. It is
+published on the owner's explicit instruction of 2026-10-20, overriding that
+review. `npm run media` copies the campaign's own web encodes of that exact
+edit unchanged (1080p HEVC, VP9 and H.264, and the 720p file for phones) into
+`assets/media/showcase/`; the 4K masters stay in the app docs, and the owner's
+copy of one at the repository root is ignored by git. The page is the film
+alone under the hero's line, in the browser's own player (it starts by itself,
+muted, and loops; the native controls stay, so a reader whose browser holds
+autoplay back still sees a player, and reduced motion or Save-Data stops it
+from starting), whole at every width: 85% of the content width from a desktop
+up, the content width below. Its poster is the film's first frame
+(`showcase-poster` in scripts/screens.json); its share card
+(`assets/img/og-duo-showcase.jpg`) is the unfolded phone at 6 s cut to
+1200 × 630, through the `ogImage`/`ogImageAlt` front matter base.njk takes; its
+stylesheet is `assets/css/showcase.css`.
 
 ## Type and brand
 

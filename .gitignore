@@ -12,7 +12,8 @@ _site/
 /flavordraft-app-docs/
 /FlavorDraft_Approved_App_Icon_Bundle.zip
 
-# The Duo showcase's Track A master (the cinematic render of Apple's own iPhone Duo model),
-# placed here by the owner: internal only per its rights review, so never part of the site.
-# The showcase page (/duo-showcase/) and the homepage use Track B, the public candidate.
+# The owner's copy of the Duo showcase's Track A 4K master (the cinematic render of Apple's own
+# iPhone Duo model). The showcase page (/duo-showcase/) plays that edit through the campaign's
+# web encodes of it, copied by `npm run media` from flavordraft-app-docs/; the 103 MB master
+# itself is never part of the site.
 /flavordraft-duo-showcase_nomination_3840x2160_60fps_h264.mp4

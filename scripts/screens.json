@@ -76,6 +76,15 @@
       "_note": "The same frame's centre 4:3, matching the film's object-fit crop on narrow screens."
     },
     {
+      "name": "showcase-poster",
+      "from": "app-store/2.0/duo-showcase/web/flavordraft-duo-showcase_web_1920x1080_60fps_h264.mp4",
+      "frame": 0,
+      "widths": [960, 1280, 1920],
+      "quality": 60,
+      "rights": "track-a",
+      "_note": "The poster of /duo-showcase/: frame 0 of Track A's web encode (the Duo Studio cinematic of Apple's own iPhone Duo model, INTERNAL ONLY in the showcase's rights review), published on the owner's explicit instruction of 2026-10-20. Decoded as a browser shows it, so the poster and the playing film meet without a jump."
+    },
+    {
       "name": "video-card",
       "from": "app-store/2.0/creative/search-results/stills/poster_3840x2560.png",
       "crop": [120, 900, 1690, 1570],
@@ -206,6 +215,12 @@
       "files": "src/assets/media/duo/duo-film-*",
       "rights": "publisher-photos",
       "_note": "Track B of the Duo showcase (public candidate; publishing it is the owner's call). Its My Recipes and folded chapters show the seeded cookbook's publisher photographs, like the stills above."
+    },
+    {
+      "name": "duo-showcase",
+      "files": "src/assets/media/showcase/duo-showcase-*",
+      "rights": "track-a",
+      "_note": "Track A of the Duo showcase, the film of /duo-showcase/: its web encodes copied unchanged by build-media.mjs. INTERNAL ONLY in the rights review (Apple's own 3D iPhone Duo model); published on the owner's explicit instruction of 2026-10-20. Its screens also show the seeded cookbook's publisher photographs."
     },
     {
       "name": "cook-turn",
