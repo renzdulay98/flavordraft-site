@@ -1,0 +1,53 @@
+---
+layout: base.njk
+canonical: /duo-showcase/
+pageTitle: "FlavorDraft — Made for iPhone Duo"
+pageDescription: "FlavorDraft 2.0 on iPhone Duo: a personal cookbook that opens across two pages, stands beside you in Cook View and closes into one hand. The showcase film, for App Store featuring."
+ogImage: /assets/img/og-duo-showcase.jpg
+ogImageAlt: "FlavorDraft’s My Recipes on the unfolded iPhone Duo display: eight recipe cards across two pages."
+pageClass: showcase
+pageStyles: showcase
+pageScript: home
+preloadImage: film-poster
+# One value for the still's preload (base.njk) and its <img>, so the two always choose the
+# same file. Slots measured from showcase.css: 85% of the content width from 62em, the content
+# width on tablets, edge to edge on phones.
+preloadSizes: "(min-width: 90rem) 1102px, (min-width: 62em) 76.5vw, (min-width: 40em) 90vw, 100vw"
+---
+{%- from "brand.njk" import img with context -%}
+{#
+  The iPhone Duo showcase, for the App Store featuring nomination's supplemental
+  materials: one editorial page, the film and little else. The film is Track B of
+  the Duo showcase (FlavorDraft's real screens laid on paper, "PUBLIC CANDIDATE" in
+  its rights review); Track A, the cinematic render of Apple's own iPhone Duo model,
+  is internal only and is not published here. The film's markup and behaviour are
+  the homepage's (home.js, which also runs this page: its other parts find nothing
+  here and do nothing): the still is the default, the film plays over it in view,
+  never under reduced motion or Save-Data, and the frame itself is its control.
+  Unlike the homepage, the frame keeps the whole 16:9 picture at every width: phones
+  get a small full-frame file, never a crop.
+#}
+<section class="showcase" aria-labelledby="showcase-title">
+  <div class="wrap showcase__intro">
+    <p class="eyebrow">FlavorDraft 2.0</p>
+    <h1 class="showcase__title" id="showcase-title">Made for <span class="nowrap">iPhone Duo</span>.</h1>
+    <p class="lead">A personal cookbook designed around the way <span class="nowrap">iPhone Duo</span> changes <span class="nowrap">posture —</span> folded, unfolded, tent, and laptop.</p>
+  </div>
+
+  <figure class="film__figure showcase__film wrap" data-film>
+    <div class="film__frame">
+      {{ img("film-poster", "FlavorDraft’s My Recipes on the unfolded iPhone Duo display: eight recipe cards across two pages.", preloadSizes, { class: "film__still", priority: true }) }}
+      <video class="film__video" muted loop playsinline preload="none" width="1920" height="1080" aria-hidden="true" data-film-video>
+        <source media="(max-width: 39.99em)" src="/assets/media/duo/duo-film-960.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L93.90"'>
+        <source media="(max-width: 39.99em)" src="/assets/media/duo/duo-film-960.h264.mp4" type='video/mp4; codecs="avc1.64001F"'>
+        <source src="/assets/media/duo/duo-film-1920.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L123.90"'>
+        <source src="/assets/media/duo/duo-film-1920.vp9.webm" type='video/webm; codecs="vp9"'>
+        <source src="/assets/media/duo/duo-film-1920.h264.mp4" type='video/mp4; codecs="avc1.64002A"'>
+      </video>
+      <button class="film__toggle" type="button" hidden aria-label="Pause the film" data-film-toggle></button>
+    </div>
+    <figcaption class="showcase__line">Folded. Unfolded. Tent. Laptop. One cookbook that moves with you.</figcaption>
+  </figure>
+
+  <p class="showcase__back"><a href="/">Explore FlavorDraft</a></p>
+</section>

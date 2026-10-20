@@ -23,11 +23,12 @@ src/
   _includes/legal.njk  the legal-page layout
   assets/css/site.css  styles shared by every page; tokens at the top
   assets/css/home.css  the homepage's sections (loaded on / only)
+  assets/css/showcase.css  the iPhone Duo showcase page (loaded on /duo-showcase/ only)
   assets/js/site.js    header state, small-screen menu, legal contents marker
   assets/js/home.js    the iPhone Duo film, the Cook View page turn, the arrow (homepage only)
   assets/img/screens/  the homepage's images (generated: npm run screens)
-  assets/media/        the homepage's video (generated: npm run media)
-  index.njk  support.njk  privacy.njk  terms.njk  download.njk
+  assets/media/        the homepage's and the showcase page's video (generated: npm run media)
+  index.njk  duo-showcase.njk  support.njk  privacy.njk  terms.njk  download.njk
 scripts/screens.json     every homepage image (the capture it is cut from) and video, with its rights status
 scripts/build-screens.mjs  regenerates assets/img/screens/ and _data/screens.json (lib/render_image.py does the
                          pixels; lib/render_device.py puts a capture inside the campaign's hardware first)
@@ -44,6 +45,7 @@ scripts/og/              their source pages (not part of the site)
 | `/support/` | `src/support.njk` | The App Store Connect **Support URL**. Contact address, quick help, contact again. |
 | `/privacy/` | `docs/privacy.md` | Linked from the Terms and from the app; do not move |
 | `/terms/` | `docs/terms.md` | |
+| `/duo-showcase/` | `src/duo-showcase.njk` | The iPhone Duo showcase film on one editorial page, for the App Store featuring nomination's supplemental materials. Track B (the public candidate); Track A is never published. |
 | `/download` | `src/download.njk` | The short link to share. Redirects to `appStoreUrl`; `noindex`, and out of the sitemap |
 | `/sitemap.xml` `/robots.txt` | `src/sitemap.njk`, `src/root/` | Every page with a `canonical` is in the sitemap |
 
@@ -154,11 +156,25 @@ iPhone Duo film carries the same photographs; recapturing it means re-rendering
 Track B (`source/trackb.py` in the app docs).
 
 The film is Track B of the iPhone Duo showcase, "PUBLIC CANDIDATE" in its
-rights review. Its three 1920 encodes are copied unchanged by `npm run media`
-(`web/EMBED.md` in the app docs describes the files). Two pieces are new edits,
-for the owner to sign off with the film: the phone film (`duo-film-narrow.*`,
-the loop's middle 4:3 at 1200 × 900, re-encoded), and the Cook View page-turn
-clip, two seconds of the same film's 4K master cropped to the screen.
+rights review (the same 17 s edit as Track B's nomination master, at 1920).
+Its three 1920 encodes are copied unchanged by `npm run media` (`web/EMBED.md`
+in the app docs describes the files). Three pieces are new encodes, for the
+owner to sign off with the film: the phone film (`duo-film-narrow.*`, the
+loop's middle 4:3 at 1200 × 900), the whole loop at 960 × 540 (`duo-film-960.*`,
+for the showcase page on phones, where nothing may be cropped), and the Cook
+View page-turn clip, two seconds of the same film's 4K master cropped to the
+screen. Track A of the showcase (the cinematic render of Apple's own iPhone Duo
+model, which also shows the tent posture) is marked internal only in that
+review and is never published; a copy at the repository root is ignored by git.
+
+The showcase page (`/duo-showcase/`, for the App Store featuring nomination's
+supplemental materials) is the film alone under the hero's line, whole at every
+width: 85% of the content width from a desktop up, the content width on
+tablets, edge to edge on phones with the 960 file. Its markup is the homepage
+film's and home.js runs it (the page's other parts find nothing there). It has
+its own share card (`assets/img/og-duo-showcase.jpg`, the film's first frame
+cut to 1200 × 630) through the `ogImage`/`ogImageAlt` front matter base.njk
+takes, and its own stylesheet (`assets/css/showcase.css`).
 
 ## Type and brand
 

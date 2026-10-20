@@ -1,0 +1,166 @@
+/* ==========================================================================
+   FlavorDraft — the iPhone Duo showcase (loaded after site.css, on /duo-showcase/ only)
+
+   One page for the App Store featuring nomination's supplemental materials: the
+   homepage hero's own line, centred, and the iPhone Duo film beneath it across
+   most of the page, on the site's paper. The film's frame, still and control
+   are the homepage's (home.css §5), carried here so the page loads only what it
+   shows; home.js runs the film. Nothing else is on the page: no card under the
+   film, no player chrome, no second call to action, and nothing moves but the
+   film itself.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1 · The words, centred
+   -------------------------------------------------------------------------- */
+
+.showcase__intro {
+  padding-top: clamp(3rem, 7vw, 6rem);
+  text-align: center;
+}
+
+/* The hero's "Made for iPhone Duo." (home.css), set as this page's headline:
+   the serif, plain weight, a step larger. */
+.showcase__title {
+  margin-top: var(--s4);
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 1.5rem + 3.4vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.014em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.showcase__intro .lead {
+  margin-top: var(--s5);
+  margin-inline: auto;
+  max-width: 32em;
+  text-wrap: balance;
+}
+
+/* --------------------------------------------------------------------------
+   2 · The film: the homepage's frame, the whole 16:9 picture at every width
+   -------------------------------------------------------------------------- */
+
+.showcase__film {
+  margin-top: clamp(2rem, 4.5vw, 3.5rem);
+}
+
+.film__frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin-inline: auto;
+}
+
+/* Most of the page's width, centred, from a desktop up. */
+@media (min-width: 62em) {
+  .film__frame {
+    width: 85%;
+  }
+}
+
+/* Phones: the film runs edge to edge, whole (a small file of the whole frame,
+   never a crop of it); its faded edges keep it from showing as a box. */
+@media (max-width: 39.99em) {
+  .film__frame {
+    margin-inline: calc(-1 * var(--gutter));
+  }
+}
+
+.film__frame picture,
+.film__still,
+.film__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* The film's paper is the page's, a level apart; its edges are faded into the
+   page so the frame never shows as a box. The picture and the frame share one
+   aspect, so nothing is cut. */
+.film__still,
+.film__video {
+  object-fit: cover;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent),
+    linear-gradient(to bottom, transparent, #000 5%, #000 95%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent),
+    linear-gradient(to bottom, transparent, #000 5%, #000 95%, transparent);
+  mask-composite: intersect;
+}
+
+/* The film covers its still only once it is actually playing (home.js). Its
+   first frame is the still, so the change cannot be seen. */
+.film__video {
+  opacity: 0;
+}
+
+.film__figure[data-state="playing"] .film__video {
+  opacity: 1;
+}
+
+/* The film is its own control: the button covers the frame, drawn only as a
+   focus ring for a keyboard, so the picture stays clean. */
+.film__toggle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.film__toggle:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: -2px;
+  border-radius: var(--r-sm);
+}
+
+.film__toggle[hidden] {
+  display: none;
+}
+
+/* One line under the film, set like a plate's caption in a cookbook. */
+.showcase__line {
+  margin-top: clamp(1rem, 2.2vw, 1.75rem);
+  font-family: var(--serif);
+  font-size: clamp(1.0625rem, 0.95rem + 0.4vw, 1.25rem);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--ink-quiet);
+  text-wrap: balance;
+}
+
+/* --------------------------------------------------------------------------
+   3 · The one way on: a plain link, as the hero's "See what's new"
+   -------------------------------------------------------------------------- */
+
+.showcase__back {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-inline: var(--gutter);
+  padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
+  text-align: center;
+}
+
+.showcase__back a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in srgb, var(--ink) 25%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+.showcase__back a:hover {
+  color: var(--red);
+  text-decoration-color: currentColor;
+}

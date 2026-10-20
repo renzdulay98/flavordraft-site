@@ -106,6 +106,26 @@ for (const name of ["duo/duo-film-narrow.hevc.mp4", "duo/duo-film-narrow.h264.mp
   console.log(`${name.padEnd(32)} ${await size(join(out, name))}  (the loop's middle 4:3, for narrow screens)`);
 }
 
+// The showcase page (/duo-showcase/) shows the whole frame at every width, so phones
+// get the full 16:9 loop small: 960 × 540, the same keyframe spacing as the narrow file.
+const small = ["-v", "error", "-y", "-i", loop, "-an", "-vf", "scale=960:540:flags=lanczos"];
+await run("ffmpeg", [
+  ...small,
+  "-c:v", "libx265", "-preset", "slow", "-crf", "26", "-tag:v", "hvc1", "-pix_fmt", "yuv420p",
+  "-x265-params", "keyint=600:min-keyint=600:log-level=error",
+  ...colour, "-movflags", "+faststart",
+  join(out, "duo/duo-film-960.hevc.mp4")
+]);
+await run("ffmpeg", [
+  ...small,
+  "-c:v", "libx264", "-preset", "veryslow", "-crf", "24", "-profile:v", "high", "-pix_fmt", "yuv420p", "-g", "600",
+  ...colour, "-movflags", "+faststart",
+  join(out, "duo/duo-film-960.h264.mp4")
+]);
+for (const name of ["duo/duo-film-960.hevc.mp4", "duo/duo-film-960.h264.mp4"]) {
+  console.log(`${name.padEnd(32)} ${await size(join(out, name))}  (the whole loop at 960 × 540, for the showcase on phones)`);
+}
+
 // The rights of what was written are recorded in scripts/screens.json ("media"),
 // beside the images', and the site build repeats any that are not cleared.
 const { media = [] } = JSON.parse(await readFile(resolve(root, "scripts/screens.json"), "utf8"));
